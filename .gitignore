@@ -1,0 +1,11 @@
+# Ignore Google Drive sync files & system metadata
+.DS_Store
+Icon?
+desktop.ini
+thumbs.db
+
+# Ignore ALL .ini configuration files in the project
+*.ini
+
+# If you have specific .ini files you want to ignore:
+# config.ini

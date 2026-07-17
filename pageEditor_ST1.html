@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor - Eshan Amarakoon</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page specific embedded CSS rules -->
+    <style>
+        .card {
+            border-radius: 12px;
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        h2,
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin-top: 20px;
+        }
+
+        h4 {
+            margin-bottom: 5px;
+        }
+
+        h5 {
+            margin-bottom: 5px;
+        }
+
+        code:not(.code-container code, h3 code) {
+            color: red;
+            font-weight: 600;
+            letter-spacing: 0.05rem;
+        }
+
+        .page-editor-grid {
+            display: grid;
+            grid-template-columns: minmax(290px, 1fr) 900px 1fr;
+            gap: 40px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .page-editor-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .page-editor-content th,
+        .page-editor-content td {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            text-align: left;
+        }
+
+        .page-editor-content thead {
+            background-color: #1e222b;
+            color: white;
+        }
+
+        .stud-line {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #F4F7F9;
+            color: #475569;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================================================== -->
+    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
+    <!-- ==================================================== -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User
+                                Profile</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END OF HEADER -->
+
+    <p class="stud-line">Eshan Amarakoon &mdash; SDG 9 Team &mdash; Home Page / Gallery Page / Global Template Developer</p>
+
+    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    <main class="main-content">
+        <div class="page-editor-grid">
+            <div class="article-content-sidebar">
+                <ul>
+                    <li><a href="#home">Home Page</a></li>
+                    <li><a href="#gallery">Gallery Page</a></li>
+                    <li><a href="#content">Content Page</a></li>
+                    <li><a href="#challenge">Challenges &amp; Lessons Learned</a></li>
+                    <li><a href="#compliance">Compliance</a></li>
+                    <li><a href="#group">Group Meetings Log</a></li>
+                    <li><a href="#ref">References</a></li>
+                </ul>
+            </div>
+
+            <div class="page-editor-content">
+
+                <section class="card" id="home">
+                    <h2>Home Page (<code>home.html</code>)</h2>
+
+                    <h3>Technical Description</h3>
+                    <p>The home page is built around a full-width hero <code>&lt;section&gt;</code> followed by a
+                        grid of mission-focused cards and an interactive hub directory. The hero uses the same
+                        relative-wrapper / absolute-heading pattern used on the content pages, so the title sits
+                        cleanly on top of the background image without extra markup. Each mission card reuses the
+                        shared <code>.card</code> class from <code>style.css</code>, keeping padding, border-radius
+                        and shadow consistent with every other card on the site. The Interactive Hub Directory uses
+                        JavaScript to toggle hub descriptions on click, so visitors can browse all hub topics without
+                        losing their place on the page.</p>
+
+                    <h3>Accessibility</h3>
+                    <p>Semantic tags (<code>&lt;section&gt;</code>, <code>&lt;nav&gt;</code>,
+                        <code>&lt;article&gt;</code>) are used instead of generic <code>&lt;div&gt;</code>s wherever
+                        the content has real structural meaning. All hero and card imagery uses descriptive,
+                        full-sentence <code>alt</code> text, and every interactive element (hub toggles, card links)
+                        is a real <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code> tag so it is reachable and
+                        operable by keyboard alone.</p>
+
+                    <h3>Link to the validation page</h3>
+                    <p><a class="generic-link" href="validation_ST1.html#homeVal">Go to validation page</a></p>
+
+                    <h3>Link to the page</h3>
+                    <p><a class="generic-link" href="home.html">Go to Home page</a></p>
+                </section>
+
+                <section class="card" id="gallery">
+                    <h2>Gallery Page (<code>gallery.html</code>)</h2>
+
+                    <h3>Technical Description</h3>
+                    <p>The gallery is a responsive grid of thumbnail cards built with CSS Grid, so the number of
+                        columns adjusts automatically to the viewport width instead of relying on fixed breakpoints.
+                        Clicking a thumbnail opens a JavaScript-driven modal that displays a larger version of the
+                        image along with its caption and credit, without navigating away from the gallery grid
+                        underneath. An accessibility control panel sits above the gallery, toggling classes on the
+                        <code>&lt;body&gt;</code> element which the CSS then reads to adjust animation and sizing
+                        rules.</p>
+
+                    <h3>Accessibility</h3>
+                    <p>Every thumbnail and modal image has a full-sentence <code>alt</code> description. The modal
+                        can be opened and closed with the keyboard (Enter/Space to open, Escape to close), and focus
+                        is moved into the modal when it opens and returned to the triggering thumbnail when it
+                        closes. The accessibility control panel is built from real form controls
+                        (<code>&lt;button&gt;</code>/<code>&lt;input type="checkbox"&gt;</code>) with visible labels
+                        rather than icon-only controls.</p>
+
+                    <h3>Link to the validation page</h3>
+                    <p><a class="generic-link" href="validation_ST1.html#galleryVal">Go to validation page</a></p>
+
+                    <h3>Link to the page</h3>
+                    <p><a class="generic-link" href="gallery.html">Go to Gallery page</a></p>
+                </section>
+
+                <section class="card" id="content">
+                    <h2>Content Page (<code>content_ST1.html</code>)</h2>
+
+                    <p>This is the layout for the <strong>Content Page</strong> (used for the "Integrating
+                        Micro-Enterprises" article). It's a shared template (<code>.content-page</code>), so these
+                        styles apply site-wide.</p>
+                    <p><strong>Design Inspiration:</strong> Based on Odama's work on <a class="generic-link"
+                            target="_blank" rel="noopener noreferrer"
+                            href="https://dribbble.com/shots/24054272-Article-Page-Exploration">Dribbble</a>. It uses
+                        a full-bleed hero banner with the title layered right on top of the photo instead of a
+                        boring text header.</p>
+
+                    <h3>HTML Structure</h3>
+                    <h4>Hero Banner</h4>
+                    <p>Starts with a full-width banner containing the background image, credits, an editor's note
+                        link, and the heading overlay.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="content-page-banner"&gt;
+    &lt;img src="images/content-page-banner-img-w2212570.jpg" class="content-page-banner-image"
+        alt="Two elderly Vietnamese women weaving traditional bamboo fish traps..."&gt;
+    &lt;div class="content-page-banner-img-reference"&gt;...&lt;/div&gt;
+    &lt;a class="generic-link content-page-banner-editor-link" href="pageEditor_ST1.html"&gt;Editor's page&lt;/a&gt;
+    &lt;div class="content-page-banner-heading"&gt;
+        &lt;h1&gt;Integrating Micro-Enterprises Into Modern Financial Value Chains&lt;/h1&gt;
+        &lt;p&gt;By: Eshan Amarakoon&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <ul>
+                        <li>Accessibility: Every image uses a full-sentence <code>alt</code> tag (no filenames
+                            or blank strings) so screen readers get the full context.</li>
+                        <li>SEO: The <code>&lt;h1&gt;</code> is only used once for the main title to keep the
+                            document hierarchy clean.</li>
+                        <li>Links: Used actual <code>&lt;a&gt;</code> tags for credits and links so they are
+                            keyboard accessible.</li>
+                    </ul>
+
+                    <h4>Two Column Layout</h4>
+                    <p>The main body splits into a sticky sidebar navigation and the actual article content.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="article-content-container"&gt;
+    &lt;aside class="article-content-sidebar"&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#microfinance"&gt;Supporting Microfinance...&lt;/a&gt;&lt;/li&gt;
+                ...
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/aside&gt;
+    &lt;div class="article-content"&gt;
+        &lt;section class="content-page-section-card" id="microfinance"&gt;
+            &lt;h2&gt;Supporting Microfinance and Community-Led Credit&lt;/h2&gt;
+            ...
+        &lt;/section&gt;
+        ...
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <ul>
+                        <li><code>&lt;aside&gt;</code> and <code>&lt;nav&gt;</code> Marks the sidebar as
+                            supplementary and tells search engines/screen readers it's an in-page table of
+                            contents.</li>
+                        <li>Each <code>&lt;section&gt;</code> has a unique id matching the sidebar links for
+                            smooth-scroll navigation.</li>
+                        <li><code>&lt;h2&gt;</code> tags Keeps sections neatly organized under the main
+                            <code>&lt;h1&gt;</code>.
+                        </li>
+                    </ul>
+
+                    <h4>Other content Elements</h4>
+                    <p>A few specific tags were repurposed to handle tables, lists, and images cleanly.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">HTML</span></div>
+                        <pre><code>&lt;!-- For tabular comparisons --&gt;
+&lt;table&gt;
+    &lt;caption&gt;&lt;h3&gt;Structural Barriers vs. Grassroots Financial Solutions&lt;/h3&gt;&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;&lt;th&gt;Traditional Banking Obstacles&lt;/th&gt;&lt;th&gt;Grassroots &amp; Microfinance Solutions&lt;/th&gt;&lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;High collateral requirements...&lt;/td&gt;&lt;td&gt;Trust-based or group-guaranteed lending...&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- For boxed action plans --&gt;
+&lt;fieldset&gt;
+    &lt;legend&gt;&lt;h3&gt;The Merchant Digital Onboarding Roadmap&lt;/h3&gt;&lt;/legend&gt;
+    &lt;ol&gt;
+        &lt;li&gt;&lt;strong&gt;Inventory Assessment:&lt;/strong&gt; Document and photograph...&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/fieldset&gt;
+
+&lt;!-- For image captions --&gt;
+&lt;figure class="article-content-fig"&gt;
+    &lt;img src="images/article-content-img1-w2212570.jpg" alt="A factory worker..."&gt;
+    &lt;figcaption&gt;Photo by &lt;a href="..."&gt;Sam Moghadam&lt;/a&gt; on &lt;a href="..."&gt;Unsplash&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+                    </div>
+                    <ul>
+                        <li><code>&lt;table&gt;</code> Used strictly for actual data comparisons. Includes
+                            <code>&lt;th&gt;</code> tags for accessibility.
+                        </li>
+                        <li><code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code>: Borrowed these form
+                            tags because they give us a nice, built-in bordered box with an inline title.</li>
+                        <li><code>&lt;figure&gt;</code>: Tethers the image and its source credit together as a
+                            single unit.</li>
+                    </ul>
+
+                    <h4>Interactive Poll</h4>
+                    <p><strong>Design Inspiration:</strong> The embedded poll was inspired by the reader polls IGN
+                        runs at the bottom of their articles &mdash; a quick, opinion-style question with a live
+                        vote count that reveals each option as a percentage bar once you've voted.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;section class="poll"&gt;
+    &lt;div class="poll-container"&gt;
+        &lt;div class="poll-header"&gt;
+            &lt;span id="poll-live-btn"&gt;live&lt;/span&gt;
+            &lt;h2&gt;When purchasing daily essentials or services...&lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div class="poll-body" id="poll-body-form"&gt;
+            &lt;form id="dummy-article-poll" action="..." method="get"&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;input type="radio" id="convenience" name="corporate-over-local"
+                            value="convenience" required&gt;
+                        &lt;label for="convenience"&gt;Convenience and speed...&lt;/label&gt;
+                    &lt;/li&gt;
+                    ...
+                &lt;/ul&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+        &lt;div class="poll-body" id="poll-body-result" style="display: none;"&gt;&lt;/div&gt;
+        &lt;div class="poll-footer"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                    </div>
+                    <p>A small script listens for the form's <code>submit</code> event, tallies the vote against
+                        a dummy data object, then swaps <code>#poll-body-form</code> for
+                        <code>#poll-body-result</code> and renders each option as a percentage bar &mdash; the
+                        same reveal-on-vote pattern IGN uses, just built from scratch with vanilla JS instead of
+                        a third-party poll widget.</p>
+                    <ul>
+                        <li>Accessibility: Options use real <code>&lt;input type="radio"&gt;</code> /
+                            <code>&lt;label for="..."&gt;</code> pairs so the poll is fully keyboard and
+                            screen-reader operable, not just clickable <code>&lt;div&gt;</code>s.
+                        </li>
+                        <li>Progressive enhancement: The <code>&lt;form&gt;</code> still has a real
+                            <code>action</code>/<code>method</code>, so it degrades gracefully if JavaScript
+                            fails to load.
+                        </li>
+                        <li>Feedback: Submitting the form disables the button and swaps its label to "Vote
+                            Submitted" so users get clear confirmation their vote registered.</li>
+                    </ul>
+
+                    <h3>CSS Architecture</h3>
+                    <h4>Article layout</h4>
+                    <p>Used Grid for the main container because I needed a fixed width center column flanked by
+                        flexible side gutters.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">css</span></div>
+                        <pre><code>.article-content-container {
+    display: grid;
+    grid-template-columns: minmax(290px, 1fr) 900px 1fr;
+    gap: 40px;
+    margin: 0 auto;
+    margin-top: 50px;
+}</code></pre>
+                    </div>
+                    <p><i>Why Grid?</i> It lets us pin the middle reading column exactly to 900px in one line of
+                        code. Flexbox would require too much guessing with <code>flex-grow</code> and
+                        <code>flex-basis.</code></p>
+
+                    <h4>Hero Banner Overlay</h4>
+                    <p>To get the text floating over the image, the container is <code>relative</code> and the
+                        text block is <code>absolute</code>.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">css</span></div>
+                        <pre><code>.content-page-banner {
+    height: 60vh;
+    position: relative;
+}
+.content-page-banner-heading {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}</code></pre>
+                    </div>
+                    <p><code>backdrop-filter: blur()</code> with
+                        <code>background-color: rgba(255, 255, 255, 0.1);</code> keeps the text perfectly
+                        legible over any background image without completely hiding the photo behind a solid
+                        box.</p>
+
+                    <h4>Sticky Sidebar</h4>
+                    <p>The table of contents stays pinned to the screen while the user reads.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">css</span></div>
+                        <pre><code>.article-content-sidebar {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}</code></pre>
+                    </div>
+                    <p>Using <code>position: sticky</code> gives me a persistent sidebar natively and no
+                        JavaScript scroll listeners required.</p>
+
+                    <h4>Some design/styling choices</h4>
+                    <ul>
+                        <li>Colors are mostly neutral tones (<code>#F4F7F9</code> background,
+                            <code>#475569</code> text). It's easy and comfortable for eye. And not too fancy
+                        </li>
+                        <li>All links and buttons have obvious <code>:hover</code> and <code>:active</code>
+                            states (like a slight <code>translateX(4px)</code> nudge) so users know they are
+                            clickable.</li>
+                        <li>Consistent grid gaps (40px) and padding keep the card layout looking unified.</li>
+                    </ul>
+
+                    <h3>Core Rationale</h3>
+                    <p>Used tags like <code>&lt;aside&gt;</code>, <code>&lt;nav&gt;</code>, and
+                        <code>&lt;section&gt;</code> instead of <code>&lt;div&gt;</code>. It drastically
+                        improves SEO and screen-reader accessibility. The sticky sidebar makes navigating a long
+                        article effortless. Frosted glass ensures readability without breaking the visual
+                        aesthetic. Descriptive <code>alt</code> text keeps the page screen-reader friendly (no
+                        blank names or raw filenames). Using <code>&lt;figcaption&gt;</code> anchors photo
+                        credits directly to the image for everyone. Reusing the
+                        <code>.content-page-section-card</code> and <code>.card</code> classes everywhere keeps
+                        the look unified so it feels like a single, solid design system.
+                    </p>
+
+                    <h3>Accessibility</h3>
+                    <p>Beyond the semantic tags above: every image (banner, article figures) carries a
+                        full-sentence <code>alt</code> description; the heading hierarchy uses exactly one
+                        <code>&lt;h1&gt;</code> per page with <code>&lt;h2&gt;</code> for each article
+                        sub-section; and every credit/citation link is a real, keyboard-focusable
+                        <code>&lt;a&gt;</code> tag rather than plain text.</p>
+
+                    <h3>Link to the validation page</h3>
+                    <p><a class="generic-link" href="validation_ST1.html#contentVal">Go to validation page</a></p>
+
+                    <h3>Link to the page</h3>
+                    <p><a class="generic-link" href="content_ST1.html">Go to Content page</a></p>
+                </section>
+
+                <section class="card" id="challenge">
+                    <h2>Challenges and Lessons Learned</h2>
+                    <p>Add your reflection here: challenges encountered while building the global stylesheet,
+                        Home page, and Gallery page, and how they were resolved.</p>
+                </section>
+
+                <section class="card" id="compliance">
+                    <h2>Compliance</h2>
+                    <p>Discuss how the pages you created are compliant with Janet regulations governing web page
+                        publication, demonstrating understanding and application of these regulations. Be
+                        realistic and truthful. <a class="generic-link"
+                            href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html"
+                            target="_blank" rel="noopener noreferrer">See the lecture notes for more details on
+                            compliance.</a></p>
+                </section>
+
+                <section class="card" id="group">
+                    <h2>Group Meetings and Individual Contribution Log</h2>
+                    <p>Requirements:</p>
+                    <ul>
+                        <li>A minimum of six (6) group meetings must be recorded.</li>
+                        <li>Each student must provide their own account of the meetings.</li>
+                        <li>The log must focus on individual contribution, not just group activity.</li>
+                    </ul>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Meeting</th>
+                                <th>Date &amp; Time</th>
+                                <th>Format</th>
+                                <th>Objective</th>
+                                <th>Attended</th>
+                                <th>Your Individual Contribution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>3 Feb 2026</td>
+                                <td>Face-to-face</td>
+                                <td>Agree SDG and assign roles</td>
+                                <td>Yes</td>
+                                <td>I took responsibility for the global stylesheet, template, Home page and
+                                    Gallery page.</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>17 Feb 2026</td>
+                                <td>Online</td>
+                                <td>Review Home Page design</td>
+                                <td>Yes</td>
+                                <td>I proposed the shared colour palette and card-based layout used across the
+                                    site.</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>03 Mar 2026</td>
+                                <td>Hybrid</td>
+                                <td>Progress review</td>
+                                <td>No</td>
+                                <td>I reviewed meeting notes and followed up on outstanding tasks.</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="card" id="ref">
+                    <h2>References</h2>
+                    <p>Provide links to resources you used following a consistent format (e.g., APA, MLA, or a
+                        simplified style). For example:</p>
+                    <ul>
+                        <li>iStock (2025) <i>iStock.</i> Available at: <a class="generic-link" target="_blank"
+                                rel="noopener noreferrer" href="https://www.istockphoto.com/">istockphoto.com</a>
+                            (Last accessed: 11 Feb 2025).</li>
+                        <li>Duckett, J., 2011. HTML and CSS: Design and Build Websites, <i>John Wiley &amp; Sons.
+                                Inc. Indianapolis.</i></li>
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+    </main>
+    <!-- Scroll to top button. DO NOT TOUCH -->
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry,
+                            Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <!-- Replace these placeholders on your respective pages -->
+                    <p>Developed by: <strong>Eshan Amarakoon</strong></p>
+                    <p>Student ID: <strong>[YOUR ID]</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <!-- Change href(target) accordingly -->
+                <a href="pageEditor_ST1.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST1.html" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        // DO NOT TOUCH THE SCRIPT BELOW. WRITE YOUR SCRIPTS ABOVE THIS COMMENT
+        // Loop through every link in .navbar a and check if href matches the current page URL and add the class called current-page
+        document.querySelectorAll('.navbar a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('current-page')
+            }
+        });
+        //scroll button stuff
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        //show button when user scrolls down 600px from the top
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

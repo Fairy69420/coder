@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Template -- Can be edited</title> <!--Update the title as needed-->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page specific embedded CSS rules -->
+    <style>
+        .profile-wrapper {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+        }
+        .profile-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .progress-container {
+            width: 100%;
+            background: #e2e2e2;
+            border-radius: 8px;
+            height: 18px;
+            overflow: hidden;
+            margin: 0.6rem 0 0.3rem 0;
+        }
+        .profile-progress-fill {
+            height: 100%;
+            background: #FD6925;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .profile-status {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 1.2rem;
+        }
+
+        .profile-output {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .profile-step-card {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease, max-height 0.5s ease;
+        }
+
+        .profile-step-card.revealed {
+            opacity: 1;
+            max-height: 500px;
+        }
+
+        .profile-step-card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-step-card dl {
+            margin: 0;
+        }
+
+        .profile-step-card dt {
+            font-weight: bold;
+        }
+
+        .profile-step-card dd {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .profile-confirmation {
+            border: 2px solid #FD6925;
+            background: #fff4ee;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- ==================================================== -->
+    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
+    <!-- ==================================================== -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link"
+                            id="nav-profile"><span>User Profile</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END OF HEADER -->
+
+
+    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    <main class="main-content">
+        <div class="profile-wrapper">
+            <h2>BUILD YOUR INNOVATION PROFILE</h2>
+            <p>
+              Complete a few quick prompts to build your profile and explore how you can 
+              support Industry, Innovation and Infrastructure (SDG 9). 
+              You can skip questions and revisit them at any time
+            </p>
+
+            <div class="profile-toolbar">
+                <button id="btnStart" type="button">Start</button>
+                <button id="btnReset" type="button">Reset Profile</button>
+                <button id="btnRevisit1" type="button">Revisit Step 1</button>
+                <button id="btnRevisit2" type="button">Revisit Step 2</button>
+                <button id="btnRevisit3" type="button">Revisit Step 3</button>
+            </div>
+            <div>
+                <label id="progressLabel" for="progressBar">Completion : 0%</label>
+                <div class="progress-container">
+                    <div class="profile-progress-fill" id="progressBar"></div>
+                </div>
+                <p class="profile-status" id="statusLine">Status: Click Start to begin.</p>
+            </div>
+
+            <h3>Your Profile (Live Updates)</h3>
+            <div class="profile-output" id="profileOutput">
+                <!-- Step cards are injected here dynamically by JavaScript -->
+            </div>
+
+            <div class="profile-confirmation" id="confirmationBox" role="status">
+                Congratulations! Your profile has been completed successfully.
+                Thank you for supporting SDG 9: Industry, Innovation and Infrastructure.
+            </div>
+        </div>
+
+    </main>
+    <!-- Scroll to top button. DO NOT TOUCH -->
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg"
+                            alt="sdg9 black logo"><span>Industry, Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <!-- Replace these placeholders on your respective pages -->
+                    <p>Developed by: <strong>Thamiliny Sivanesan</strong></p>
+                    <p>Student ID: <strong>w2213234</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <!-- Change href(target) accordingly -->
+                <a href="" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        // DO NOT TOUCH
+        // Loop through every link in .navbar a and check if href matches the current page URL and add the class called current-page
+        document.querySelectorAll('.navbar a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('current-page')
+            }
+        });
+        //scroll button stuff
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        //show button when user scrolls down 600px from the top
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

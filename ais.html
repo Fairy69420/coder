@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG Action Impact Simulator</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- page specific css rules for the simulator page (5 rules minimum) -->
+    <style>
+        /* 1. the box at the top with the title and text */
+        .ais-intro {
+            text-align: center;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        .ais-intro h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        /* 2. lay the cards out in a simple grid */
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        /* 3. basic styling for each card */
+        .action-card {
+            background-color: #ffffff;
+            border: 2px solid #cccccc;
+            border-radius: 8px;
+            width: 250px;
+            padding: 15px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .action-card .emoji {
+            font-size: 40px;
+        }
+
+        .action-card h3 {
+            margin: 10px 0 5px 0;
+            font-size: 17px;
+        }
+
+        .action-card p {
+            font-size: 13px;
+            color: #555555;
+        }
+
+        .action-card .points {
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        /* 4. show clearly which cards are selected */
+        .action-card.selected {
+            border-color: #FD6925;
+            background-color: #fff1e8;
+        }
+
+        /* 5. the results box at the bottom */
+        #resultsBox {
+            max-width: 500px;
+            margin: 0 auto 60px auto;
+            background-color: #1e2638;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        #resultsBox button {
+            margin-top: 12px;
+            padding: 8px 18px;
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================================================== -->
+    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
+    <!-- ==================================================== -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User
+                                Profile</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END OF HEADER -->
+
+    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    <main class="main-content">
+
+        <div class="ais-intro">
+            <h1>SDG Action Impact Simulator</h1>
+            <p>Click on the actions you would actually do. This is not a test, just click
+                the cards below and see your impact score change at the bottom.</p>
+        </div>
+
+        <div class="card-grid">
+
+            <!-- card 1 -->
+            <div class="action-card" data-points="3">
+                <div class="emoji">🏪</div>
+                <h3>Support local makers</h3>
+                <p>Buy from small local businesses instead of big importers.</p>
+                <div class="points">Impact points: 3</div>
+            </div>
+
+            <!-- card 2 -->
+            <div class="action-card" data-points="3">
+                <div class="emoji">🔧</div>
+                <h3>Choose repairable tech</h3>
+                <p>Repair a device instead of throwing it away.</p>
+                <div class="points">Impact points: 3</div>
+            </div>
+
+            <!-- card 3 -->
+            <div class="action-card" data-points="2">
+                <div class="emoji">💡</div>
+                <h3>Share your skills</h3>
+                <p>Post a free tutorial or help someone learn something technical.</p>
+                <div class="points">Impact points: 2</div>
+            </div>
+
+            <!-- card 4 -->
+            <div class="action-card" data-points="2">
+                <div class="emoji">📍</div>
+                <h3>Report broken infrastructure</h3>
+                <p>Report a pothole or broken streetlight to your local council.</p>
+                <div class="points">Impact points: 2</div>
+            </div>
+
+            <!-- card 5 -->
+            <div class="action-card" data-points="4">
+                <div class="emoji">♻️</div>
+                <h3>Recycle e-waste</h3>
+                <p>Take old electronics to a proper recycling point.</p>
+                <div class="points">Impact points: 4</div>
+            </div>
+
+            <!-- card 6 -->
+            <div class="action-card" data-points="5">
+                <div class="emoji">🚀</div>
+                <h3>Back an innovation project</h3>
+                <p>Support or volunteer for a local student/tech project.</p>
+                <div class="points">Impact points: 5</div>
+            </div>
+
+        </div>
+
+        <!-- this box updates using javascript -->
+        <div id="resultsBox">
+            <p>Selected actions: <span id="countText">0</span></p>
+            <p>Total impact score: <span id="scoreText">0</span></p>
+            <p>Impact level: <span id="levelText">-</span></p>
+            <p id="messageText">Click a card above to get started.</p>
+            <button id="resetBtn">Reset</button>
+        </div>
+
+    </main>
+
+    <!-- Scroll to top button. DO NOT TOUCH -->
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry,
+                            Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <!-- Replace these placeholders with your details -->
+                    <p>Developed by: <strong>[YOUR NAME]</strong></p>
+                    <p>Student ID: <strong>[YOUR ID]</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <!-- Change href(target) accordingly -->
+                <a href="pageEditor_ST2.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST2.html" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- external JS script -->
+    <script src="ais_script.js"></script>
+
+    <script>
+
+        // DO NOT TOUCH THE SCRIPT BELOW. WRITE YOUR SCRIPTS ABOVE THIS COMMENT
+        // Loop through every link in .navbar a and check if href matches the current page URL and add the class called current-page
+        document.querySelectorAll('.navbar a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('current-page')
+            }
+        });
+        //scroll button stuff
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        //show button when user scrolls down 600px from the top
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

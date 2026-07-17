@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title> <!--Update the title as needed-->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page specific embedded CSS rules -->
+    <style>
+        /* overwritting header margin */
+        header {
+            margin-bottom: 0;
+        }
+
+        /* Hero section styling */
+        .hero-section-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 60px);
+            overflow: hidden;
+        }
+
+        .hero-slider-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .hero-slider-track {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: 100%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: right center;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(img3.jpg);
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            /* make this element the bottom layer */
+        }
+
+        .hero-overlay-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60%;
+            height: 100%;
+            z-index: 2;
+            clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%);
+            background-image: linear-gradient(to right top, #fd6925, #fb5f31, #f8553b, #f44c44, #ef434c, #e53855, #d92e5d, #cb2864, #b3226c, #982270, #7c2470, #5e256d);
+        }
+
+        .hero-overlay-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60%;
+            height: 100%;
+            z-index: 3;
+            clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%);
+
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+        }
+
+        .hero-overlay-2-watermark-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            pointer-events: none;
+            user-select: none;
+            padding: 2rem 0;
+            overflow: hidden;
+
+
+        }
+
+        .animate-watermark-slide-left {
+            animation: slideLeft 6s ease-out forwards;
+        }
+
+        @keyframes slideLeft {
+            from {
+                transform: translateX(80px);
+            }
+        }
+
+        .hero-overlay-2-watermark-bg span {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            /* Thick fonts look best here */
+            font-size: 10rem;
+            /* Massive scale to fill the trapezium height */
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+
+            /* The Muted Light Black Color */
+            color: rgba(0, 0, 0, 0.03);
+
+            /* Stagger the words slightly for a dynamic grid layout */
+            padding-left: 1px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            width: 75%;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .animate-hero-content-slide-right {
+            animation: slideRight 2s ease-out forwards;
+        }
+
+        @keyframes slideRight {
+            from {
+                transform: translateX(-3rem);
+            }
+        }
+
+        .hero-content h1 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            width: 500px;
+            font-size: 4rem;
+        }
+
+        .hero-content p {
+            width: 500px;
+            margin-top: 25px;
+            font-family: 'Outfit', 'Inter', sans-serif;
+            letter-spacing: 0.01rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            width: 500px;
+            display: flex;
+            margin-top: 25px;
+        }
+
+        .hero-buttons button {
+            margin-right: 20px;
+        }
+
+        /* Hero section style end */
+
+        /* mission and goal promoting section */
+
+        .mission-goal-promoting {
+            margin: 40px 0;
+
+            max-width: 1300px;
+            /* padding-top: 25px;
+            padding-bottom: 25px;
+            padding-left: 50px;
+            padding-right: 50px; */
+            margin-right: auto;
+            margin-left: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 600px);
+            /* flex-direction: column; */
+            justify-content: center;
+            gap: 30px;
+        }
+
+
+        .card {
+            width: 600px;
+            /* height: 480px; */
+            padding: 15px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+            /* height: 50px; */
+        }
+
+        /* .card:hover {
+            transform: translateY(-10px);
+
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+        } */
+
+        .mgp-card-bottom-text {
+            height: 50px;
+            width: 100%;
+            margin-top: auto;
+            border-top: 1px solid #FD6925;
+            display: flex;
+            align-items: center;
+            color: #fd6925;
+
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .mgp-card-content-container {
+            display: flex;
+            flex-direction: wrap;
+            width: 100%;
+        }
+
+        .mgp-card-img figure {
+            float: left;
+            margin-right: 15px;
+        }
+
+        .mgp-card-img figure img {
+            width: 300px;
+            height: 200px;
+            border-radius: 5px;
+        }
+
+        .mgp-card-highlights {
+            /* height: 100px; */
+            /* margin-top: auto; */
+            width: 100%;
+        }
+
+        .mgp-card-highlights ul {
+            margin-left: 30px;
+        }
+
+        .mgp-card-img figcaption {
+            font-size: small;
+            transform: translateY(-5px);
+        }
+
+        /* mission and goal promoting section styling end */
+
+
+        .article-linking-section {
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        .article-section-header {
+            font-family: 'Inter';
+            font-size: 28px;
+            font-weight: 600;
+            margin-left: 40px;
+        }
+
+        .full-width-article-thumbnail {
+            max-width: 1240px;
+            min-height: 500px;
+            /* background-color: #5e256d; */
+            /* background-color: rgba(0, 0, 0, 0.05); */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px;
+            border-radius: 0.5rem;
+
+            margin-bottom: 20px;
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .full-width-article-img-container {
+            flex: 1 1 55%;
+            min-width: 300px;
+            /* height: 400px; */
+            max-height: 480px;
+            /* background-color: #5e256d; */
+            border-radius: 0.5rem;
+            overflow: hidden;
+
+            contain: layout paint;
+        }
+
+        .full-width-article-img-container img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            will-change: transform;
+        }
+
+        .full-width-article-content {
+            flex: 1 1 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+
+        .mini-article-thumbnail-container {
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 400px);
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .mini-article-thumbnail {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            height: 500px;
+            /* outline: auto; */
+            overflow: hidden;
+            padding: 10px;
+            border-radius: 0.5rem;
+            /* cursor: pointer; */
+
+
+        }
+
+        .clickable-box {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .clickable-box:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            /* box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); */
+        }
+
+        /* .mini-article-thumbnail:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        } */
+
+        .clickable-box:hover .article-read-more svg {
+            transform: translateX(10px);
+        }
+
+
+        .mini-article-img-container {
+            /* outline: auto; */
+            width: 100%;
+            aspect-ratio: 1 / 0.55;
+            /* background-color: #5e256d; */
+            border-radius: 0.3rem;
+            margin-bottom: 4px;
+        }
+
+        .mini-article-img-container img {
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .article-meta-data {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            /* letter-spacing: 0.05rem; */
+        }
+
+        .article-content {
+            flex-grow: 1;
+            font-family: 'Inter';
+        }
+
+        .article-content h2 {
+            font-weight: 650;
+            margin: 10px 0;
+        }
+
+        .article-content p {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .article-read-more {
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            font-family: 'Inter';
+            font-size: 20px;
+            /* color: #FD6925; */
+            color: rgb(0, 65, 200);
+        }
+
+        .article-read-more svg {
+            transition: transform 0.3s ease;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================================================== -->
+    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
+    <!-- ==================================================== -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User
+                                Profile</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END OF HEADER -->
+
+
+    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    <main class="main-content">
+        <div class="hero-section-container">
+            <!-- Layer 1: background image -->
+            <div class="hero-slider-wrapper">
+                <div class="hero-slider-track">
+                    <div class="hero-slide" style="background-image: url(images/hero-bg-img1.jpg);" role="img"
+                        aria-label="https://pixabay.com/photos/people-industry-construction-3286036/"></div>
+                    <div class="hero-slide" style="background-image: url(images/hero-bg-img2.jpg);" role="img"
+                        aria-label="https://pixabay.com/photos/port-ship-water-sea-crane-freight-6670684/"></div>
+                    <div class="hero-slide" style="background-image: url(images/hero-bg-img3.jpg);" role="img"
+                        aria-label="https://pixabay.com/photos/industry-environmental-pollution-1761801/"></div>
+                    <div class="hero-slide" style="background-image: url(images/hero-bg-img4.jpg);" role="img"
+                        aria-label="https://pixabay.com/photos/train-railway-snow-winter-railroad-62849/"></div>
+                    <div class="hero-slide" style="background-image: url(images/hero-bg-img5.jpg);" role="img"
+                        aria-label="photo by Freek Wolsink from Pexels: https://www.pexels.com/photo/teenager-experiencing-virtual-reality-simulation-indoors-37533367/">
+                    </div>
+                    <div class="hero-slide" style="background-image: url(images/hero-bg-img6.jpg);" role="img"
+                        aria-label="https://pixabay.com/photos/woman-job-traditional-vietnam-7659866/"></div>
+                </div>
+            </div>
+            <!-- Layer 2: gradient trapezium -->
+            <div class="hero-overlay-1"></div>
+            <!-- Layer 3: White blur glass pane -->
+            <!-- Content also goes here -->
+            <div class="hero-overlay-2">
+                <!-- watermark is hidden so assistive technologies can skip it -->
+                <div class="hero-overlay-2-watermark-bg animate-watermark-slide-left" aria-hidden="true">
+                    <span>INDUSTRY</span>
+                    <span>INNOVATION</span>
+                    <span>INFRASTRUCTURE</span>
+                </div>
+                <div class="hero-content animate-hero-content-slide-right">
+                    <h1><span style="color: white;">Re-Engineering Industry for a</span> Sustainable Future</h1>
+
+                    <p>Coder is a collaborative platform dedicated to UN SDG 9. We bridge the gap between
+                        academic theory and industrial reality, empowering students to build the resilient
+                        infrastructure of tomorrow. </p>
+                    <div class="hero-buttons">
+                        <button class="button">Take actions!</button>
+                        <button class="button">Make your profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mission-goal-promoting">
+            <div class="card">
+                <h2>The Crisis of Legacy Infrastructure</h2>
+                <div class="mgp-card-content-container">
+                    <div class="mgp-card-img">
+                        <figure>
+                            <img src="images/mgp-card-img1.jpg"
+                                alt="Explore Dubai's intricate roadways and futuristic skyline in this stunning aerial shot.">
+                            <figcaption><a class="generic-link"
+                                    href="https://www.pexels.com/photo/aerial-view-of-city-buildings-10619941/">Photo by
+                                    Kate Trysh - Pexels</a></figcaption>
+                        </figure>
+                    </div>
+                    <div class="mgp-description">
+                        <p>Modern societies are heavily reliant on systems engineered in the previous century. From
+                            outdated transportation networks to inefficient power grids, legacy infrastructure
+                            drains
+                            regional economies, creates massive carbon footprints, and fails under extreme weather
+                            events. Upgrading these systems is not just an environmental goal—it is a baseline
+                            requirement for economic survival.
+                        </p>
+                    </div>
+                </div>
+                <div class="mgp-card-highlights">
+                    <h3>Key Outcomes :</h3>
+                    <ul>
+                        <li>40% reduction in regional energy transmission losses.</li>
+                        <li>Resilient supply chains capable of weathering severe climate disruptions.</li>
+                        <li>Immediate drops in municipal maintenance expenditures.</li>
+                    </ul>
+                </div>
+                <div class="mgp-card-bottom-text">
+                    Local communities and civic planners.
+                </div>
+            </div>
+            <div class="card">
+                <h2>Bridging the Tech-to-Industry Divide</h2>
+                <div class="mgp-card-content-container">
+                    <div class="mgp-card-img">
+                        <figure>
+                            <img src="images/mgp-card-img2.png"
+                                alt="Image of two people each holding a puzzle piece while trying to connect on disconnected land">
+                            <figcaption><a class="generic-link"
+                                    href="https://diversityq.com/how-can-businesses-bridge-the-digital-divide/">Image by
+                                    diversityQ</a></figcaption>
+                        </figure>
+                    </div>
+                    <div class="mgp-description">
+                        <p>A massive gap exists between textbook theories taught in universities and the hardware
+                            realities of modern industrial environments. Students are the primary catalysts for change,
+                            yet they rarely get the chance to interface with real-world infrastructure problems before
+                            graduating. Creating a direct pipeline for student innovation accelerates the adoption of
+                            smarter technologies.</p>
+                    </div>
+                </div>
+                <div class="mgp-card-highlights">
+                    <h3>Individual Actions :</h3>
+                    <ul>
+                        <li>Participate in open-source hardware and software development for public utilities.</li>
+                        <li>Focus academic research on upgrading local, real-world legacy hardware.</li>
+                        <li>Join student tech cooperatives that offer consulting to local small-scale industries.
+                        </li>
+                    </ul>
+                </div>
+                <div class="mgp-card-bottom-text">
+                    University students and academic institutions.
+                </div>
+            </div>
+            <div class="card">
+                <h2>Decentralized Power and Smart Micro-Grids</h2>
+                <div class="mgp-card-content-container">
+                    <div class="mgp-card-img">
+                        <figure>
+                            <img src="images/mgp-card-img3.jpg" alt="High angle 3d electric cars on streets">
+                            <figcaption><a class="generic-link"
+                                    href="https://www.magnific.com/free-photo/high-angle-3d-electric-cars-streets_14371096.htm#fromView=search&page=1&position=7&uuid=5195a2dc-c17a-464f-adc5-c47528bac792&query=decentralized+power+and+smart+micro-grids">Image
+                                    by freepik</a></figcaption>
+                        </figure>
+                    </div>
+                    <div class="mgp-description">
+                        <p>Centralized industrial zones are highly vulnerable to failure and produce high emissions. The
+                            future relies on highly localized, decentralized smart grids that use microcontrollers and
+                            embedded systems to monitor, distribute, and conserve energy in real-time. By automating
+                            data flows from the factory floor to the grid, we can dynamically eliminate resource waste.
+                        </p>
+                    </div>
+                </div>
+                <div class="mgp-card-highlights">
+                    <h3>Key Outcomes :</h3>
+                    <ul>
+                        <li>Elimination of catastrophic single-point-of-failure blackouts.</li>
+                        <li>Seamless integration of localized solar, wind, and kinetic energy recovery.</li>
+                        <li>Democratic access to affordable, reliable electricity for marginalized sectors.</li>
+                    </ul>
+                </div>
+                <div class="mgp-card-bottom-text">
+                    Tech innovators and small enterprises.
+                </div>
+            </div>
+            <div class="card">
+                <h2>Sustainable Industrialization for All</h2>
+                <div class="mgp-card-content-container">
+                    <div class="mgp-card-img">
+                        <figure>
+                            <img src="images/mgp-card-img4.jpg"
+                                alt="Women sorting broken glass at a recycling facility in Tanzania.">
+                            <figcaption><a class="generic-link"
+                                    href="https://www.pexels.com/photo/workers-sorting-glass-at-a-recycling-facility-36423787/">Photo
+                                    by Keegan Checks - Pexels</a></figcaption>
+                        </figure>
+                    </div>
+                    <div class="mgp-description">
+                        <p>Sustainable industry is often mistaken as a concern only for multi-billion-dollar
+                            conglomerates. In reality, the most impactful transitions happen at the grass-roots level
+                            when small businesses, community workshops, and individual developers optimize their tools.
+                            True sustainability is achieved when data transparency and eco-friendly manufacturing
+                            frameworks are accessible to everyone.</p>
+                    </div>
+                </div>
+                <div class="mgp-card-highlights">
+                    <h3>Individual Actions :</h3>
+                    <ul>
+                        <li>Audit personal and workplace digital footprints to optimize server and device lifespans.
+                        </li>
+                        <li>Support and source materials exclusively from manufacturers utilizing circular supply
+                            loops.</li>
+                        <li>Advocate for community-led digital transparency platforms that log local industrial
+                            emissions.</li>
+                    </ul>
+                </div>
+                <div class="mgp-card-bottom-text">
+                    Everyday citizens and young professionals.
+                </div>
+            </div>
+        </div>
+        <div class="article-linking-section">
+            <span class="article-section-header">Read our articles...</span>
+            <div class="full-width-article-thumbnail clickable-box" data-href="content_ST1.html" role="link"
+                tabindex="0" id="st1_article">
+                <div class="full-width-article-img-container"><img src="images/content-page-banner-img-w2212570.jpg">
+                </div>
+                <div class="full-width-article-content">
+                    <div class="article-meta-data">
+                        <span style="color: rgb(0, 65, 200);">Eshan Amarakoon</span>
+                        <span style="color: rgb(67, 70, 86);">23 Apr 2026</span>
+                    </div>
+                    <div class="article-content">
+                        <h2>Integrating Micro-Enterprises Into Modern Financial Value Chains</h2>
+                        <p>Discover how grassroots businesses bypass traditional banking barriers by adopting community
+                            credit, digital payments, e-commerce onboarding, and eco-friendly practices to integrate
+                            into modern financial value chains...
+                        </p>
+                    </div>
+                    <div class="article-read-more"><span>Read more</span><svg style="margin-left: 10px;"
+                            viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <rect width="16" height="16" id="icon-bound" fill="none"></rect>
+                                <polygon points="7.586,2.414 12.172,7 0,7 0,9 12.172,9 7.586,13.586 9,15 16,8 9,1">
+                                </polygon>
+                            </g>
+                        </svg></div>
+                </div>
+            </div>
+            <div class="mini-article-thumbnail-container">
+                <div class="mini-article-thumbnail  clickable-box" data-href="content_ST1.html" role="link" tabindex="0"
+                    id="st2_article">
+                    <div class="mini-article-img-container" style="overflow: hidden;">
+                        <img src="images/gallery/card3_img.jpg" style="height: 100%; width: 100%;">
+                    </div>
+                    <div class="article-meta-data">
+                        <span style="color: rgb(0, 65, 200);">Thimithri vidanapathirana</span>
+                        <span style="color: rgb(67, 70, 86);">03 May 2026</span>
+                    </div>
+                    <div class="article-content">
+                        <h2>Integrating Micro-Enterprises Into Modern Financial Value Chains</h2>
+                        <p>Discover how grassroots businesses bypass traditional banking barriers by adopting community
+                            credit, digital payments, e-commerce onboarding, and eco-friendly practices to integrate
+                            into modern financial value chains...
+                        </p>
+                    </div>
+                    <div class="article-read-more"><span>Read more</span><svg style="margin-left: 10px;"
+                            viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <rect width="16" height="16" id="icon-bound" fill="none"></rect>
+                                <polygon points="7.586,2.414 12.172,7 0,7 0,9 12.172,9 7.586,13.586 9,15 16,8 9,1">
+                                </polygon>
+                            </g>
+                        </svg></div>
+                </div>
+                <div class="mini-article-thumbnail  clickable-box" data-href="content_ST1.html" role="link" tabindex="0"
+                    id="st3_article">
+                    <div class="mini-article-img-container" style="overflow: hidden;">
+                        <img src="images/gallery/card1_img.jpg" style="height: 100%; width: 100%;">
+                    </div>
+                    <div class="article-meta-data">
+                        <span style="color: rgb(0, 65, 200);">Upeksha vidushi</span>
+                        <span style="color: rgb(67, 70, 86);">11 Jun 2026</span>
+                    </div>
+                    <div class="article-content">
+                        <h2>Integrating Micro-Enterprises Into Modern Financial Value Chains</h2>
+                        <p>Discover how grassroots businesses bypass traditional banking barriers by adopting community
+                            credit, digital payments, e-commerce onboarding, and eco-friendly practices to integrate
+                            into modern financial value chains...
+                        </p>
+                    </div>
+                    <div class="article-read-more"><span>Read more</span><svg style="margin-left: 10px;"
+                            viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <rect width="16" height="16" id="icon-bound" fill="none"></rect>
+                                <polygon points="7.586,2.414 12.172,7 0,7 0,9 12.172,9 7.586,13.586 9,15 16,8 9,1">
+                                </polygon>
+                            </g>
+                        </svg></div>
+                </div>
+                <div class="mini-article-thumbnail  clickable-box" data-href="content_ST4.html" role="link" tabindex="0"
+                    id="st4_article">
+                    <div class="mini-article-img-container" style="overflow: hidden;">
+                        <img src="images/homePage_article_ST2_thumbnail_Img.jpg" style="height: 100%; width: 100%;">
+                    </div>
+                    <div class="article-meta-data">
+                        <span style="color: rgb(0, 65, 200);">Thamiliny Sivanesan</span>
+                        <span style="color: rgb(67, 70, 86);">04 Jul 2026</span>
+                    </div>
+                    <div class="article-content">
+                        <h2>Bridging the Digital Divide</h2>
+                        <p>Discover how investing in resilient tech infrastructure, expanding global network access, and
+                            fostering inclusive innovation are empowering underserved communities and fueling economic
+                            growth to ensure no one is left behind in our connected world...
+                        </p>
+                    </div>
+                    <div class="article-read-more"><span>Read more</span><svg style="margin-left: 10px;"
+                            viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <rect width="16" height="16" id="icon-bound" fill="none"></rect>
+                                <polygon points="7.586,2.414 12.172,7 0,7 0,9 12.172,9 7.586,13.586 9,15 16,8 9,1">
+                                </polygon>
+                            </g>
+                        </svg></div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry,
+                            Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <!-- Replace these placeholders on your respective pages -->
+                    <p>Developed by: <strong>Eshan Amarakoon</strong></p>
+                    <p>Student ID: <strong>W2212570</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <!-- Change href(target) accordingly -->
+                <a href="" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // article thumbnail click event handle
+        document.addEventListener('click', (event) => {
+            const clickableElement = event.target.closest('.clickable-box');
+
+            if (clickableElement) {
+                console.log(`Article click event - id: ${clickableElement.id}`);
+                window.location.href = clickableElement.dataset.href;
+            }
+        });
+
+        // Slide rotation controller
+        let currentSlide = 0;
+        const sliderTrack = document.querySelector('.hero-slider-track');
+        const originalSlides = document.querySelectorAll('.hero-slide');
+        const totalSlides = originalSlides.length; // 6
+
+        // 1. Clone the first slide and append it to the end of the track
+        const firstSlideClone = originalSlides[0].cloneNode(true);
+        sliderTrack.appendChild(firstSlideClone);
+
+        function swipeNext() {
+            currentSlide++;
+
+            // Enable transition for normal forward movement
+            sliderTrack.style.transition = "transform 2.5s cubic-bezier(0.25, 1, 0.5, 1)";
+            sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // 2. Check if we just transitioned to the cloned slide
+            if (currentSlide === totalSlides) {
+                // Wait for the 1s sliding animation to finish
+                setTimeout(() => {
+                    sliderTrack.style.transition = "none"; // Disable animation instantly
+                    currentSlide = 0; // Reset index to the actual first slide
+                    sliderTrack.style.transform = `translateX(0%)`; // Snap back
+                }, 1000); // Must match your CSS transition duration (1s)
+            }
+        }
+
+        // Swipe automatically every 5 seconds
+        setInterval(swipeNext, 5000);
+    </script>
+</body>
+
+</html>

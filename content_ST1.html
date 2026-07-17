@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrating Micro-Enterprises Into Modern Financial Value Chains</title> <!--Update the title as needed-->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page specific embedded CSS rules -->
+    <style>
+        /*
+            Put your minimum 5 page-specific CSS rules here
+        */
+
+        .content-page-banner-heading {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .content-page-banner-heading h1 {
+            color: white;
+        }
+
+        .content-page-section-card table,
+        th,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        .content-page-section-card table {
+            margin-top: 20px;
+            width: 600px;
+        }
+
+        .content-page-section-card h2 {
+            margin-bottom: 15px;
+        }
+
+        .article-content-fig {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .content-page-section-card fieldset {
+            margin-top: 10px;
+            border-radius: 7px;
+        }
+
+        .content-page-section-card fieldset ul,
+        .content-page-section-card fieldset ol {
+            padding: 25px;
+            padding-left: 40px;
+        }
+
+        .content-page-section-card fieldset legend {
+            margin-left: 30px;
+            padding: 0 5px;
+        }
+
+        .content-page-section-card fieldset li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .poll {
+            width: 100%;
+            /* height: 500px; */
+            padding: 70px 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 0.3rem;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+
+        .poll-container {
+            border-radius: 7px;
+            background-color: white;
+            width: 90%;
+            /* height: 600px; */
+            padding: 10px;
+            /* padding-bottom: 0; */
+            box-shadow: 10px 22px 25px 2px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .poll-body {
+            /* flex-grow: 1; */
+            width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            /* padding-top: 20px;
+            padding-bottom: 20px; */
+            height: 300px;
+            outline: 1px solid rgba(0, 0, 0, 0.2)
+        }
+
+        .poll-header {
+            padding-bottom: 10px;
+        }
+
+        .poll-footer {
+            width: 100%;
+            height: 60px;
+            /* background-color: blueviolet; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            margin-top: 10px;
+        }
+
+        .poll-body form {
+            height: 100%;
+        }
+
+        .poll-body ul {
+            height: 100%;
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: space-between; */
+            justify-content: space-evenly;
+        }
+
+        .poll-body li {
+            width: 100%;
+            /* padding-left: 10px; */
+            /*padding-top: 10px;
+            padding-bottom: 10px; */
+            height: 50px;
+            border-radius: 5px;
+
+            display: flex;
+            align-items: center;
+
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+
+            box-sizing: border-box;
+        }
+
+        .poll-body li:hover, .poll-body li:has(input:checked) {
+            border-color: #FD6925;
+            background-color: rgba(253, 105, 37, 0.05);
+        }
+
+        .poll-body label {
+            /* margin-left: 15px; */
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+
+            width: 100%;
+            height: 100%;
+            padding-left: 15px;
+        }
+        .poll-body input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+
+            margin-left: 15px;
+
+            flex-shrink: 0;
+        }
+        .poll-body input[type="radio"]:checked {
+            border-color: #FD6925;
+            background-color: rgba(253, 105, 37, 0.3);
+        }
+
+        #poll-body-result {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            /* background-color: rgba(0, 0, 0, 0.3); */
+            /* outline: 1px solid; */
+        }
+        .poll-option-and-votes {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .poll-option-bar-track {
+            height: 8px;
+            background-color: rgb(234, 238, 242);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        .poll-option-bar-fill {
+            height: 100%;
+        }
+        #poll-submit-button-greyed {
+            background-color: rgb(191 196 205);
+            border-color: rgb(191 196 205);
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- ==================================================== -->
+    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
+    <!-- ==================================================== -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User
+                                Profile</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END OF HEADER -->
+
+
+    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    <main class="main-content">
+        <div class="content-page">
+            <div class="content-page-banner">
+                <img src="images/content-page-banner-img-w2212570.jpg" class="content-page-banner-image"
+                    alt="Two elderly Vietnamese women weaving traditional bamboo fish traps in a courtyard filled with completed woven baskets.">
+                <div class="content-page-banner-img-reference" style="font-size: small;">
+                    Photo by <a target="_blank" rel="noopener noreferrer" class="generic-link"
+                        href="https://unsplash.com/@quangpraha?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Quang
+                        Nguyen Vinh</a> on <a target="_blank" rel="noopener noreferrer" class="generic-link"
+                        href="https://unsplash.com/photos/a-woman-sitting-on-the-ground-surrounded-by-baskets-gJMmKVAhnqk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                </div>
+                <a class="generic-link content-page-banner-editor-link" href="pageEditor_ST1.html">Editor's page</a>
+                <div class="content-page-banner-heading" style="width: 950px;">
+                    <h1>Integrating Micro-Enterprises Into Modern Financial Value Chains</h1>
+                    <p style="color: white;">By: Eshan Amarakoon</p>
+                </div>
+            </div>
+
+            <div class="article-content-container">
+                <aside class="article-content-sidebar">
+                    <nav>
+                        <ul>
+                            <li><a href="#microfinance">Supporting Microfinance and Community-Led Credit</a></li>
+                            <li><a href="#digital-payment">Accelerating Digital Financial Literacy</a></li>
+                            <li><a href="#local-value-chains">Integrating Small Vendors into Value Chains</a></li>
+                            <li><a href="#e-commerce-access">Bridging the Gap to Digital Marketplaces</a></li>
+                            <li><a href="#policy-advocacy">Empowering Local Enterprises Through Advocacy</a></li>
+                            <li><a href="#operational-resilience-practices">Adopting Sustainable Practices for
+                                    Operational Resilience</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <div class="article-content">
+                    <section class="content-page-section-card" id="microfinance">
+                        <h2>Supporting Microfinance and Community-Led Credit</h2>
+                        <p>Small-scale industrial setups, neighborhood workshops, and independent creators form the
+                            economic bedrock of developing regions, yet they routinely encounter a steep, systemic
+                            barrier: an absolute lack of accessible capital. Traditional banking institutions operate on
+                            rigid, risk-averse frameworks that require substantial tangible collateral, such as formal
+                            property deeds, commercial vehicles, or land titles. For a grassroots entrepreneur or an
+                            artisan running an unregistered home workshop, these demands are impossible to meet.
+                            Consequently, commercial banking systems structurally exclude the very enterprises capable
+                            of driving localized industrial innovation, forcing them to remain stagnant or turn to
+                            predatory, high-interest informal lenders.
+                        </p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img1-w2212570.jpg"
+                                alt="A factory worker in a red and grey polo shirt operating heavy industrial machinery on a busy manufacturing floor.">
+                            <figcaption>Photo by <a
+                                    href="https://unsplash.com/@sammoghadam?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sam
+                                    Moghadam</a> on <a
+                                    href="https://unsplash.com/photos/man-in-orange-polo-shirt-standing-in-front-of-table-bN_aaTKfwM0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                            </figcaption>
+                        </figure>
+                        <p>
+                            To break this cycle, communities must actively champion and transition toward
+                            alternative, community-driven microfinance initiatives and trust-based credit systems.
+                            Microfinance institutions specialize in delivering targeted micro-loans that bypass
+                            conventional banking hurdles by utilizing group-guaranteed lending models or
+                            character-based vetting. As individuals, students, and neighbors, our role is to act as
+                            informational bridges—connecting local vendors to reputable micro-credit organizations
+                            and helping them form localized cooperative saving circles. These grassroots credit
+                            associations allow members to pool small amounts of capital collectively, providing
+                            interest-free, rotating loans that allow a business owner to purchase critical raw
+                            materials or basic machinery without entering a cycle of debt.
+                        </p>
+                        <table>
+                            <caption>
+                                <h3>Structural Barriers vs. Grassroots Financial Solutions</h3>
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th>Traditional Banking Obstacles</th>
+                                    <th>Grassroots & Microfinance Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>High collateral requirements (property/land deeds)</td>
+                                    <td>Trust-based or group-guaranteed lending models</td>
+                                </tr>
+                                <tr>
+                                    <td>Rigid, lengthy paperwork and credit score checks</td>
+                                    <td>Simplified documentation tailored to informal businesses</td>
+                                </tr>
+                                <tr>
+                                    <td>High minimum loan amounts unsuitable for small setups</td>
+                                    <td>Micro-loans ideal for purchasing raw materials or basic tools</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section class="content-page-section-card" id="digital-payment" style="border-bottom: none;">
+                        <h2>Accelerating Digital Financial Literacy</h2>
+                        <p>In an increasingly cashless global economy, operating entirely within a physical cash-based
+                            ecosystem is a severe competitive disadvantage. Cash-only micro-enterprises face invisible
+                            barriers: they alienate younger, tech-dependent demographics, struggle with the logistical
+                            risks of handling and storing physical currency, and find it incredibly difficult to
+                            maintain the transparent financial records required to prove creditworthiness. Integrating
+                            simple, low-cost financial technologies—such as unified QR codes or mobile merchant
+                            wallets—instantly links a street vendor, local market stall, or small-scale manufacturer
+                            into a country's broader digital economic infrastructure.
+                        </p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img2-w2212570.jpg"
+                                alt="A woman holding a qr code payment sign infront of a food stamp photo">
+                            <figcaption>Photo by <a
+                                    href="https://unsplash.com/@grab?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Grab</a>
+                                on <a
+                                    href="https://unsplash.com/photos/a-woman-holding-a-sign-in-front-of-a-food-stand-dVUuEReMYRQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                            </figcaption>
+                        </figure>
+                        <p>Despite the availability of free digital payment tools, a profound digital literacy gap
+                            prevents thousands of traditional business owners from making the leap. Concerns over
+                            digital fraud, hidden transaction fees, and general technical unfamiliarity build a wall of
+                            resistance. This is where university students and tech-literate citizens can step in with
+                            practical, direct mentorship. By spending an afternoon volunteering to walk a local
+                            shopkeeper through a secure setup process, showing them how to instantly verify incoming SMS
+                            transaction alerts, and explaining standard digital security hygiene (like keeping PINs
+                            private), you can permanently transform how an independent business interacts with the
+                            modern marketplace.
+
+                        </p>
+                        <div class="card" style="margin-top: 10px;">
+                            <h3>Volunteer Action Principle:</h3>
+                            <p>Digital financial inclusion is not just about installing an app; it is about building
+                                trust. When helping a local merchant adopt QR code payments, our primary role as
+                                students is to ensure they understand security practices, transaction verification, and
+                                cash-flow tracking to prevent exploitation.</p>
+                        </div>
+                    </section>
+                    <section class="poll">
+                        <div class="poll-container">
+                            <div class="poll-header">
+                                <div style="font-size: smaller; margin-bottom: 5px;"><span id="poll-live-btn" style="background-color: #FD6925; padding: 2px 5px; font-weight: 700; letter-spacing: 0.05rem; border-radius: 4px; color: white; text-transform: uppercase;">live</span><span style="margin-left: 10px;font-weight: 500; color: rgb(115, 118, 134);">Market Preferences Study</span></div>
+                                <h2 style="font-size: 20px; margin-left: 10px;">When purchasing
+                                    daily essentials or services, what is your primary reason for choosing a large
+                                    corporate outlet over a local independent vendor?
+                                </h2>
+                            </div>
+                            <div class="poll-body" id="poll-body-form">
+                                <form id="dummy-article-poll" action="https://google.com" method="get">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" id="convenience" name="corporate-over-local" value="convenience" required>
+                                            <label for="convenience">Convenience and speed (e.g., digital checkout, all-in-one locations).</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="pricing" name="corporate-over-local" value="pricing">
+                                            <label for="pricing">Predictable pricing and volume discounts.</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="visibility" name="corporate-over-local" value="visibility">
+                                            <label for="visibility">Lack of visible local or independent alternatives in my immediate area.</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="reliability" name="corporate-over-local" value="reliability">
+                                            <label for="reliability">Reliable delivery options or an online ordering system.</label>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                            <div class="poll-body" id="poll-body-result" style="display: none;"></div>
+                            <div class="poll-footer">
+                                <div id="poll-footer-vote-count" style="font-weight: 600; background-color: rgba(253, 105, 37, 0.1); padding: 5px 5px; border-radius: 5px; color: #FD6925;">place_holder</div>
+                                <div id="poll-footer-thank-you" style="font-weight: 700; color: #FD6925; letter-spacing: 0.025rem; display: none;">Thank you for your vote!</div>
+                                <button class="button" style="display: flex; align-items: center; height: 75%;" form="dummy-article-poll">
+                                    <svg style="width: 25px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20.498 15.5H3.5V20.5H20.498V15.5ZM21.9445 14.4719L21.9661 14.5336L21.9892 14.6345L21.9981 14.7331V21.25C21.9981 21.6297 21.7159 21.9435 21.3499 21.9932L21.2481 22H2.75C2.3703 22 2.05651 21.7178 2.00685 21.3518L2 21.25V14.7506L2.00184 14.6977L2.01271 14.6122C2.02285 14.5584 2.03841 14.5072 2.05894 14.4587L4.81824 8.44003C4.92517 8.2068 5.14245 8.04682 5.39153 8.01047L5.5 8.0026L8.03982 8.00183L7.25089 9.37206L7.18282 9.50183L5.981 9.502L3.918 13.9998H20.07L18.0428 9.65383L18.9052 8.15653C18.9718 8.20739 19.0301 8.26957 19.0771 8.3411L19.1297 8.43553L21.9445 14.4719ZM13.3652 2.05565L13.4566 2.10062L18.6447 5.10375C18.9729 5.29371 19.1033 5.69521 18.9636 6.03728L18.9187 6.1289L16.112 11.001L17.25 11.0016C17.6642 11.0016 18 11.3374 18 11.7516C18 12.1313 17.7178 12.4451 17.3518 12.4948L17.25 12.5016L15.248 12.501L15.2471 12.504H11.1691L11.166 12.501L6.75 12.5016C6.33579 12.5016 6 12.1658 6 11.7516C6 11.3719 6.28215 11.0581 6.64823 11.0085L6.75 11.0016L8.573 11.001L8.39145 10.8963C8.06327 10.7063 7.93285 10.3048 8.0726 9.96272L8.11747 9.8711L12.4341 2.37536C12.6235 2.04633 13.024 1.91557 13.3652 2.05565ZM13.3559 3.77529L9.78781 9.97119L11.566 11.001H14.383L17.248 6.02818L13.3559 3.77529Z" fill="currentColor"></path> </g></svg>
+                                    <span style="margin-left: 7px;" id="poll-submit-button-text">Submit Vote</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </section>
+                    <section class="content-page-section-card" id="local-value-chains">
+                        <h2>Integrating Small Vendors into Value Chains</h2>
+                        <p>Modern supply chains are heavily dominated by massive corporate conglomerates and centralized
+                            hypermarkets. Because large industries prioritize volume discounts and automated logistics,
+                            they consistently source their raw materials, logistics, and catering from other massive
+                            corporations. This corporate isolation systematically pushes small-scale local producers,
+                            family farms, and independent craftsmen out of the primary economic value chains. When local
+                            institutions, universities, and commercial spaces buy exclusively from multinational brands,
+                            wealth is drained directly out of the immediate community.</p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img3-w2212570.webp" alt="">
+                            <figcaption style="display: flex;"><span>Photo by <a
+                                        href="https://unsplash.com/@arnosenoner?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Arno
+                                        Senoner</a> on <a
+                                        href="https://unsplash.com/photos/blue-and-brown-metal-bridge-yqu6tJkSQ_k?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                                </span><span style="margin-left: auto;">Photo by <a
+                                        href="https://unsplash.com/@wouter_gv?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Wouter
+                                        Groote Veldman</a> on <a
+                                        href="https://unsplash.com/photos/fresh-produce-piled-high-at-a-vibrant-market-stall-ZbgPa-S42QM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                                </span></figcaption>
+                        </figure>
+                        <p>Redirecting this economic flow requires a collective commitment to "conscious consumerism"
+                            from ordinary citizens and local organizations alike. We can actively reshape supply chains
+                            by evaluating our daily buying habits and choosing to source products directly from the
+                            ground up. When we buy goods directly from independent makers, we are intentionally keeping
+                            them integrated into the economic ecosystem.</p>
+                        <fieldset>
+                            <legend>
+                                <h3>Actionable Habits for Conscious Consumers</h3>
+                            </legend>
+                            <ul>
+                                <li><strong>Direct Sourcing:</strong> Purchase fresh produce, textiles, and raw
+                                    household materials
+                                    directly from independent neighborhood markets rather than large, centralized
+                                    hypermarkets.</li>
+                                <li>
+                                    <strong>B2B Small-Scale Pairing:</strong> Actively petition and encourage campus
+                                    groups, student
+                                    unions, and community organizations to contract local catering, printing, or
+                                    maintenance services instead of corporate conglomerates.
+                                </li>
+                                <li>
+                                    <strong>Sustained Patronage:</strong> Commit to consistent purchasing cycles from
+                                    independent vendors
+                                    to give them predictable, stable cash flows, allowing them to manage their inventory
+                                    effectively.
+                                </li>
+                            </ul>
+                        </fieldset>
+                    </section>
+                    <section class="content-page-section-card" id="e-commerce-access">
+                        <h2>Bridging the Gap to Digital Marketplaces</h2>
+                        <p>
+                            A narrow, isolated geographical footprint is one of the most critical vulnerabilities for
+                            any traditional small enterprise. When a small business relies completely on physical foot
+                            traffic on a specific street corner, it remains highly exposed to local disruptions,
+                            seasonal drops, or unexpected urban infrastructure changes. If the immediate neighborhood
+                            experiences lower foot traffic, the business immediately suffers. Transitioning these
+                            businesses onto established e-commerce platforms and social commerce marketplaces completely
+                            changes this dynamic by instantly expanding a hyper-local business's reach to a massive
+                            national audience.
+                        </p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img4-w2212570.jpg"
+                                alt="A smartphone lying on a wooden desk displaying the AliExpress Shopping App download page in the App Store, with credit cards and a laptop keyboard blurred in the background.">
+                            <figcaption>Photo by <a
+                                    href="https://unsplash.com/@cardmapr?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">CardMapr.nl</a>
+                                on <a
+                                    href="https://unsplash.com/photos/black-and-orange-card-on-brown-wooden-table-SGj4fw55Y7w?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                            </figcaption>
+                        </figure>
+                        <p>
+                            While the potential of e-commerce is undeniable, the practical steps required to get
+                            started—such as staging clean product photography, managing online inventory, configuring
+                            weight-based courier shipping, and linking merchant bank accounts—can feel incredibly
+                            overwhelming to a traditional business owner. Tech-literate students can act as a crucial
+                            technical bridge to facilitate this onboarding process. By guiding an entrepreneurial family
+                            or local merchant through the digital storefront creation process, you provide them with a
+                            resilient, secondary revenue stream that operates 24/7.
+                        </p>
+                        <fieldset>
+                            <legend>
+                                <h3>The Merchant Digital Onboarding Roadmap</h3>
+                            </legend>
+                            <ol>
+                                <li>
+                                    <strong>Inventory Assessment:</strong> Document and photograph the merchant's
+                                    top-performing physical
+                                    products under clear, professional lighting, and draft straightforward, accurate
+                                    descriptions.
+                                </li>
+                                <li>
+                                    <strong>Platform Registration:</strong> Set up a verified seller account on a
+                                    prominent regional
+                                    e-commerce marketplace or create a dedicated business profile on widely used social
+                                    media networks.
+                                </li>
+                                <li><strong>Logistics Configuration:</strong> Connect the newly created digital
+                                    storefront to reliable
+                                    local delivery or third-party courier services to streamline packaging and pickup
+                                    schedules.
+
+                                </li>
+                                <li>
+                                    <strong>Handoff & Training:</strong> Conduct a simple, step-by-step training session
+                                    with the
+                                    business owner to show them how to track incoming notifications, fulfill digital
+                                    orders, and monitor electronic payouts independently.
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </section>
+                    <section class="content-page-section-card" id="policy-advocacy">
+                        <h2>Empowering Local Enterprises Through Advocacy</h2>
+                        <p>
+                            Direct community actions, such as teaching digital financial literacy or modifying our
+                            individual purchasing habits, provide essential, immediate support to small businesses.
+                            However, building long-term, structural resilience requires systemic change. Grassroots
+                            enterprises cannot thrive if municipal zoning laws, tax structures, and public
+                            infrastructure spending exclusively favor multinational developers and massive industrial
+                            parks while completely ignoring the needs of smaller informal markets. Everyday citizens and
+                            student communities hold the collective power to advocate for policies that give small
+                            enterprises a fair and equal chance to compete.
+                        </p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img5-w2212570.jpg"
+                                alt="Speaker leads interactive session in packed auditorium with diverse audience.">
+                            <figcaption>Photo by <a href="https://www.pexels.com/@eumatheusamaral/">Matheus Amaral</a>
+                                from <a
+                                    href="https://www.pexels.com/photo/engaging-seminar-in-large-auditorium-35064535/">Pexels</a>
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Advocacy means turning individual efforts into a loud, organized community voice. By
+                            focusing on the essential role small-scale industries play in preserving cultural heritage
+                            and creating local jobs, citizens can push local councils and public institutions to invest
+                            in equitable infrastructure. This includes creating dedicated, low-cost marketplace zones,
+                            public cooling storage for small farmers, and fair public procurement policies.
+                        </p>
+                        <fieldset>
+                            <legend>
+                                <h3>Core Pillars of Grassroots Economic Advocacy</h3>
+                            </legend>
+                            <ul>
+                                <li>
+                                    <strong>Amplifying Voices:</strong> Utilize social media platforms, student-led
+                                    blogs, or campus
+                                    journalism to feature the stories, challenges, and successes of local craftsmen and
+                                    micro-enterprises, drastically increasing their public visibility.
+                                </li>
+                                <li>
+                                    <strong>Institutional Shifting:</strong> Actively petition student unions,
+                                    university
+                                    administrations, and corporate offices to implement sourcing guidelines that mandate
+                                    purchasing event supplies, promotional gear, and catering from verified local
+                                    micro-enterprises.
+                                </li>
+                                <li>
+                                    <strong>Public Forums:</strong> Organize or participate in community-led panel
+                                    discussions that bring
+                                    together independent small business owners, residents, and local organizers to
+                                    openly discuss infrastructure gaps and economic challenges.
+                                </li>
+                            </ul>
+                        </fieldset>
+                    </section>
+                    <section class="content-page-section-card" id="operational-resilience-practices">
+                        <h2>Adopting Sustainable Practices for Operational Resilience</h2>
+                        <p>
+                            To achieve true resilience under SDG 9, integration into markets must go hand in hand with
+                            environmental sustainability. Small-scale industries often operate with constrained
+                            resources, making them particularly vulnerable to fluctuating energy prices, raw material
+                            scarcity, and environmental degradation. When a small business relies on inefficient
+                            manufacturing techniques, single-use plastic packaging, or high-emission energy sources, it
+                            drives up long-term operational overhead while accelerating its ecological footprint.
+                            Developing resilient infrastructure requires a bottom-up commitment to greening small-scale
+                            operational frameworks.
+                        </p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img6-w2212570.jpg"
+                                alt="A paper cutout with the bold text RECYCLED, PRACTICAL AND BEAUTIFUL placed against a red and white checkered plastic surface, featuring smaller scraps labeled Original and WE MAKE IT WORK.">
+                            <figcaption>Photo by <a
+                                    href="https://unsplash.com/@simplicity?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Marija
+                                    Zaric</a> on <a
+                                    href="https://unsplash.com/photos/a-piece-of-paper-that-says-recycled-practical-and-beautiful-DNjjzpcvrXw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Transitioning toward eco-friendly practices does not require massive corporate capital; it
+                            begins with realistic, incremental optimizations at the local workshop level. Communities
+                            and students can support merchants by collaborating on zero-waste packaging alternatives,
+                            designing circular production models where waste products are repurposed, and adopting
+                            energy-saving habits. These operational changes not only insulate small businesses against
+                            resource supply spikes but also position them favorably in modern eco-conscious markets.
+                        </p>
+                        <fieldset>
+                            <legend>
+                                <h3>Action Plan for Green Enterprise Upgrades</h3>
+                            </legend>
+                            <ol>
+                                <li>
+                                    <strong>Circular Packaging Transition:</strong> Replace plastic wrappers and
+                                    synthetic fillers with
+                                    biodegradable, locally sourced alternatives like unbleached cardboard, jute fibers,
+                                    or upcycled paper products.
+                                </li>
+                                <li>
+                                    <strong>Resource Efficiency Audit:</strong> Evaluate machinery power consumption and
+                                    workshop layouts
+                                    to minimize electricity and water waste, opting for natural light optimization or
+                                    low-energy LED infrastructure.
+                                </li>
+                                <li>
+                                    <strong>Local Material Sourcing:</strong> Minimize the carbon footprint associated
+                                    with transport by
+                                    mapping and selecting raw material suppliers located strictly within a regional
+                                    radius.
+                                </li>
+                                <li>
+                                    <strong>Waste Transformation:</strong> Partner with neighboring micro-enterprises to
+                                    establish
+                                    exchange programs where manufacturing offcuts (such as fabric scraps, timber
+                                    remnants, or organic waste) are used as raw inputs for other artisanal goods.
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry,
+                            Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <!-- Replace these placeholders on your respective pages -->
+                    <p>Developed by: <strong>Eshan Amarakoon</strong></p>
+                    <p>Student ID: <strong>W2212570</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <!-- Change href(target) accordingly -->
+                <a href="" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // poll stuff
+        const pollDummyData = {
+            convenience: {vote: 350, text:"Convenience and speed (e.g., digital checkout, all-in-one locations)"},
+            pricing: {vote: 524, text:"Predictable pricing and volume discounts."},
+            visibility: {vote: 150, text:"Lack of visible local or independent alternatives in my immediate area."},
+            reliability: {vote: 224, text:"Reliable delivery options or an online ordering system."},
+            totalVotes: 1248
+        }
+
+        const pollForm = document.getElementById('dummy-article-poll');
+        const pollFormContainer = document.getElementById('poll-body-form');
+        const pollResultsContainer = document.getElementById('poll-body-result');
+
+        const pollThankYouText = document.getElementById('poll-footer-thank-you');
+        const voteCountText = document.getElementById('poll-footer-vote-count');
+        const pollSubmitBtn = document.querySelector('.poll-footer button.button');
+        const pollLiveBtn = document.getElementById('poll-live-btn');
+
+        voteCountText.textContent = `${pollDummyData.totalVotes} votes`;
+        
+        pollForm.addEventListener('submit', function(event){
+            event.preventDefault();
+
+            const formData = new FormData(pollForm);
+            const selectedOption = formData.get('corporate-over-local');
+            console.log(`Submit button event - ${selectedOption}`);
+            if (!selectedOption) return;
+
+            pollDummyData[selectedOption].vote += 1;
+            pollDummyData.totalVotes += 1;
+
+            pollResultsContainer.innerHTML = '';
+
+            Object.keys(pollDummyData).forEach(key => {
+                if (key === 'totalVotes') return;
+
+                const option = pollDummyData[key];
+                const percentage = Math.round((option.vote / pollDummyData.totalVotes) * 100);
+                
+
+                const resultHTML = `
+                <div class="poll-result-item">
+                    <div class="poll-option-and-votes">
+                        <span class="poll-option">${option.text}</span><span ${key === selectedOption ? `style="color: rgb(253 105 37); font-weight: 700;"` : ''} >${percentage}% (${option.vote} votes)</span>
+                    </div>
+                    <div class="poll-option-bar-track">
+                        <div class="poll-option-bar-fill" style="width: ${percentage}%; background-color: ${key === selectedOption ? 'rgb(253 105 37)' : 'rgb(80 95 118)'};"></div>
+                    </div>
+                </div>
+                `;
+
+                pollResultsContainer.insertAdjacentHTML('beforeend', resultHTML);
+            });
+
+            pollLiveBtn.textContent = 'closed';
+            voteCountText.textContent = `${pollDummyData.totalVotes} votes`;
+            pollFormContainer.style.display = 'none';
+            pollThankYouText.style.display = 'block';
+            pollResultsContainer.style.display = 'flex';
+            pollSubmitBtn.id = 'poll-submit-button-greyed';
+
+            pollSubmitBtn.disabled = true;
+            pollSubmitBtn.style.cursor = 'not-allowed';
+            document.getElementById('poll-submit-button-text').textContent = 'Vote Submitted';
+        });
+        // poll stuff script end
+
+        //go through all figcaptions and their links and add generic-link class to them
+        const links = document.querySelectorAll('.article-content-fig figcaption a');
+
+        links.forEach(link => {
+            link.classList.add('generic-link');
+
+            //set attributes to open in a new tab
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        });
+
+        //scroll button stuff
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        //show button when user scrolls down 600px from the top
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

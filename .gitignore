@@ -9,3 +9,6 @@ thumbs.db
 
 # If you have specific .ini files you want to ignore:
 # config.ini
+
+# Ignore Google Drive temporary upload folders
+.tmp.driveupload/

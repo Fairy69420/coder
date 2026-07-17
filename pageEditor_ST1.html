@@ -104,7 +104,8 @@
     </header>
     <!-- END OF HEADER -->
 
-    <p class="stud-line">Eshan Amarakoon &mdash; SDG 9 Team &mdash; Home Page / Gallery Page / Global Template Developer</p>
+    <p class="stud-line">Eshan Amarakoon &mdash; SDG 9 Team &mdash; Home Page / Gallery Page / Global Template Developer
+    </p>
 
     <!-- MAIN CONTENT AREA: CAN BE EDITED -->
     <main class="main-content">
@@ -126,23 +127,198 @@
                 <section class="card" id="home">
                     <h2>Home Page (<code>home.html</code>)</h2>
 
-                    <h3>Technical Description</h3>
-                    <p>The home page is built around a full-width hero <code>&lt;section&gt;</code> followed by a
-                        grid of mission-focused cards and an interactive hub directory. The hero uses the same
-                        relative-wrapper / absolute-heading pattern used on the content pages, so the title sits
-                        cleanly on top of the background image without extra markup. Each mission card reuses the
-                        shared <code>.card</code> class from <code>style.css</code>, keeping padding, border-radius
-                        and shadow consistent with every other card on the site. The Interactive Hub Directory uses
-                        JavaScript to toggle hub descriptions on click, so visitors can browse all hub topics without
-                        losing their place on the page.</p>
+                    <p>This is the layout for the <strong>Home Page</strong>, the site's landing page. It has an
+                        auto-rotating hero slider, four mission-focused summary cards, and an article directory at
+                        the bottom that links out to the site's content pages.</p>
+
+                    <h3>HTML Structure</h3>
+                    <h4>Hero Slider</h4>
+                    <p>The hero is a track of slide divs, and each one carries its photo as a CSS background
+                        instead of an img tag. I needed it as a background because the slide animation moves
+                        things with transform, and that's easier to do with backgrounds than swapping image
+                        sources.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="hero-slider-wrapper"&gt;
+    &lt;div class="hero-slider-track"&gt;
+        &lt;div class="hero-slide" style="background-image: url(images/hero-bg-img1.jpg);" role="img"
+            aria-label="https://pixabay.com/photos/people-industry-construction-3286036/"&gt;&lt;/div&gt;
+        ...
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <p>Since a CSS background image has no alt text of its own, I added <code>role="img"</code>
+                        and <code>aria-label</code> to each slide so screen readers still get something meaningful
+                        instead of nothing. I also updated the slider so it loops properly now: the script clones
+                        the first slide and sticks it on the end of the track, so once the slideshow reaches that
+                        clone it can snap back to slide 0 with the transition turned off for a moment. That way it
+                        loops endlessly instead of jumping back visibly.</p>
+
+                    <h4>Mission &amp; Goal Cards</h4>
+                    <p>Four cards summarise the site's main themes. Each one has a credited photo, a short
+                        write-up, and a small list of outcomes or actions underneath.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="card"&gt;
+    &lt;h2&gt;The Crisis of Legacy Infrastructure&lt;/h2&gt;
+    &lt;div class="mgp-card-content-container"&gt;
+        &lt;div class="mgp-card-img"&gt;
+            &lt;figure&gt;
+                &lt;img src="images/mgp-card-img1.jpg" alt="Explore Dubai's intricate roadways..."&gt;
+                &lt;figcaption&gt;&lt;a class="generic-link" href="..."&gt;Photo by Kate Trysh - Pexels&lt;/a&gt;&lt;/figcaption&gt;
+            &lt;/figure&gt;
+        &lt;/div&gt;
+        &lt;div class="mgp-description"&gt;
+            &lt;p&gt;Modern societies are heavily reliant on systems engineered in the previous century...&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="mgp-card-highlights"&gt;
+        &lt;h3&gt;Key Outcomes :&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;40% reduction in regional energy transmission losses.&lt;/li&gt;
+            ...
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div class="mgp-card-bottom-text"&gt;Local communities and civic planners.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <p>I split the image and the description text into their own wrapper divs
+                        (<code>.mgp-card-img</code> and <code>.mgp-description</code>) instead of mixing them
+                        together, so I could size and wrap each one on its own. I also moved the highlights block
+                        outside the content container rather than nesting it inside, which keeps every card's
+                        outcomes list sitting at the same depth no matter how long the description text ends up
+                        being. Figure and figcaption are used again here to keep each photo tied to its credit,
+                        same as on the content pages.</p>
+
+                    <h4>Article Linking Section</h4>
+                    <p>A "Read our articles..." section closes the page off. There's one big featured thumbnail
+                        followed by a grid of smaller ones, and they all link out to the article pages.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="mini-article-thumbnail clickable-box" data-href="content_ST1.html" role="link" tabindex="0"
+    id="st2_article"&gt;
+    &lt;div class="mini-article-img-container"&gt;&lt;img src="images/gallery/card3_img.jpg"&gt;&lt;/div&gt;
+    &lt;div class="article-meta-data"&gt;
+        &lt;span&gt;Thimithri vidanapathirana&lt;/span&gt;
+        &lt;span&gt;03 May 2026&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="article-content"&gt;
+        &lt;h2&gt;Integrating Micro-Enterprises Into Modern Financial Value Chains&lt;/h2&gt;
+        &lt;p&gt;Discover how grassroots businesses bypass traditional banking barriers...&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="article-read-more"&gt;&lt;span&gt;Read more&lt;/span&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">js</span></div>
+                        <pre><code>
+document.addEventListener('click', (event) => {
+    const clickableElement = event.target.closest('.clickable-box');
+
+    if (clickableElement) {
+        console.log(`Article click event - id: ${clickableElement.id}`);
+        window.location.href = clickableElement.dataset.href;
+    }
+});                            
+                        </code></pre>
+                    </div>
+                    <p>Instead of adding a click listener to every single thumbnail, there's one listener on the
+                        whole document that checks if whatever was clicked is inside a <code>.clickable-box</code>,
+                        then reads its <code>data-href</code> and navigates there. That means new thumbnails just
+                        need the class and the attribute, nothing extra in the script. Each thumbnail also has
+                        <code>role="link"</code> and <code>tabindex="0"</code> so it's still discoverable and
+                        focusable even though it's a div and not a real anchor tag.
+                    </p>
+
+                    <h3>CSS Architecture</h3>
+                    <h4>Hero Slider Track</h4>
+                    <p>I used Grid instead of Flexbox for the slider track because each slide needs to take up
+                        exactly one full-width column that can be shifted together as a unit.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">css</span></div>
+                        <pre><code>.hero-slider-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    width: 100%;
+    height: 100%;
+}</code></pre>
+                    </div>
+                    <p><i>Why Grid?</i> <code>grid-auto-flow: column</code> with <code>grid-auto-columns: 100%</code>
+                        lays out as many equal columns as there are slides automatically. Adding a seventh slide,
+                        or the cloned one for the loop, doesn't need any CSS changes at all.</p>
+
+                    <h4>Layered Hero Overlays</h4>
+                    <p>The gradient trapezium and the frosted glass pane sit on top of the slider using absolute
+                        positioning and a shared clip-path.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">css</span></div>
+                        <pre><code>.hero-overlay-1 {
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    z-index: 2;
+    clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%);
+    background-image: linear-gradient(to right top, #fd6925, ..., #5e256d);
+}
+.hero-overlay-2 {
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    z-index: 3;
+    clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%);
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(40px);
+}</code></pre>
+                    </div>
+                    <p>Both layers use the same clip-path so they line up, and that's what gives the hero its
+                        angled, sliced look instead of a plain rectangle. The <code>backdrop-filter: blur(40px)</code>
+                        lets the gradient and the photo behind it show through softly while keeping the heading
+                        text easy to read.</p>
+
+                    <h4>Mission Card Layout</h4>
+                    <p>Cards use Flexbox in column direction, with a small trick to keep the bottom text strip
+                        pinned in place no matter how much content is above it.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">css</span></div>
+                        <pre><code>.card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.mgp-card-bottom-text {
+    margin-top: auto;
+    border-top: 1px solid #FD6925;
+}</code></pre>
+                    </div>
+                    <p><code>margin-top: auto</code> inside a flex column pushes the bottom text all the way down
+                        to the bottom of the card, so every card's footer strip lines up even if the description
+                        text is a different length.</p>
+
+                    <h4>Some design/styling choices</h4>
+                    <p>The hero gradient (orange fading into purple) is the boldest colour moment on the page, and
+                        everywhere else stays fairly neutral so the gradient panel is what draws the eye first.
+                        Article thumbnails get a light background hover state and their "Read more" arrow nudges
+                        forward on hover, which matches the hover style used on links elsewhere on the site.
+                        Padding and gaps are kept consistent across the mission cards and the article grid so they
+                        feel like part of the same layout rather than two separate sections stuck together.</p>
+
+                    <h3>Core Rationale</h3>
+                    <p>Keeping the hero's slideshow, gradient and glass pane as separate absolutely-positioned
+                        layers means I can tweak any one of them without affecting the others. The role and
+                        aria-label attributes on the slides, and the role/tabindex on the article thumbnails, bring
+                        back the accessibility meaning that plain divs would otherwise lose. Reusing the same card,
+                        figure and figcaption patterns, and the same hover feedback style, from the rest of the
+                        site keeps the home page feeling consistent with the content pages instead of like a
+                        separate design.</p>
 
                     <h3>Accessibility</h3>
-                    <p>Semantic tags (<code>&lt;section&gt;</code>, <code>&lt;nav&gt;</code>,
-                        <code>&lt;article&gt;</code>) are used instead of generic <code>&lt;div&gt;</code>s wherever
-                        the content has real structural meaning. All hero and card imagery uses descriptive,
-                        full-sentence <code>alt</code> text, and every interactive element (hub toggles, card links)
-                        is a real <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code> tag so it is reachable and
-                        operable by keyboard alone.</p>
+                    <p>Every hero slide and mission card image has descriptive alt text or an equivalent
+                        aria-label. The decorative watermark text in the background is marked aria-hidden so it
+                        doesn't get read out loud. Article thumbnails can be reached by keyboard thanks to
+                        tabindex, and they're announced as links, though right now the click handling only listens
+                        for mouse clicks. Adding a keydown handler for Enter and Space would be a good follow-up so
+                        the thumbnails can actually be activated by keyboard too, not just focused.</p>
 
                     <h3>Link to the validation page</h3>
                     <p><a class="generic-link" href="validation_ST1.html#homeVal">Go to validation page</a></p>
@@ -161,7 +337,8 @@
                         image along with its caption and credit, without navigating away from the gallery grid
                         underneath. An accessibility control panel sits above the gallery, toggling classes on the
                         <code>&lt;body&gt;</code> element which the CSS then reads to adjust animation and sizing
-                        rules.</p>
+                        rules.
+                    </p>
 
                     <h3>Accessibility</h3>
                     <p>Every thumbnail and modal image has a full-sentence <code>alt</code> description. The modal
@@ -321,7 +498,8 @@
                         a dummy data object, then swaps <code>#poll-body-form</code> for
                         <code>#poll-body-result</code> and renders each option as a percentage bar &mdash; the
                         same reveal-on-vote pattern IGN uses, just built from scratch with vanilla JS instead of
-                        a third-party poll widget.</p>
+                        a third-party poll widget.
+                    </p>
                     <ul>
                         <li>Accessibility: Options use real <code>&lt;input type="radio"&gt;</code> /
                             <code>&lt;label for="..."&gt;</code> pairs so the poll is fully keyboard and
@@ -351,7 +529,8 @@
                     </div>
                     <p><i>Why Grid?</i> It lets us pin the middle reading column exactly to 900px in one line of
                         code. Flexbox would require too much guessing with <code>flex-grow</code> and
-                        <code>flex-basis.</code></p>
+                        <code>flex-basis.</code>
+                    </p>
 
                     <h4>Hero Banner Overlay</h4>
                     <p>To get the text floating over the image, the container is <code>relative</code> and the
@@ -374,7 +553,8 @@
                     <p><code>backdrop-filter: blur()</code> with
                         <code>background-color: rgba(255, 255, 255, 0.1);</code> keeps the text perfectly
                         legible over any background image without completely hiding the photo behind a solid
-                        box.</p>
+                        box.
+                    </p>
 
                     <h4>Sticky Sidebar</h4>
                     <p>The table of contents stays pinned to the screen while the user reads.</p>
@@ -417,7 +597,8 @@
                         full-sentence <code>alt</code> description; the heading hierarchy uses exactly one
                         <code>&lt;h1&gt;</code> per page with <code>&lt;h2&gt;</code> for each article
                         sub-section; and every credit/citation link is a real, keyboard-focusable
-                        <code>&lt;a&gt;</code> tag rather than plain text.</p>
+                        <code>&lt;a&gt;</code> tag rather than plain text.
+                    </p>
 
                     <h3>Link to the validation page</h3>
                     <p><a class="generic-link" href="validation_ST1.html#contentVal">Go to validation page</a></p>

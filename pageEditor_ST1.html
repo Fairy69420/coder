@@ -330,23 +330,315 @@ document.addEventListener('click', (event) => {
                 <section class="card" id="gallery">
                     <h2>Gallery Page (<code>gallery.html</code>)</h2>
 
-                    <h3>Technical Description</h3>
-                    <p>The gallery is a responsive grid of thumbnail cards built with CSS Grid, so the number of
-                        columns adjusts automatically to the viewport width instead of relying on fixed breakpoints.
-                        Clicking a thumbnail opens a JavaScript-driven modal that displays a larger version of the
-                        image along with its caption and credit, without navigating away from the gallery grid
-                        underneath. An accessibility control panel sits above the gallery, toggling classes on the
-                        <code>&lt;body&gt;</code> element which the CSS then reads to adjust animation and sizing
-                        rules.
-                    </p>
+                    <p>This is the layout for the <strong>Gallery Page</strong>. It shows a row of interactive
+                        cards, and clicking any of them opens a full detail popup pulled from a shared data object
+                        in <code>gallery_script.js</code>.</p>
+
+                    <h3>HTML Structure</h3>
+                    <h4>Thumbnail Grid</h4>
+                    <p>The gallery markup itself is fairly bare on purpose. Each thumbnail div only carries an id
+                        and an inline theme color variable, and everything else inside it starts empty and gets
+                        filled in by the script once the page loads.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="gallery-thumbnail" style="--theme-color: rgb(191, 238, 149)" data-id="cat-imhi-imhi"&gt;
+    &lt;div class="gallery-thumbnail-image-container"&gt;
+        &lt;img src="" alt="" class="gallery-card-img"&gt;
+    &lt;/div&gt;
+    &lt;div class="gallery-thumbnail-badge-container"&gt;
+        &lt;div class="thumbnail-badge"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="gallery-thumbnail-title-container"&gt;
+        &lt;h3 class="thumbnail-title"&gt;&lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;div class="gallery-thumbnail-cta-container"&gt;
+        &lt;div class="thumbnail-cta"&gt;open me !!&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <p>The <code>data-id</code> on the card is the key that links it to a matching entry in
+                        <code>popupData</code> inside the script. On page load the script looks up that entry, then
+                        fills in the image source, alt text, badge text and title straight into the empty elements
+                        above, so the actual content only has to exist once in the data object instead of being
+                        typed out again in the HTML.</p>
+
+                    <h4>Popup Detail Card</h4>
+                    <p>This is the part of the page I spent the most time on. Every card's full detail view lives
+                        as one big object inside <code>popupData</code> in <code>gallery_script.js</code>, keyed
+                        by the same <code>data-id</code> used on the thumbnail. Here is a trimmed down version of
+                        one entry.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">js</span></div>
+                        <pre><code>"cat-imhi-imhi": {
+    thumbnailImg: "images/gallery/card1_img.jpg",
+    cardBadge: 'INFRASTRUCTURE',
+    cardTitle: 'Smart Grid Systems',
+    bannerImgLocation: "images/gallery/card1_img_HighRes.jpg",
+    bannerImgCredit: `Photo by &lt;a href="..."&gt;Karsten Würth&lt;/a&gt; on &lt;a href="..."&gt;Unsplash&lt;/a&gt;`,
+    bannerImgAlt: "windmill on grass field during golden hour photo",
+    bannerTitle: "Resilient Energy",
+    contentTitle: "Next-Gen Grid Decoupling &amp; Distribution",
+    contentDescription: "Integrating decentralized AI routing across national power grids...",
+    metricLabel_1: "EFFICIENCY GAIN",
+    metricLabel_1_SVG: `&lt;svg&gt;...&lt;/svg&gt;`,
+    metricLabel_1_Value: "38.6%",
+    metricLabel_2: "SYSTEM LATENCY",
+    metricLabel_2_SVG: `&lt;svg&gt;...&lt;/svg&gt;`,
+    metricLabel_2_Value: "12ms Response"
+}</code></pre>
+                    </div>
+                    <p>One object holds everything both the thumbnail and the popup need, the small card image, the
+                        badge and title text, the bigger banner photo, the long description, the photo credit, and
+                        two metric boxes each with their own inline svg icon and a value. Keeping it all in one
+                        place means the thumbnail and the popup are never out of sync with each other, since they
+                        are both just reading from the same object.</p>
+
+                    <p>When a card is clicked, the script looks up its matching entry and builds the entire popup
+                        as one template literal, then drops it into a single empty overlay div.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">js</span></div>
+                        <pre><code>card.addEventListener('click', () => {
+    if (data) {
+        const parser = new DOMParser;
+        const tempCreditDoc = parser.parseFromString(data.bannerImgCredit, 'text/html');
+        const creditLinks = tempCreditDoc.querySelectorAll('a');
+
+        creditLinks.forEach(link => {
+            link.classList.add('generic-link', 'popup-banner-image-credit-link');
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        });
+
+        const processedBannerImgCredit = tempCreditDoc.body.innerHTML;
+
+        popupOverlay.innerHTML = `
+        &lt;div class="popup-card"&gt;
+            &lt;div class="popup-banner"&gt;
+                &lt;div class="popup-banner-layer1"&gt;&lt;img src="${data.bannerImgLocation}" alt="${data.bannerImgAlt}"&gt;&lt;/div&gt;
+                &lt;div class="popup-banner-layer2"&gt;&lt;h1&gt;${data.bannerTitle}&lt;/h1&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="popup-content-container"&gt;
+                &lt;div class="popup-long-title-n-des"&gt;
+                    &lt;h2&gt;${data.contentTitle}&lt;/h2&gt;
+                    &lt;p&gt;${data.contentDescription}&lt;/p&gt;
+                    &lt;p&gt;${processedBannerImgCredit}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="popup-content-metrics"&gt;...&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="popup-customization-panel"&gt;...&lt;/div&gt;
+        &lt;/div&gt;
+        `;
+
+        popupOverlay.classList.add('is-active');
+        document.body.classList.add('modal-open');
+    }
+});</code></pre>
+                    </div>
+                    <p>The credit string is not just dropped in as it is written in the data object. It gets
+                        parsed into a temporary document with <code>DOMParser</code> first, so the script can loop
+                        through whatever links happen to be inside it and add the <code>generic-link</code> class
+                        plus <code>target="_blank"</code> and <code>rel="noopener noreferrer"</code>, no matter how
+                        many links a particular credit has. That way I only ever write the credit text once in the
+                        data object and never have to remember to add those attributes by hand. Once everything is
+                        ready, the whole popup markup gets written into <code>popupOverlay.innerHTML</code> in one
+                        go, and adding <code>is-active</code> to the overlay and <code>modal-open</code> to the
+                        body is what actually reveals the popup and stops the page underneath from scrolling.</p>
+
+                    <p>Closing the popup does the reverse, and it is handled by a listener on the overlay itself
+                        rather than one on the close button alone.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">js</span></div>
+                        <pre><code>popupOverlay.addEventListener('click', (e) => {
+    const clickedOverlay = e.target.id === 'popup-overlay';
+    const clickedCloseBtn = e.target.closest('#popup-close-btn');
+    if (clickedCloseBtn || clickedOverlay) {
+        closePopup();
+    }
+    ...
+});
+
+function closePopup() {
+    popupOverlay.classList.remove('is-active');
+    document.body.classList.remove('modal-open');
+    popupOverlay.innerHTML = '';
+}</code></pre>
+                    </div>
+                    <p>Checking <code>e.target.id === 'popup-overlay'</code> is what lets clicking the dark
+                        background outside the card close it, while <code>e.target.closest('#popup-close-btn')</code>
+                        catches a click on the little close button in the corner, or anything inside it like the
+                        svg icon. Either one calls <code>closePopup()</code>, which removes the classes that make
+                        the overlay visible and clears out its innerHTML so the next card clicked starts from a
+                        clean slate instead of leaving old content behind.</p>
+
+                    <h4>Customization Panel</h4>
+                    <p>At the bottom of the popup there is a small panel with buttons for switching between light
+                        and dark mode, changing the font, and toggling a more spaced out readability mode.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="switches border-radius-9999px" id="dark-mode-light-mode"&gt;
+    &lt;button class="dark-light-mode" data-id="custom-panel-btn" data-name="theme" data-value="light-mode" id="is-active-button"&gt;...&lt;/button&gt;
+    &lt;button class="dark-light-mode" data-id="custom-panel-btn" data-name="theme" data-value="dark-mode"&gt;...&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="switches" id="font-change"&gt;
+    &lt;button class="font-change-button" id="is-active-button" data-id="custom-panel-btn" data-name="font" data-value="font-default"&gt;Default&lt;/button&gt;
+    &lt;button class="font-change-button" data-id="custom-panel-btn" data-name="font" data-value="font-mono"&gt;Mono&lt;/button&gt;
+    &lt;button class="font-change-button" data-id="custom-panel-btn" data-name="font" data-value="font-comic"&gt;Comic&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <p>Every option button carries the same <code>data-id="custom-panel-btn"</code>, so the same
+                        click listener on the popup overlay catches every one of them, then reads <code>data-name</code>
+                        and <code>data-value</code> off whichever button was actually clicked to figure out what to
+                        do.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">js</span></div>
+                        <pre><code>if (name === "theme") {
+    if (!(customizeBtn.id === "is-active-button")) {
+        const allThemeBtns = popupOverlay.querySelectorAll('[data-name="theme"]');
+        const contentContainerElement = popupOverlay.querySelector('.popup-content-container');
+        const customizePanelElement = popupOverlay.querySelector('.popup-customization-panel');
+
+        allThemeBtns.forEach(btn => btn.id = "");
+        customizeBtn.id = "is-active-button";
+
+        if (value === "light-mode") {
+            contentContainerElement.classList.remove('is-dark-mode');
+            customizePanelElement.classList.remove('is-dark-mode');
+        } else if (value === "dark-mode") {
+            contentContainerElement.classList.add('is-dark-mode');
+            customizePanelElement.classList.add('is-dark-mode');
+        }
+    }
+}</code></pre>
+                    </div>
+                    <p>Clicking a theme button first clears the <code>is-active-button</code> id off both theme
+                        buttons, then puts it back on whichever one was just clicked. That id is just being used as
+                        a marker for the currently selected option, not for anything to do with real element ids
+                        elsewhere on the page. Depending on which value was picked, <code>is-dark-mode</code> then
+                        gets added or removed on both the content container and the customization panel, which is
+                        what triggers all the dark mode colors defined back in the CSS.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">js</span></div>
+                        <pre><code>} else if (name === "font") {
+    if (!(customizeBtn.id === "is-active-button")) {
+        const allFontBtns = popupOverlay.querySelectorAll('[data-name="font"]');
+        const longTitleDescriptionElement = popupOverlay.querySelector('.popup-long-title-n-des');
+        let fontClassToBeRemoved;
+
+        allFontBtns.forEach(btn => {
+            if (btn.id === "is-active-button") {
+                btn.id = "";
+                fontClassToBeRemoved = btn.dataset.value;
+            }
+        });
+
+        customizeBtn.id = "is-active-button";
+        longTitleDescriptionElement.classList.remove(fontClassToBeRemoved);
+        longTitleDescriptionElement.classList.add(customizeBtn.dataset.value);
+    }
+}</code></pre>
+                    </div>
+                    <p>Font switching needed a bit more logic than the theme toggle, because there is more than one
+                        old class that might need removing depending on what was picked last time. Before adding
+                        the new font class, the script first loops through the font buttons to find whichever one
+                        currently has the active id, reads its <code>data-value</code> to know which class to
+                        strip off the description text, then only after that adds the newly picked one.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">js</span></div>
+                        <pre><code>} else if (name === "readability-btn") {
+    const longTitleDescriptionElement = popupOverlay.querySelector('.popup-long-title-n-des');
+
+    if (customizeBtn.id === "is-active-button") {
+        customizeBtn.id = "";
+        longTitleDescriptionElement.classList.remove(customizeBtn.dataset.value);
+    } else if (customizeBtn.id === "") {
+        customizeBtn.id = "is-active-button";
+        longTitleDescriptionElement.classList.add(customizeBtn.dataset.value);
+    }
+}</code></pre>
+                    </div>
+                    <p>The readability toggle only has one button, so it just flips itself on and off each time it
+                        is clicked, adding the readability class when it turns on and removing it again when it
+                        turns off. It does not need the reset step the theme and font buttons need, since there is
+                        nothing else to clear before it.</p>
+
+                    <h3>CSS Architecture</h3>
+                    <h4>Layered Grid Background</h4>
+                    <p>The thumbnail row sits inside a wrapper with two stacked layers, a plain tinted background
+                        behind, and the actual row of cards in front.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">css</span></div>
+                        <pre><code>.gallery-thumbnail-container-layer1 {
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.05);
+    width: 100%;
+    height: 100%;
+}
+.gallery-thumbnail-container-layer2 {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    width: 1200px;
+}</code></pre>
+                    </div>
+                    <p>Using flex with <code>justify-content: space-between</code> keeps the four cards evenly
+                        spread across the fixed width row without me having to calculate individual margins. The
+                        faint background layer behind it just gives the row a bit of visual separation from the
+                        rest of the page.</p>
+
+                    <h4>Hover State</h4>
+                    <p>Hovering a card lifts it and makes its call to action more prominent, driven by a class the
+                        script toggles on mouseenter and mouseleave.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">css</span></div>
+                        <pre><code>.gallery-thumbnail.is-hovered {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.gallery-thumbnail.is-hovered .gallery-thumbnail-cta-container {
+    background-color: var(--theme-color);
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+}</code></pre>
+                    </div>
+                    <p>Each card has its own <code>--theme-color</code> variable set inline in the HTML, so this
+                        one CSS rule can give every card a different accent color on hover without needing a
+                        separate class per card.</p>
+
+                    <h4>Dark Mode and Font Switching</h4>
+                    <p>The popup can change its appearance without reloading anything, just by toggling classes on
+                        the content container.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">css</span></div>
+                        <pre><code>.popup-content-container.is-dark-mode {
+    background-color: #121824;
+}
+.popup-long-title-n-des.font-mono {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+}</code></pre>
+                    </div>
+                    <p>Keeping the dark mode and font overrides as separate class based rules means the same base
+                        popup markup can look completely different just by adding or removing a class, so the
+                        script only has to manage classList changes instead of touching any styles directly.</p>
+
+                    <h3>Core Rationale</h3>
+                    <p>Filling in the thumbnail content from a shared data object instead of writing it directly
+                        into the HTML means updating a card's photo or wording only has to happen in one place.
+                        Splitting the background layer from the card row lets the row sit visually separate from
+                        the page without adding extra markup around every single card. The theme color variable
+                        and the hover class keep each card's accent color and its call to action tied together
+                        with very little CSS.</p>
 
                     <h3>Accessibility</h3>
-                    <p>Every thumbnail and modal image has a full-sentence <code>alt</code> description. The modal
-                        can be opened and closed with the keyboard (Enter/Space to open, Escape to close), and focus
-                        is moved into the modal when it opens and returned to the triggering thumbnail when it
-                        closes. The accessibility control panel is built from real form controls
-                        (<code>&lt;button&gt;</code>/<code>&lt;input type="checkbox"&gt;</code>) with visible labels
-                        rather than icon-only controls.</p>
+                    <p>Images get their alt text filled in from the data object rather than being left blank. That
+                        said, the thumbnail cards themselves are plain divs with only a click listener attached, so
+                        right now they can't be reached or opened using the keyboard. The same goes for the popup's
+                        close button and the overlay background, both only close on a mouse click. Adding tabindex
+                        and a keydown handler to the cards, along with an escape key listener for the popup, would
+                        be the main things left to fix to make this page properly keyboard accessible.</p>
 
                     <h3>Link to the validation page</h3>
                     <p><a class="generic-link" href="validation_ST1.html#galleryVal">Go to validation page</a></p>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Small Actions, Stronger Industry: Repair, Reuse and Local Innovation</title> <!--Update the title as needed-->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page specific embedded CSS rules -->
+    <style>
+        /*
+            Put your minimum 5 page-specific CSS rules here
+        */
+
+        .content-page-banner-heading {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .content-page-banner-heading h1 {
+            color: white;
+        }
+
+        .content-page-section-card table,
+        th,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        .content-page-section-card table {
+            margin-top: 20px;
+            width: 600px;
+        }
+
+        .content-page-section-card h2 {
+            margin-bottom: 15px;
+        }
+
+        .article-content-fig {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .content-page-section-card fieldset {
+            margin-top: 10px;
+            border-radius: 7px;
+        }
+
+        .content-page-section-card fieldset ul,
+        .content-page-section-card fieldset ol {
+            padding: 25px;
+            padding-left: 40px;
+        }
+
+        .content-page-section-card fieldset legend {
+            margin-left: 30px;
+            padding: 0 5px;
+        }
+
+        .content-page-section-card fieldset li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        /* Required "Go to Top" button: pure HTML/CSS anchor link, no JavaScript,
+           always visible via position: fixed (coursework brief section 4.10.6) */
+        #pureGoToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 50;
+            text-decoration: none;
+        }
+
+        /* Make the article figures resize on smaller screens instead of staying
+           locked at the fixed 600px width set in the global CSS */
+        @media (max-width: 700px) {
+
+            .article-content-fig,
+            .article-content-fig img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body id="top">
+    <!-- ==================================================== -->
+    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
+    <!-- ==================================================== -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User
+                                Profile</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END OF HEADER -->
+
+
+    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    <main class="main-content">
+        <div class="content-page">
+            <div class="content-page-banner">
+                <img src="images/content-page-banner-repair.svg" class="content-page-banner-image"
+                    alt="Flat illustration of a workshop building with an orange lightbulb and gear above it, representing repair and local industry.">
+                <div class="content-page-banner-img-reference" style="font-size: small;">
+                    <!-- TODO: replace the illustration above with a royalty-free photo (e.g. from iStockPhoto)
+                         and update this credit line, in the same style as the rest of the site -->
+                    Illustration: placeholder graphic, replace with a credited royalty-free photo
+                </div>
+                <a class="generic-link content-page-banner-editor-link" href="pageEditor_ST2.html">Editor's page</a>
+                <div class="content-page-banner-heading" style="width: 950px;">
+                    <h1>Small Actions, Stronger Industry: Repair, Reuse and Local Innovation</h1>
+                    <p style="color: white;">By: [Your Name]</p>
+                </div>
+            </div>
+
+            <div class="article-content-container">
+                <aside class="article-content-sidebar">
+                    <nav>
+                        <ul>
+                            <li><a href="#right-to-repair">Choosing Repair Over Replacement</a></li>
+                            <li><a href="#e-waste">Where Broken Electronics Really End Up</a></li>
+                            <li><a href="#local-makers">Buying From Local Makers and Repair Shops</a></li>
+                            <li><a href="#campus-innovation">Backing Student-Led Innovation Projects</a></li>
+                            <li><a href="#reporting-infrastructure">Reporting Broken Public Infrastructure</a></li>
+                            <li><a href="#building-habits">Turning Small Actions Into Habits</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <div class="article-content">
+
+                    <section class="content-page-section-card" id="right-to-repair">
+                        <h2>Choosing Repair Over Replacement</h2>
+                        <p>
+                            It is often quicker to replace a cracked phone screen or a broken kettle than to
+                            get it repaired, but that convenience comes at a cost. Every new device that gets
+                            manufactured uses raw materials, energy, and industrial capacity that a repair
+                            simply does not require. SDG 9 is about building industry that is efficient and
+                            sustainable, and one of the simplest ways students can support that is by choosing
+                            to fix things rather than throw them away.
+                        </p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img1-repair.svg"
+                                alt="Flat illustration of an orange wrench repairing a dark coloured smartphone.">
+                            <figcaption>
+                                <!-- TODO: replace with a real royalty-free photo and credit, e.g.
+                                     "Photo by [Name] on Unsplash" -->
+                                Illustration: placeholder graphic, replace with a credited photo
+                            </figcaption>
+                        </figure>
+                        <p>
+                            A growing "right to repair" movement is pushing manufacturers to design products
+                            that are easier and cheaper to fix. As students, we don't get much say in how
+                            products are designed, but we do get a say in what we do when something of ours
+                            breaks.
+                        </p>
+                        <table>
+                            <caption>
+                                <h3>Repair vs. Replace: What Changes</h3>
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th>Replacing an Item</th>
+                                    <th>Repairing an Item</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Uses new raw materials and manufacturing energy</td>
+                                    <td>Reuses materials already invested in the product</td>
+                                </tr>
+                                <tr>
+                                    <td>Old item usually ends up as waste</td>
+                                    <td>Keeps the item in use for longer</td>
+                                </tr>
+                                <tr>
+                                    <td>Supports large-scale mass production</td>
+                                    <td>Often supports a local repair shop or technician</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section class="content-page-section-card" id="e-waste">
+                        <h2>Where Broken Electronics Really End Up</h2>
+                        <p>
+                            Electronic waste is one of the fastest-growing waste types in the world. Phones,
+                            chargers, and small appliances contain metals and components that took real
+                            energy and effort to produce. When they're thrown in the regular bin instead of
+                            recycled properly, those materials are lost completely, and new ones have to be
+                            mined and manufactured all over again to replace them.
+                        </p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img2-ewaste.svg"
+                                alt="Flat illustration of a dark electronics recycling bin with two orange indicator lights.">
+                            <figcaption>
+                                <!-- TODO: replace with a real royalty-free photo and credit -->
+                                Illustration: placeholder graphic, replace with a credited photo
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Most towns now have dedicated e-waste recycling points, often at supermarkets,
+                            electronics stores, or council recycling centres. Using them instead of the bin is
+                            a five-minute action that directly reduces the pressure on manufacturing
+                            industries to keep extracting new raw materials.
+                        </p>
+                    </section>
+
+                    <section class="content-page-section-card" id="local-makers">
+                        <h2>Buying From Local Makers and Repair Shops</h2>
+                        <p>
+                            Where we choose to spend money shapes what kind of industry gets to grow. Local
+                            makers, repair shops, and small manufacturers operate on a much smaller scale than
+                            large importers, and supporting them keeps skills, jobs, and innovation within the
+                            local community instead of relying entirely on mass production somewhere else.
+                        </p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img3-local-makers.svg"
+                                alt="Flat illustration of a small market stall with an orange roof, representing a local maker or shop.">
+                            <figcaption>
+                                <!-- TODO: replace with a real royalty-free photo and credit -->
+                                Illustration: placeholder graphic, replace with a credited photo
+                            </figcaption>
+                        </figure>
+                        <div class="card" style="margin-top: 10px;">
+                            <h3>Quick Tip:</h3>
+                            <p>Before buying something new online, try searching for a local maker, repair
+                                shop, or second-hand option first. It doesn't have to replace every purchase —
+                                even doing it occasionally makes a difference.</p>
+                        </div>
+                    </section>
+
+                    <section class="content-page-section-card" id="campus-innovation">
+                        <h2>Backing Student-Led Innovation Projects</h2>
+                        <p>
+                            Universities are full of small-scale innovation: student projects, hackathon
+                            builds, and early-stage ideas that try to solve a real infrastructure or industry
+                            problem. Many of these never go anywhere, not because the idea is bad, but because
+                            nobody outside the project team ever hears about it or gets involved.
+                        </p>
+                        <figure class="article-content-fig">
+                            <img src="images/article-content-img4-innovation.svg"
+                                alt="Flat illustration of an orange lightbulb next to a small gear, representing student innovation.">
+                            <figcaption>
+                                <!-- TODO: replace with a real royalty-free photo and credit -->
+                                Illustration: placeholder graphic, replace with a credited photo
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Supporting a project doesn't have to mean joining the team. Sharing it, giving
+                            feedback, volunteering an afternoon, or simply showing up to a demo day all help
+                            keep small-scale innovation alive.
+                        </p>
+                        <fieldset>
+                            <legend>
+                                <h3>Ways to Support a Student Project</h3>
+                            </legend>
+                            <ol>
+                                <li>
+                                    <strong>Show up:</strong> Attend demo days, showcases, or presentations for
+                                    student-led projects, even ones outside your own course.
+                                </li>
+                                <li>
+                                    <strong>Share it:</strong> Post about a project you found interesting so
+                                    more people hear about it.
+                                </li>
+                                <li>
+                                    <strong>Give feedback:</strong> Try out an early prototype and tell the
+                                    team what worked and what didn't.
+                                </li>
+                                <li>
+                                    <strong>Volunteer time:</strong> Offer a specific skill (design, writing,
+                                    testing) for a few hours, rather than a long-term commitment.
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </section>
+
+                    <section class="content-page-section-card" id="reporting-infrastructure">
+                        <h2>Reporting Broken Public Infrastructure</h2>
+                        <p>
+                            A pothole, a broken streetlight, or a cracked pavement usually doesn't get fixed
+                            until someone reports it. Most local councils now have an online form or app for
+                            exactly this, and reporting an issue takes a couple of minutes. It won't fix
+                            things overnight, but unreported problems almost never get fixed at all.
+                        </p>
+                        <p>
+                            This connects directly to SDG 9's focus on resilient infrastructure — the
+                            small, everyday maintenance of public spaces is just as much a part of that as
+                            large construction projects.
+                        </p>
+                    </section>
+
+                    <section class="content-page-section-card" id="building-habits">
+                        <h2>Turning Small Actions Into Habits</h2>
+                        <p>
+                            None of the actions on this page require money, expertise, or a lot of time. What
+                            makes them add up is doing them consistently. Try our
+                            <a href="ais.html">Action Impact Simulator</a> to see how picking a few of these
+                            actions could add up to a real impact score.
+                        </p>
+                        <fieldset>
+                            <legend>
+                                <h3>A Simple Checklist to Start With</h3>
+                            </legend>
+                            <ul>
+                                <li>Get one broken item repaired instead of replaced this month.</li>
+                                <li>Find your nearest e-waste recycling point and use it.</li>
+                                <li>Buy one thing from a local maker or shop instead of a big retailer.</li>
+                                <li>Attend or share one student innovation project.</li>
+                                <li>Report one piece of broken public infrastructure you've noticed.</li>
+                            </ul>
+                        </fieldset>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- "Go to Top" button required by the coursework brief: a plain anchor
+         link styled with CSS only (position: fixed), no JavaScript involved -->
+    <a href="#top" id="pureGoToTopBtn" class="button">Go to Top</a>
+
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry,
+                            Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <!-- Replace these placeholders on your respective pages -->
+                    <p>Developed by: <strong>[YOUR NAME]</strong></p>
+                    <p>Student ID: <strong>[YOUR ID]</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <!-- Change href(target) accordingly -->
+                <a href="pageEditor_ST2.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST2.html" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+
+        //go through all figcaptions and their links and add generic-link class to them
+        const links = document.querySelectorAll('.article-content-fig figcaption a');
+
+        links.forEach(link => {
+            link.classList.add('generic-link');
+
+            //set attributes to open in a new tab
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        });
+
+        //scroll button stuff
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        //show button when user scrolls down 600px from the top
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

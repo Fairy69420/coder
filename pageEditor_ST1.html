@@ -901,8 +901,60 @@ function closePopup() {
 
                 <section class="card" id="challenge">
                     <h2>Challenges and Lessons Learned</h2>
-                    <p>Add your reflection here: challenges encountered while building the global stylesheet,
-                        Home page, and Gallery page, and how they were resolved.</p>
+
+                    <p>This module was also my first real project working with HTML, CSS, and JavaScript beyond a
+                        few small exercises, so a good part of the challenges below came from learning the
+                        fundamentals of layout and scripting while trying to build a full multi-page site at the
+                        same time. That order of things, picking up a technique on one page and only learning the
+                        "better" way to do it a week or two later on the next one, is the root cause behind most
+                        of what follows.</p>
+
+                    <h3>Inconsistent Responsiveness</h3>
+                    <p>The clearest symptom of that learning curve is that the site isn't consistently responsive.
+                        The article layout on the Content page and the thumbnail row on the Gallery page are both
+                        built on fixed pixel widths (<code>900px</code> and <code>1200px</code> respectively),
+                        because at the time I built them I only really knew how to lay things out with exact
+                        numbers rather than relative units or media queries. By the time I'd learned how to scale
+                        a layout properly, those sections were already built and reasonably polished, so rebuilding
+                        them from scratch felt riskier than leaving them as they were and applying what I'd learned
+                        going forward instead. The result is a site where some parts hold up fine on a narrower
+                        viewport and others just don't, and it's one of the more obvious things I'd go back and fix
+                        with more time.</p>
+
+                    <h3>The Hero Slider Loop</h3>
+                    <p>The Home page's hero slider was the first properly interactive piece I built, and it broke
+                        in an ugly way the first time I tried to make it loop. My first version just reset the
+                        track's <code>transform</code> straight back to the first slide once it reached the end,
+                        which caused a visible jump because the transition was still active during the reset. I
+                        also kept running into a related issue through Live Server, where reloading the page during
+                        testing would sometimes leave the scroll position stuck somewhere in the middle of the
+                        page instead of at the top, which made it look like the slider had broken when it hadn't.
+                        Fixing the actual loop meant cloning the first slide onto the end of the track, letting the
+                        animation play through to that clone, and only then snapping back to the real first slide
+                        with the transition briefly disabled. It was the first time I properly understood why
+                        cloned-slide loops are the standard approach for this kind of animation instead of just
+                        resetting a counter.</p>
+
+                    <h3>Revisiting the Gallery Popup</h3>
+                    <p>The Gallery page's popup went through a few rewrites. Early on I had the thumbnail content
+                        and the popup content written out separately, which meant editing a card meant updating it
+                        in two places, and they drifted out of sync more than once. Pulling everything into the
+                        single <code>popupData</code> object in <code>gallery_script.js</code>, so both the card
+                        and the popup read from the same source, fixed that, but restructuring the script after
+                        I'd already written a working version of it was more rewriting than I expected going in.
+                        The dark mode, font, and readability toggles inside the popup went through something
+                        similar: my first attempt just toggled classes on click with no real check for what was
+                        already active, which meant it was possible to stack two font classes on top of each
+                        other by clicking around. I ended up rewriting that logic to check which button was
+                        currently active and clear it before applying the new one.</p>
+
+                    <h3>What's Still Left</h3>
+                    <p>Keyboard accessibility is the biggest gap I'm aware of and didn't get to properly. The
+                        gallery thumbnails and the popup's close button only respond to mouse clicks right now, so
+                        someone navigating with a keyboard alone can't open or close them. I know what the fix
+                        looks like, adding <code>tabindex</code> and a <code>keydown</code> listener to the cards,
+                        plus an escape key listener for the popup, but it's a change I ran out of time to make and
+                        test properly across every page, so I've left it flagged here rather than rushed.</p>
                 </section>
 
                 <section class="card" id="compliance">

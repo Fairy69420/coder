@@ -959,12 +959,49 @@ function closePopup() {
 
                 <section class="card" id="compliance">
                     <h2>Compliance</h2>
-                    <p>Discuss how the pages you created are compliant with Janet regulations governing web page
-                        publication, demonstrating understanding and application of these regulations. Be
-                        realistic and truthful. <a class="generic-link"
+                    <p>The University's network connection runs through JANET, the Jisc-operated network used by
+                        UK education and research organisations, so anything published on a University server is
+                        bound by the <a class="generic-link"
                             href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html"
-                            target="_blank" rel="noopener noreferrer">See the lecture notes for more details on
-                            compliance.</a></p>
+                            target="_blank" rel="noopener noreferrer">JANET Acceptable Use Policy</a>. The main
+                        things that policy rules out are offensive or obscene material, content that infringes
+                        someone else's copyright, defamatory content, unsolicited commercial material, and
+                        anything that misuses the network itself. Here's how the pages I built line up against
+                        each of those.</p>
+
+                    <h3>Copyright and Image Sourcing</h3>
+                    <p>Every photo on the Home, Gallery, and Content pages is downloaded and hosted locally rather
+                        than hotlinked, and each one is credited with a link back to the photographer and the
+                        source site, mostly Unsplash and Pexels, both of which license their photos for free reuse
+                        with attribution. The one image I'm not fully confident about is the "bridging the digital
+                        divide" graphic on the Home page, which is credited to diversityQ rather than a stock
+                        photo site, so its actual licence terms aren't as clear cut as the rest and are worth
+                        double-checking before this goes any further.</p>
+
+                    <h3>Content Suitability</h3>
+                    <p>All of the written content across the pages is factual, SDG9-themed commentary, industry
+                        statistics, infrastructure topics, and similar, none of it is offensive, obscene, or
+                        written about a real person or organisation in a way that could be considered
+                        defamatory.</p>
+
+                    <h3>No Commercial or Unsolicited Material</h3>
+                    <p>The site doesn't carry any advertising, doesn't promote a real product or service, and
+                        doesn't send anything to anyone unprompted. The only outward-facing links on the pages are
+                        the photo credits and the references list.</p>
+
+                    <h3>The Interactive Poll and User Data</h3>
+                    <p>The reader poll on the Content page is the only part of the site that takes user input.
+                        Its <code>&lt;form&gt;</code> tag has <code>action="https://google.com"</code> written
+                        into it so the page still degrades sensibly if JavaScript fails to load, but in normal use
+                        the submit handler calls <code>event.preventDefault()</code> before that action ever
+                        fires, so a vote is tallied against a local dummy dataset in the browser and never
+                        actually leaves the page. No names, emails, or any other personal details are collected
+                        anywhere on the site.</p>
+
+                    <h3>Network and Resource Use</h3>
+                    <p>All of the interactivity, the slider, the popup, the poll, is vanilla JavaScript that I
+                        wrote myself. The pages don't pull in any third-party scripts, trackers, or external APIs,
+                        so there's nothing running that could disrupt JANET or another user's connection.</p>
                 </section>
 
                 <section class="card" id="group">

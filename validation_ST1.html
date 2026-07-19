@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation - Eshan Amarakoon</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .card {
+            border-radius: 12px;
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        h2,
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin-top: 20px;
+        }
+
+        .page-editor-grid {
+            display: grid;
+            grid-template-columns: minmax(290px, 1fr) 900px 1fr;
+            gap: 40px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .page-editor-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .stud-line {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #F4F7F9;
+            color: #475569;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User
+                                Profile</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <p class="stud-line">Eshan Amarakoon &mdash; SDG 9 Team &mdash; Home Page / Gallery Page / Global Template Developer
+    </p>
+
+    <main class="main-content">
+        <div class="page-editor-grid">
+            <div class="article-content-sidebar">
+                <ul>
+                    <li><a href="#home">Home Page</a></li>
+                    <li><a href="#gallery">Gallery Page</a></li>
+                    <li><a href="#content">Content Page</a></li>
+                </ul>
+            </div>
+
+            <div class="page-editor-content">
+
+                <section class="card" id="home">
+                    <h2>Home Page validation report</h2>
+                    <p>Even though the site looked completely fine when I loaded it in my browser, the code had a few
+                        mistakes under the hood. I had used flex-direction: wrap instead of flex-wrap: wrap,
+                        which the browser apparently ignored, and I completely missed putting alt tags on the article
+                        images. Plus, copy-pasting those SVG icons accidentally brought in a bunch of duplicate IDs that
+                        broke basic HTML rules.</p>
+                    <img src="images/validation/st1/home_w3_validation.png" alt="">
+
+                    <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST1.html#home">Home Page section in the Page Editor</a></p>
+                </section>
+
+                <section class="card" id="gallery">
+                    <h2>Gallery Page validation report</h2>
+                    <p>There were couple of errors like missing alt or src. But that is due to leaving them empty because JS will dynamically inject elements. However I replaced them with placeholders. And I had used h3 inside thumbnail cards. This resulted in site jumping from h1 to h3. Instead of going to h2.</p>
+                    <img src="images/validation/st1/gallery_w3_validation.png" alt="">
+
+                    <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST1.html#gallery">Gallery Page section in the Page Editor</a></p>
+                </section>
+
+                <section class="card" id="content">
+                    <h2>Content Page validation report</h2>
+                    <p>THe only errors on this page were a result of duplicate ids in the SVGs which I copied from svgrepo</p>
+                    <img src="images/validation/st1/content_st1_w3_validation.png" alt="">
+
+                    <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST1.html#content">Content Page section in the Page Editor</a></p>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry,
+                            Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <p>Developed by: <strong>Eshan Amarakoon</strong></p>
+                    <p>Student ID: <strong>W2212570</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <a href="pageEditor_ST1.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST1.html" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.navbar a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('current-page')
+            }
+        });
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

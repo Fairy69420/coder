@@ -9,9 +9,7 @@
 
     <!-- Page specific embedded CSS rules -->
     <style>
-        /*
-            Put your minimum 5 page-specific CSS rules here
-        */
+        
 
         .content-page-banner-heading {
             background-color: rgba(0, 0, 0, 0.3);
@@ -64,8 +62,6 @@
             line-height: 1.4;
         }
 
-        /* Required "Go to Top" button: pure HTML/CSS anchor link, no JavaScript,
-           always visible via position: fixed (coursework brief section 4.10.6) */
         #pureGoToTopBtn {
             position: fixed;
             bottom: 20px;
@@ -74,8 +70,7 @@
             text-decoration: none;
         }
 
-        /* Make the article figures resize on smaller screens instead of staying
-           locked at the fixed 600px width set in the global CSS */
+       
         @media (max-width: 700px) {
 
             .article-content-fig,
@@ -88,9 +83,7 @@
 </head>
 
 <body id="top">
-    <!-- ==================================================== -->
-    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
-    <!-- ==================================================== -->
+
     <header>
         <div class="navbar-and-logo">
             <div class="logo-container">
@@ -111,18 +104,16 @@
             </nav>
         </div>
     </header>
-    <!-- END OF HEADER -->
+   
 
-
-    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    
     <main class="main-content">
         <div class="content-page">
             <div class="content-page-banner">
                 <img src="images/content-page-banner-repair.svg" class="content-page-banner-image"
                     alt="Flat illustration of a workshop building with an orange lightbulb and gear above it, representing repair and local industry.">
                 <div class="content-page-banner-img-reference" style="font-size: small;">
-                    <!-- TODO: replace the illustration above with a royalty-free photo (e.g. from iStockPhoto)
-                         and update this credit line, in the same style as the rest of the site -->
+                    <
                     Illustration: placeholder graphic, replace with a credited royalty-free photo
                 </div>
                 <a class="generic-link content-page-banner-editor-link" href="pageEditor_ST2.html">Editor's page</a>
@@ -212,8 +203,8 @@
                             <img src="images/article-content-img2-ewaste.svg"
                                 alt="Flat illustration of a dark electronics recycling bin with two orange indicator lights.">
                             <figcaption>
-                                <!-- TODO: replace with a real royalty-free photo and credit -->
-                                Illustration: placeholder graphic, replace with a credited photo
+                                
+                                Illustration: 
                             </figcaption>
                         </figure>
                         <p>
@@ -236,8 +227,8 @@
                             <img src="images/article-content-img3-local-makers.svg"
                                 alt="Flat illustration of a small market stall with an orange roof, representing a local maker or shop.">
                             <figcaption>
-                                <!-- TODO: replace with a real royalty-free photo and credit -->
-                                Illustration: placeholder graphic, replace with a credited photo
+                                
+                                Illustration: 
                             </figcaption>
                         </figure>
                         <div class="card" style="margin-top: 10px;">
@@ -260,8 +251,8 @@
                             <img src="images/article-content-img4-innovation.svg"
                                 alt="Flat illustration of an orange lightbulb next to a small gear, representing student innovation.">
                             <figcaption>
-                                <!-- TODO: replace with a real royalty-free photo and credit -->
-                                Illustration: placeholder graphic, replace with a credited photo
+                                
+                                Illustration: 
                             </figcaption>
                         </figure>
                         <p>
@@ -336,8 +327,7 @@
         </div>
     </main>
 
-    <!-- "Go to Top" button required by the coursework brief: a plain anchor
-         link styled with CSS only (position: fixed), no JavaScript involved -->
+   
     <a href="#top" id="pureGoToTopBtn" class="button">Go to Top</a>
 
     <div id="scrollToTopBtn">
@@ -388,7 +378,7 @@
     </footer>
     <script>
 
-        //go through all figcaptions and their links and add generic-link class to them
+
         const links = document.querySelectorAll('.article-content-fig figcaption a');
 
         links.forEach(link => {

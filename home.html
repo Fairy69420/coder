@@ -239,7 +239,7 @@
 
         .mgp-card-content-container {
             display: flex;
-            flex-direction: wrap;
+            flex-wrap: wrap; /* Fixed: flex-direction changed to flex-wrap */
             width: 100%;
         }
 
@@ -640,7 +640,8 @@
             <span class="article-section-header">Read our articles...</span>
             <div class="full-width-article-thumbnail clickable-box" data-href="content_ST1.html" role="link"
                 tabindex="0" id="st1_article">
-                <div class="full-width-article-img-container"><img src="images/content-page-banner-img-w2212570.jpg">
+                <!-- Fixed: Added missing alt attribute -->
+                <div class="full-width-article-img-container"><img src="images/content-page-banner-img-w2212570.jpg" alt="Financial value chains integration article banner image">
                 </div>
                 <div class="full-width-article-content">
                     <div class="article-meta-data">
@@ -654,13 +655,14 @@
                             into modern financial value chains...
                         </p>
                     </div>
+                    <!-- Fixed: Removed duplicate IDs from SVG interior elements -->
                     <div class="article-read-more"><span>Read more</span><svg style="margin-left: 10px;"
                             viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <rect width="16" height="16" id="icon-bound" fill="none"></rect>
+                            fill="currentColor">
+                            <g stroke-width="0"></g>
+                            <g stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g>
+                                <rect width="16" height="16" fill="none"></rect>
                                 <polygon points="7.586,2.414 12.172,7 0,7 0,9 12.172,9 7.586,13.586 9,15 16,8 9,1">
                                 </polygon>
                             </g>
@@ -670,8 +672,9 @@
             <div class="mini-article-thumbnail-container">
                 <div class="mini-article-thumbnail  clickable-box" data-href="content_ST1.html" role="link" tabindex="0"
                     id="st2_article">
+                    <!-- Fixed: Added missing alt attribute -->
                     <div class="mini-article-img-container" style="overflow: hidden;">
-                        <img src="images/gallery/card3_img.jpg" style="height: 100%; width: 100%;">
+                        <img src="images/gallery/card3_img.jpg" style="height: 100%; width: 100%;" alt="Micro-enterprise funding loops visualization graphics">
                     </div>
                     <div class="article-meta-data">
                         <span style="color: rgb(0, 65, 200);">Thimithri vidanapathirana</span>
@@ -684,13 +687,14 @@
                             into modern financial value chains...
                         </p>
                     </div>
+                    <!-- Fixed: Removed duplicate IDs from SVG interior elements -->
                     <div class="article-read-more"><span>Read more</span><svg style="margin-left: 10px;"
                             viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <rect width="16" height="16" id="icon-bound" fill="none"></rect>
+                            fill="currentColor">
+                            <g stroke-width="0"></g>
+                            <g stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g>
+                                <rect width="16" height="16" fill="none"></rect>
                                 <polygon points="7.586,2.414 12.172,7 0,7 0,9 12.172,9 7.586,13.586 9,15 16,8 9,1">
                                 </polygon>
                             </g>
@@ -698,8 +702,9 @@
                 </div>
                 <div class="mini-article-thumbnail  clickable-box" data-href="content_ST1.html" role="link" tabindex="0"
                     id="st3_article">
+                    <!-- Fixed: Added missing alt attribute -->
                     <div class="mini-article-img-container" style="overflow: hidden;">
-                        <img src="images/gallery/card1_img.jpg" style="height: 100%; width: 100%;">
+                        <img src="images/gallery/card1_img.jpg" style="height: 100%; width: 100%;" alt="Inclusive regional banking chains conceptual image">
                     </div>
                     <div class="article-meta-data">
                         <span style="color: rgb(0, 65, 200);">Upeksha vidushi</span>
@@ -712,13 +717,14 @@
                             into modern financial value chains...
                         </p>
                     </div>
+                    <!-- Fixed: Removed duplicate IDs from SVG interior elements -->
                     <div class="article-read-more"><span>Read more</span><svg style="margin-left: 10px;"
                             viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <rect width="16" height="16" id="icon-bound" fill="none"></rect>
+                            fill="currentColor">
+                            <g stroke-width="0"></g>
+                            <g stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g>
+                                <rect width="16" height="16" fill="none"></rect>
                                 <polygon points="7.586,2.414 12.172,7 0,7 0,9 12.172,9 7.586,13.586 9,15 16,8 9,1">
                                 </polygon>
                             </g>
@@ -726,8 +732,9 @@
                 </div>
                 <div class="mini-article-thumbnail  clickable-box" data-href="content_ST4.html" role="link" tabindex="0"
                     id="st4_article">
+                    <!-- Fixed: Added missing alt attribute -->
                     <div class="mini-article-img-container" style="overflow: hidden;">
-                        <img src="images/homePage_article_ST2_thumbnail_Img.jpg" style="height: 100%; width: 100%;">
+                        <img src="images/homePage_article_ST2_thumbnail_Img.jpg" style="height: 100%; width: 100%;" alt="Bridging regional technological resource divide graphics">
                     </div>
                     <div class="article-meta-data">
                         <span style="color: rgb(0, 65, 200);">Thamiliny Sivanesan</span>
@@ -740,13 +747,14 @@
                             growth to ensure no one is left behind in our connected world...
                         </p>
                     </div>
+                    <!-- Fixed: Removed duplicate IDs from SVG interior elements -->
                     <div class="article-read-more"><span>Read more</span><svg style="margin-left: 10px;"
                             viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <rect width="16" height="16" id="icon-bound" fill="none"></rect>
+                            fill="currentColor">
+                            <g stroke-width="0"></g>
+                            <g stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g>
+                                <rect width="16" height="16" fill="none"></rect>
                                 <polygon points="7.586,2.414 12.172,7 0,7 0,9 12.172,9 7.586,13.586 9,15 16,8 9,1">
                                 </polygon>
                             </g>
@@ -757,12 +765,13 @@
         </div>
 
     </main>
+    <!-- Fixed: Removed duplicate IDs from scroll-to-top button interior SVGs -->
     <div id="scrollToTopBtn">
         <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
             stroke="#ffffff">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
+            <g stroke-width="0"></g>
+            <g stroke-linecap="round" stroke-linejoin="round"></g>
+            <g>
                 <g data-name="Layer 2">
                     <g data-name="arrowhead-up">
                         <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>

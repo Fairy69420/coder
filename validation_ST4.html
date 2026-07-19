@@ -4,85 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title> 
+    <title>Validation Page - Thamiliny Sivanesan</title> <!--Update the title as needed-->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Page specific embedded CSS rules -->
     <style>
-        .profile-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1.5rem;
-        }
-        .profile-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        .progress-container {
-            width: 100%;
-            background: #e2e2e2;
-            border-radius: 8px;
-            height: 18px;
-            overflow: hidden;
-            margin: 0.6rem 0 0.3rem 0;
-        }
-        .profile-progress-fill {
-            height: 100%;
-            background: #FD6925;
-            width: 0%;
-            transition: width 0.4s ease;
+        /*
+            Put your minimum 5 page-specific CSS rules here
+        */
+        .card {
+            border-radius: 12px;
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            margin-bottom: 30px;
         }
 
-        .profile-status {
-            font-size: 0.9rem;
-            color: #475569;
-            margin-bottom: 1.2rem;
+        h2,
+        h3 {
+            margin-bottom: 20px;
         }
 
-        .profile-output {
+        h3 {
+            margin-top: 20px;
+        }
+
+        .page-editor-grid {
             display: grid;
-            gap: 1rem;
+            grid-template-columns: minmax(290px, 1fr) 900px 1fr;
+            gap: 40px;
+            margin: 0 auto;
+            margin-top: 50px;
         }
 
-        .profile-step-card {
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: opacity 0.4s ease, max-height 0.5s ease;
-        }
-
-        .profile-step-card.revealed {
-            opacity: 1;
-            max-height: 500px;
-        }
-
-        .profile-step-card h3 {
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-step-card dl {
-            margin: 0;
-        }
-
-        .profile-step-card dt {
-            font-weight: bold;
-        }
-
-        .profile-step-card dd {
-            margin: 0 0 0.5rem 0;
-        }
-
-        .profile-confirmation {
-            border: 2px solid #FD6925;
-            background: #fff4ee;
-            padding: 1rem;
+        .page-editor-content img {
+            max-width: 100%;
             border-radius: 8px;
-            margin-top: 1rem;
-            display: none;
+            margin: 15px 0;
         }
 
+        .stud-line {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #F4F7F9;
+            color: #475569;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -115,40 +84,55 @@
 
     <!-- MAIN CONTENT AREA: CAN BE EDITED -->
     <main class="main-content">
-        <div class="profile-container">
-            <h2>BUILD YOUR INNOVATION PROFILE</h2>
-            <p>
-              Complete a few quick prompts to build your profile and explore how you can 
-              support Industry, Innovation and Infrastructure (SDG 9). 
-              You can skip questions and revisit them at any time
-            </p>
-
-            <div class="profile-toolbar">
-                <button id="btnStart" type="button">Start</button>
-                <button id="btnReset" type="button">Reset Profile</button>
-                <button id="btnRevisit1" type="button">Revisit Step 1</button>
-                <button id="btnRevisit2" type="button">Revisit Step 2</button>
-                <button id="btnRevisit3" type="button">Revisit Step 3</button>
-            </div>
-            <div>
-                <label id="progressLabel" for="progressBar">Completion : 0%</label>
-                <div class="progress-container">
-                    <div class="profile-progress-fill" id="progressBar"></div>
-                </div>
-                <p class="profile-status" id="statusLine">Status: Click Start to begin.</p>
+        <div class="page-editor-grid">
+            <div class="article-content-sidebar">
+                <ul>
+                    <li><a href="#profile">User Profile Page</a></li>
+                    <li><a href="#sitemap">Sitemap Page</a></li>
+                    <li><a href="#content">Content Page</a></li>
+                </ul>
             </div>
 
-            <h3>Your Profile (Live Updates)</h3>
-            <div class="profile-output" id="profileOutput">
-                <!-- Step cards are injected here dynamically by JavaScript -->
-            </div>
+            <div class="page-editor-content">
 
-            <div class="profile-confirmation" id="confirmationBox" role="status">
-                Congratulations! Your profile has been completed successfully.
-                Thank you for supporting SDG 9: Industry, Innovation and Infrastructure.
+                <section class="card" id="profile">
+                    <h2>User Profile Page validation report</h2>
+                    <p>The first run through the validator picked up a couple of small things: one of my buttons
+                        didn't have <code>type="button"</code> on it, so it was defaulting to a submit type even
+                        though there's no form on the page, and I had an empty <code>&lt;dl&gt;</code> left in the
+                        markup from an earlier version that wasn't being used for anything. Fixed both and it now
+                        validates clean.</p>
+                    <img src="images/validation/st4/profile_w3_validation.png" alt="">
+
+                    <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST4.html#profile">User Profile Page section in the Page Editor</a></p>
+                </section>
+
+                <section class="card" id="sitemap">
+                    <h2>Sitemap Page validation report</h2>
+                    <p>Most of the errors here were to do with the SVG. I had written <code>viewbox</code> in
+                        lowercase instead of <code>viewBox</code>, which the validator flagged even though it still
+                        displayed fine in the browser. A couple of the node links were also missing their
+                        <code>aria-label</code> at first, so the validator (and just common sense) pointed out they
+                        didn't have a proper accessible name yet. Fixed the casing and added the missing labels.</p>
+                    <img src="images/validation/st4/sitemap_w3_validation.png" alt="">
+
+                    <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST4.html#sitemap">Sitemap Page section in the Page Editor</a></p>
+                </section>
+
+                <section class="card" id="content">
+                    <h2>Content Page validation report</h2>
+                    <p><em>This page is still being built, so there's no validation report to show yet. I'll add
+                            the screenshot here once <code>content_ST4.html</code> is finished and run through the
+                            validator.</em></p>
+
+                    <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST4.html#content">Content Page section in the Page Editor</a></p>
+                </section>
+
             </div>
         </div>
-
     </main>
     <!-- Scroll to top button. DO NOT TOUCH -->
     <div id="scrollToTopBtn">
@@ -192,8 +176,8 @@
             </div>
             <div class="footer-bottom-card">
                 <!-- Change href(target) accordingly -->
-                <a href="" class="footer-student-specific-link">Page Editor Report</a>
-                <a href="" class="footer-student-specific-link">W3C Validation Evidence</a>
+                <a href="pagEditor_ST4.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST4.html" class="footer-student-specific-link">W3C Validation Evidence</a>
             </div>
         </div>
     </footer>

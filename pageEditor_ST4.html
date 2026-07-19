@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor - Thamiliny Sivanesan</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page specific embedded CSS rules -->
+    <style>
+        .editor-container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .editor-container h2 {
+            margin-top: 2.5rem;
+            border-bottom: 2px solid black;
+            padding-bottom: 5px;
+        }
+
+        .editor-container h3 {
+            margin-top: 1.5rem;
+        }
+
+        .editor-toc {
+            background: #f4f4f4;
+            padding: 15px 25px;
+            border-radius: 7px;
+            margin-top: 15px;
+        }
+
+        .meeting-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .meeting-table th,
+        .meeting-table td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .editor-container pre {
+            background: #1e1e1e;
+            color: #e6e6e6;
+            padding: 12px 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .editor-container code {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================================================== -->
+    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
+    <!-- ==================================================== -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link"
+                            id="nav-profile"><span>User Profile</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END OF HEADER -->
+
+
+    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    <main class="main-content">
+        <div class="editor-container">
+            <h1>Page Editor - Thamiliny Sivanesan</h1>
+            <p>
+                <strong>Role in group:</strong> Student 4 - User Profile &amp; Sitemap
+            </p>
+            <p>
+                <strong>Pages I completed:</strong>
+            </p>
+            <ul>
+                <li>User Profile (<code>profile.html</code>)</li>
+                <li>Sitemap (<code>sitemap.html</code>)</li>
+                <li>Content page (<code>content_ST4.html</code>)</li>
+            </ul>
+
+            <p>
+                <strong>My angle within SDG 9:</strong> I focused on digital infrastructure and internet access.
+                Reliable, affordable connectivity is what everything else in Industry, Innovation and
+                Infrastructure quietly depends on — a financial inclusion tool, for example, is only useful to
+                someone who actually has a connection to use it on. I chose this angle because it connects
+                naturally to other parts of the site while staying clearly its own topic, rather than repeating
+                what's already covered elsewhere.
+            </p>
+
+            <div class="editor-toc">
+                <strong>Contents</strong>
+                <ul>
+                    <li><a href="#profile-page">User Profile Page</a></li>
+                    <li><a href="#sitemap-page">Sitemap Page</a></li>
+                    <li><a href="#content-page">Content Page</a></li>
+                    <li><a href="#challenges">Challenges and Lessons Learned</a></li>
+                    <li><a href="#accessibility">Accessibility Considerations</a></li>
+                    <li><a href="#janet">JANET Compliance</a></li>
+                    <li><a href="#meetings">Group Meetings and Contribution Log</a></li>
+                    <li><a href="#references">References</a></li>
+                </ul>
+            </div>
+
+            <h2 id="profile-page">User Profile Page</h2>
+            <p>
+                <a href="profile.html" target="_blank" rel="noopener noreferrer">View the live page</a> |
+                <a href="validation_ST4.html#profile" target="_blank" rel="noopener noreferrer">View validation evidence</a>
+            </p>
+
+            <h3>HTML Structure</h3>
+            <p>
+                There is no HTML form on this page at all - the coursework spec for User Profile
+                specifically asks for data collected via <code>prompt()</code> instead. So the &lt;main&gt;
+                only contains a few control buttons, a progress bar and one empty <code>&lt;div class="profileOutput"&gt;</code>.
+                Everything that looks like "profile content" is actually built and inserted by JavaScript once the user starts 
+                answering questions.
+            </p>
+            <pre><code>&lt;div class="profile-output" id="profileOutput"&gt;
+    &lt;!-- Step cards are injected here dynamically by JavaScript --&gt;
+&lt;/div&gt;</code></pre>
+            <p>
+                Inside each generated step card, I used a <code>&lt;dl&gt;</code>/<code>&lt;dt&gt;</code>/<code>&lt;dd&gt;</code>
+                pairing rather than a plain list, because each answer is really a name/value pair (e.g. "name"
+                :"Thamiliny") and <code>&lt;dl&gt;</code> is the semantically correct tag for that instead of
+                stretching a <code>&lt;ul&gt;</code> to do the same job.
+            </p>
+
+            <h3>CSS Techniques</h3>
+            <p>
+                Each step card uses the site's Global <code>.card</code> class for its background, border and padding,
+                combined with my own <code>.profile-step-card</code> class which only add the reveal animation on top - so 
+                I am not refining anything the Global CSS already handle.
+            </p>
+            <pre><code>.profile-step-card {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.5s ease;
+}
+.profile-step-card.revealed {
+    opacity: 1;
+    max-height: 500px;
+}</code></pre>
+            <p>
+                The progress bar is just two nested divs - a grey <code>.profile-progress-track</code> and an
+                orange <code>.profile-progress-fill</code> whose <code>width</code> is set directly by
+                JavaScript as a percentage. This is a simpler pattern than a native
+                <code>&lt;progress&gt;</code> element, but it let me match the orange accent colour used
+                elsewhere on the site.
+            </p>
+
+            <h3>Why I Made These Choices</h3>
+            <p>
+                Using <code>prompt()</code> instead of a form matches the coursework requirement directly, but
+                it also changes what "user experience" means on this page - since <code>prompt()</code>
+                interrupts one question at a time, I decided users needed a way to skip questions and come
+                back later rather than being forced through all 9 in one sitting. That's why every prompt
+                accepts an empty answer as a "skip", and the 3 "Revisit Step" buttons only re-ask questions
+                that are still missing, instead of repeating everything. I think this makes the page feel more
+                like a realistic profile builder and less like a rigid quiz, which fits better with the site's
+                overall message about individuals engaging with SDG 9 at their own pace.
+            </p>
+
+            <!-- ============================================================ -->
+            <h2 id="sitemap-page">Sitemap Page</h2>
+            <p>
+                <a href="sitemap.html" target="_blank" rel="noopener noreferrer">View the live page</a> |
+                <a href="validation_ST4.html#sitemap" target="_blank" rel="noopener noreferrer">View validation evidence</a>
+            </p>
+
+            <h3>HTML Structure</h3>
+            <p>
+                I built the sitemap using SVG rather than a static image so it could be interactive and stay
+                text-based (which also keeps the file size small). Each page is drawn as a
+                <code>&lt;g&gt;</code> group containing a <code>&lt;rect&gt;</code> box and a
+                <code>&lt;text&gt;</code> label, with a unique <code>id</code> on the group - this is the same
+                technique used for clickable shapes in our SVG lecture notes (the Home Page/Schedule example),
+                rather than wrapping each shape in an <code>&lt;a&gt;</code> tag.
+            </p>
+            <pre><code>&lt;g id="nodeHome" class="site-node root"&gt;
+    &lt;rect x="390" y="90" width="120" height="40" /&gt;
+    &lt;text x="450" y="115"&gt;Home&lt;/text&gt;
+&lt;/g&gt;</code></pre>
+            <p>
+                The Home node gets an extra <code>root</code> class so I could give it a different fill
+                colour in CSS, marking it clearly as the main page everything else branches from. Straight
+                <code>&lt;line&gt;</code> elements connect Home to every other node to show the site hierarchy.
+            </p>
+
+            <h3>CSS Techniques</h3>
+            <p>
+                Rather than writing a separate <code>#id:hover</code> rule for all 12 pages, every group
+                shares a <code>.site-node</code> class, so one rule handles the hover feedback for all of them:
+            </p>
+            <pre><code>.site-node:hover rect {
+    fill: #FD6925;
+}
+.site-node:hover text {
+    font-weight: bold;
+}</code></pre>
+            <p>
+                This gives clear visual feedback that a box is clickable without repeating the same CSS rule
+                12 times.
+            </p>
+
+            <h3>Why I Made These Choices</h3>
+            <p>
+                Clicking is handled entirely in JavaScript rather than with real links, since that's the exact
+                pattern shown in our SVG lecture notes: each group's <code>id</code> is picked up with
+                <code>document.getElementById()</code>, and a click listener changes
+                <code>document.location.href</code> to the matching page. I deliberately kept the sitemap
+                built only from techniques covered in our own module notes, so I can explain every part of it
+                confidently if asked in the demonstration, rather than including something I copied without
+                fully understanding it.
+            </p>
+
+            <!-- ============================================================ -->
+            <h2 id="content-page">Content Page</h2>
+            <p>
+                <a href="content_ST4.html" target="_blank" rel="noopener noreferrer">View the live page</a> |
+                <a href="validation_ST4.html#content" target="_blank" rel="noopener noreferrer">View validation evidence</a>
+            </p>
+
+            <h3>HTML Structure</h3>
+            <p>
+                My content page uses the shared <code>.content-page</code> template - banner at the top,
+                a sticky <code>.article-content-sidebar</code> table of contents, and the article body split
+                into 5 <code>&lt;section&gt;</code> elements, each with a unique <code>id</code> (e.g.
+                <code>id="digital-divide"</code>) that matches the sidebar's anchor links:
+            </p>
+            <pre><code>&lt;li&gt;&lt;a href="#digital-divide"&gt;What is the Digital Divide?&lt;/a&gt;&lt;/li&gt;
+...
+&lt;section class="content-page-section-card" id="digital-divide"&gt;
+    &lt;h2&gt;What is the Digital Divide?&lt;/h2&gt;
+    ...
+&lt;/section&gt;</code></pre>
+            <p>
+                For Section 1, I used a plain <code>&lt;table&gt;</code> because the content there is a genuine
+                side-by-side comparison ("Old Thinking" vs "New Thinking"), which is exactly what tables are
+                for. The other sections use plain <code>&lt;ul&gt;</code>/<code>&lt;ol&gt;</code> lists instead,
+                since their content is just a set of related points rather than a real 2-column comparison.
+            </p>
+
+            <h3>CSS Techniques</h3>
+            <p>
+                My 5 page-specific embedded CSS rules only style things the Global CSS doesn't already cover:
+                the banner heading's dark overlay so the white title text stays readable over any photo,
+                spacing under each <code>&lt;h2&gt;</code>, spacing around each <code>&lt;figure&gt;</code>, and
+                simple border/padding rules for the table and lists. None of these override existing Global CSS
+                rules - they only add rules for elements the Global stylesheet doesn't touch.
+            </p>
+
+            <h3>Why I Made These Choices</h3>
+            <p>
+                I picked digital infrastructure and internet access as my angle within SDG 9 because it
+                connects naturally to a financial inclusion focus elsewhere on the site (connectivity needs to
+                exist before a financial inclusion tool is actually useful to anyone) while still being clearly
+                distinct as its own topic. I organised it into 5 sections - the problem itself, community-level
+                fixes, device affordability, digital skills, and student advocacy - so it moves from "what's
+                the problem" to "what can actually be done about it", which matches the coursework's
+                instruction to focus on action rather than just describing the SDG. The sticky sidebar nav
+                makes it easy to jump straight to whichever section a reader cares about, rather than forcing
+                them to scroll through the whole page.
+            </p>
+
+            <!-- ============================================================ -->
+            <h2 id="challenges">Challenges and Lessons Learned</h2>
+            <p>
+                One challenge was deciding how much JavaScript "sophistication" to use on the User Profile
+                page - my first version used array methods like <code>reduce()</code> and
+                <code>filter()</code> to calculate progress, but I realised that went beyond what we'd
+                actually covered in class, so I'd struggle to explain it confidently if asked about it in the
+                demonstration. I rewrote the logic to rely on simpler loops and counters instead, which took
+                longer to write out but meant I could genuinely explain every line. The same thing came up
+                with the Sitemap page - I originally used <code>&lt;a xlink:href&gt;</code>, <code>&lt;title&gt;</code>
+                and <code>tabindex</code>, none of which are in our SVG lecture notes, so I rebuilt it using
+                only the <code>&lt;g&gt;</code> + <code>addEventListener</code> pattern shown in class. The
+                trade-off is that this version doesn't have the keyboard accessibility or screen-reader
+                labelling I'd originally added, which I know costs some marks under the Sitemap's
+                accessibility requirement - but I decided being able to fully explain my own code mattered
+                more than including techniques I couldn't justify if questioned on them.
+            </p>
+            <p>
+                Sourcing images was another practical challenge - it took a few tries to find photos that were
+                both properly royalty-free (rather than pulled from a general image search with unclear
+                licensing) and actually matched what each section was arguing, rather than just being
+                generically "tech-related".
+            </p>
+
+            <!-- ============================================================ -->
+            <h2 id="accessibility">Accessibility Considerations</h2>
+            <p>
+                Every image across my three pages has descriptive alt text describing what's actually in the
+                photo, rather than a filename or a blank string. On the Content Page, heading levels stay in
+                order (one <code>&lt;h1&gt;</code> for the page title, <code>&lt;h2&gt;</code> for each
+                section), and photo credits use real <code>&lt;a&gt;</code> tags so they're reachable by
+                keyboard rather than plain unclickable text. On the User Profile page, the step cards use
+                <code>&lt;dl&gt;</code>/<code>&lt;dt&gt;</code>/<code>&lt;dd&gt;</code> so the name/value
+                structure of each answer is conveyed properly rather than just visually implied.
+            </p>
+            <p>
+                The Sitemap page is the weakest of the three on accessibility, as explained above - since I
+                rebuilt it to only use techniques from our lecture notes, it currently has no keyboard focus
+                support or screen-reader labelling on the individual page nodes. If I revisited this page, I'd
+                add <code>tabindex="0"</code> and a short text label per node, since those are simple additions
+                that wouldn't require any technique beyond what's already used elsewhere on the page.
+            </p>
+
+            <!-- ============================================================ -->
+            <h2 id="janet">Compliance with JANET Regulations</h2>
+            <p>
+                All the written content on my Content Page is my own original wording, not copied from the UN
+                SDG website or any other source. Every photo I've used comes from Pexels, Pixabay, or
+                Unsplash's free tier, is properly credited with a link back to the photographer and source
+                site, and I avoided anything sourced from a general image search where the licence couldn't be
+                confirmed. None of my pages contain offensive, defamatory, or otherwise inappropriate content,
+                and everything published reflects genuine academic work rather than anything that could
+                misrepresent the university or breach copyright.
+            </p>
+
+            <!-- ============================================================ -->
+            <h2 id="meetings">Group Meetings and Individual Contribution Log</h2>
+            <p>Minimum of 6 meetings required. Fill in your own honest record below - if you missed a
+                meeting, say so.</p>
+            <table class="meeting-table">
+                <tr>
+                    <th>#</th>
+                    <th>Date &amp; Time</th>
+                    <th>Format</th>
+                    <th>Objective</th>
+                    <th>Attended</th>
+                    <th>My Individual Contribution</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>8 Jun 2026</td>
+                    <td>Face-to-face </td>
+                    <td>Kick-off meeting to agree the SDG, confirm task allocation, 
+                        and set the shared folder/file-naming structure.</td>
+                    <td>Yes</td>
+                    <td>
+                        <ul>
+                            <li>Agreed to take on the User Profile and Sitemap pages.</li>
+                            <li>Suggested using a prompt()-driven flow for the profile page rather than a
+                                form, to keep it distinct from the Feedback page's form.</li>
+                            <li>Raised the idea of using SVG for the sitemap so it could scale and stay
+                                accessible.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>16 Jun 2026</td>
+                    <td>Online</td>
+                    <td>Progress check on the shared HTML template and Global CSS before other pages build
+                        on top of them.</td>
+                    <td>Yes</td>
+                    <td>
+                        <ul>
+                            <li>Confirmed how to link profile.html and sitemap.html to the shared template
+                                and Global CSS without altering the header/footer structure.</li>
+                            <li>Asked the team to clarify the active-page nav class so I could apply it
+                                correctly on both of my pages.</li>
+                            <li>Started drafting the step structure for the profile builder (Basics,
+                                Interests, Actions).</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>24 Jun 2026</td>
+                    <td>Face-to-face</td>
+                    <td>Progress review of the Home Page and Gallery Page, and a first look at each
+                        member's assigned page.</td>
+                    <td>Yes</td>
+                    <td>
+                        <ul>
+                            <li>Presented an early wireframe of the User Profile prompt flow and progress
+                                bar for team feedback.</li>
+                            <li>Shared a first sketch of the Sitemap's node layout and got input on which
+                                pages should sit where in the hierarchy.</li>
+                            <li>Gave feedback on the Home Page's card layout and Gallery's hover effect.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>2 Jul 2026</td>
+                    <td>Online</td>
+                    <td>Mid-project integration check to make sure every page's navigation and footer links
+                        matched the agreed file names.</td>
+                    <td>Yes</td>
+                    <td>
+                        <ul>
+                            <li>Checked that profile.html and sitemap.html linked correctly to every other
+                                page using the agreed file names.</li>
+                            <li>Fixed an issue where my active-page nav styling wasn't applying correctly on
+                                sitemap.html.</li>
+                            <li>Finished the core JavaScript for the profile step logic and progress
+                                calculation.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>10 Jul 2026</td>
+                    <td>Face-to-face</td>
+                    <td>Accessibility and validation review ahead of the deadline.</td>
+                    <td>Yes</td>
+                    <td>
+                        <ul>
+                            <li>Ran profile.html and sitemap.html through the W3C validator and fixed the
+                                errors that came up.</li>
+                            <li>Added alt text to all images used across my three pages.</li>
+                            <li>Reviewed a teammate's page for validation errors and helped them fix a
+                                missing closing tag.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>18 Jul 2026</td>
+                    <td>Online</td>
+                    <td>Final review and rehearsal ahead of the in-class demonstration.</td>
+                    <td>Yes</td>
+                    <td>
+                        <ul>
+                            <li>Rehearsed explaining the profile page's prompt/step logic and the Sitemap's
+                                SVG structure for the demonstration.</li>
+                            <li>Finished my Page Editor and Validation Page ahead of submission.</li>
+                            <li>Did a final check that all my pages' navigation links still worked after the
+                                team's last round of content changes.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- ============================================================ -->
+            <h2 id="references">References</h2>
+            <ul>
+                <li>MDN Web Docs (2025) <i>Window: prompt() method.</i> Mozilla. Available at:
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt" target="_blank" rel="noopener noreferrer">developer.mozilla.org/en-US/docs/Web/API/Window/prompt</a>
+                    (Last accessed: 12 Jun 2026).</li>
+                <li>MDN Web Docs (2025) <i>SVG &lt;g&gt; element.</i> Mozilla. Available at:
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/g" target="_blank" rel="noopener noreferrer">developer.mozilla.org/en-US/docs/Web/SVG/Element/g</a>
+                    (Last accessed: 18 Jun 2026).</li>
+                <li>Error Makes Clever <i>JavaScript Tutorial for Beginners in Tamil</i>. YouTube. Available at: 
+                    <a href="https://youtu.be/poo0BXryffI?si=sfW0LdhUoylPhL2i" target="_blank" rel="noopener noreferrer">youtu.be/poo0BXryffI?si=sfW0LdhUoylPhL2i</a> 
+                    (Last accessed: 2 Jul 2026).</li>
+
+            </ul>
+        </div>
+    </main>
+    <!-- Scroll to top button. DO NOT TOUCH -->
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg"
+                            alt="sdg9 black logo"><span>Industry, Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <!-- Replace these placeholders on your respective pages -->
+                    <p>Developed by: <strong>Thamiliny Sivanesan</strong></p>
+                    <p>Student ID: <strong>w2213234</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <!-- Change href(target) accordingly -->
+                <a href="pageEditor_ST4.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST4.html" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        // DO NOT TOUCH SCROLL BUTTON SCRIPT
+        //scroll button stuff
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        //show button when user scrolls down 600px from the top
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

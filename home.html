@@ -814,6 +814,12 @@
     </footer>
 
     <script>
+        // Loop through every link in .navbar a and check if href matches the current page URL and add the class called current-page
+        document.querySelectorAll('.navbar a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('current-page')
+            }
+        });
         // article thumbnail click event handle
         document.addEventListener('click', (event) => {
             const clickableElement = event.target.closest('.clickable-box');

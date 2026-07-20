@@ -9,13 +9,13 @@ var messageText = document.getElementById("messageText");
 var resetBtn = document.getElementById("resetBtn");
 
 // the point ranges for each impact level
-// I just picked these numbers myself, you can change them
+
 // 0 = nothing selected
 // 1-6 = low
 // 7-14 = medium
 // 15+ = high
 
-// background image for each level (images/ais/bg-....svg)
+// background image for each level 
 var backgroundImages = {
     low: "url('images/ais/bg-low.svg')",
     medium: "url('images/ais/bg-medium.svg')",
@@ -25,7 +25,7 @@ var backgroundImages = {
 // add a click event to every card
 for (var i = 0; i < cards.length; i++) {
     cards[i].addEventListener("click", function () {
-        // toggle the "selected" class on/off when clicked
+       
         this.classList.toggle("selected");
         updateResults();
     });

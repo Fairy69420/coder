@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor - Upeksha Liyanage</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page specific embedded CSS rules -->
+    <style>
+        .card {
+            border-radius: 12px;
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        h2,
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin-top: 20px;
+        }
+
+        h4 {
+            margin-bottom: 5px;
+        }
+
+        h5 {
+            margin-bottom: 5px;
+        }
+
+        code:not(.code-container code, h3 code) {
+            color: red;
+            font-weight: 600;
+            letter-spacing: 0.05rem;
+        }
+
+        .page-editor-grid {
+            display: grid;
+            grid-template-columns: minmax(290px, 1fr) 900px 1fr;
+            gap: 40px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .page-editor-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .page-editor-content th,
+        .page-editor-content td {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            text-align: left;
+        }
+
+        .page-editor-content thead {
+            background-color: #1e222b;
+            color: white;
+        }
+
+        .stud-line {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #F4F7F9;
+            color: #475569;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================================================== -->
+    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
+    <!-- ==================================================== -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="../images/feedback/image-1.jpg" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User
+                                Profile</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END OF HEADER -->
+
+    <p class="stud-line">Upeksha Liyanage &mdash; SDG 9 Team &mdash; Feedback &amp; Program Directory Page / Team Page
+        / Content Page Developer</p>
+
+    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    <main class="main-content">
+        <div class="page-editor-grid">
+            <div class="article-content-sidebar">
+                <ul>
+                    <li><a href="#feedback">Feedback Page</a></li>
+                    <li><a href="#team">Team Page</a></li>
+                    <li><a href="#content">Content Page</a></li>
+                    <li><a href="#challenge">Challenges &amp; Lessons Learned</a></li>
+                    <li><a href="#compliance">Compliance</a></li>
+                    <li><a href="#group">Group Meetings Log</a></li>
+                    <li><a href="#ref">References</a></li>
+                </ul>
+            </div>
+
+            <div class="page-editor-content">
+
+                <!-- ==================== FEEDBACK PAGE ==================== -->
+                <section class="card" id="feedback">
+                    <h2>Feedback &amp; Program Directory Page (<code>feedback.html</code>)</h2>
+
+                    <p>This page lets visitors browse four SDG 9-related programmes in a scrollable card directory,
+                        read a summary of past participant ratings and reviews, and submit their own feedback through
+                        a validated form. It was the page where I did the most JavaScript work on the site.</p>
+
+                    <h3>HTML Structure</h3>
+
+                    <h4>Programme Directory Cards</h4>
+                    <p>Each programme is a <code>.program-card</code> inside a horizontally scrollable
+                        <code>.programs-scroll-container</code>. I attached <code>data-*</code> attributes to every
+                        card so the Sort by dropdown has something to sort against without needing a backend.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="program-card" data-popularity="5" data-distance="1.2" data-student-friendly="9"&gt;
+    &lt;img src="images/feedback-innovation-bootcamp.jpg" class="program-card-img"
+        alt="Students working on laptops during a coding and robotics workshop"&gt;
+    &lt;div class="program-card-body"&gt;
+        &lt;h3&gt;Innovation Bootcamp&lt;/h3&gt;
+        &lt;p&gt;Learn coding, AI, robotics, and entrepreneurship through hands-on workshops.&lt;/p&gt;
+        &lt;button type="button" class="button program-btn"&gt;Join Now&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+
+                    <h4>Ratings &amp; Reviews</h4>
+                    <p>Each review's text is split into two spans, a short preview and a hidden full version, so
+                        JavaScript can toggle between them without needing to fetch any extra content.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;p class="review-text"&gt;
+    &lt;span class="review-text-short"&gt;Short preview sentence...&lt;/span&gt;
+    &lt;span class="review-text-full" hidden&gt;Full, longer version of the review...&lt;/span&gt;
+    &lt;a href="#" class="see-more-link"&gt;See more&lt;/a&gt;
+&lt;/p&gt;</code></pre>
+                    </div>
+
+                    <h4>Feedback Form</h4>
+                    <p>The form uses two <code>fieldset</code>/<code>legend</code> groups (Personal Details, Feedback
+                        Details), and includes every input type the brief required: text, email, tel, textarea,
+                        select, date, and datetime-local. Every field has an adjacent
+                        <code>&lt;span class="error-message"&gt;</code> that JavaScript populates on invalid
+                        submission.</p>
+
+                    <h3>CSS Architecture</h3>
+                    <p>All page-specific styling lives in <code>feedback.css</code>, kept deliberately separate from
+                        <code>style.css</code> so I never risk overriding shared rules. A few techniques I used:</p>
+                    <ul>
+                        <li><strong>Flexbox</strong> for the scrollable programme row (<code>display: flex;
+                                overflow-x: auto;</code>) with <code>scroll-snap-type: x mandatory;</code> so cards
+                            snap neatly into place while scrolling.</li>
+                        <li>A <strong>linear-gradient</strong> banner and a dark navy gradient on the ratings summary
+                            card to create visual hierarchy without introducing new colours outside the site's
+                            palette (<code>#fd6925</code> orange, <code>#1e2638</code> navy).</li>
+                        <li>A custom <code>::-webkit-scrollbar</code> styled in the brand orange, so the horizontal
+                            scroll affordance doesn't look like a default browser scrollbar.</li>
+                        <li><code>fieldset:focus-within</code> to add a soft glowing border the moment a user starts
+                            typing inside a group of fields, giving a live sense of where they are in the form.</li>
+                        <li>Three responsive breakpoints (<code>1150px</code>, <code>800px</code>, <code>500px</code>)
+                            so the layout collapses gracefully from desktop down to mobile.</li>
+                    </ul>
+
+                    <h3>JavaScript Functionality</h3>
+                    <p>All behaviour for this page lives in <code>feedback.js</code>, wrapped in a single
+                        <code>DOMContentLoaded</code> listener:</p>
+                    <ul>
+                        <li><strong>Sort by dropdown:</strong> reads the selected option and re-sorts the
+                            <code>.program-card</code> elements by their <code>data-popularity</code>,
+                            <code>data-distance</code>, or <code>data-student-friendly</code> value, then re-appends
+                            them in the new order and smooth-scrolls the container back to the start.</li>
+                        <li><strong>See more / See less toggle:</strong> on click, swaps which of the two review text
+                            spans is visible and updates the link's label, using <code>event.preventDefault()</code>
+                            so the <code>href="#"</code> anchor doesn't jump the page.</li>
+                        <li><strong>Live character counter:</strong> listens for <code>input</code> events on the
+                            comment textarea and updates the remaining character count against its
+                            <code>maxlength</code>.</li>
+                        <li><strong>Form validation:</strong> on submit, checks every field with a regular expression
+                            or length check, writes a specific message into that field's
+                            <code>.error-message</code> span, and only shows the confirmation message once every
+                            field passes.</li>
+                    </ul>
+
+                    <h3>Core Rationale</h3>
+                    <p>I built the "See more" toggle and the sort function even though the coursework brief says the
+                        dropdown didn't need to be functional, because I wanted a genuine demonstration of DOM
+                        manipulation beyond the minimum requirement. Splitting review text into two spans instead of
+                        truncating with CSS (<code>-webkit-line-clamp</code>) was a deliberate choice: it keeps full
+                        control over exactly where the preview cuts off, rather than an arbitrary line count.</p>
+
+                    <h3>Accessibility</h3>
+                    <ul>
+                        <li>All programme and review images carry descriptive <code>alt</code> text.</li>
+                        <li>The scrollable programme row has <code>tabindex="0"</code> and a visible
+                            <code>:focus-visible</code> outline, so keyboard users can reach and scroll it.</li>
+                        <li>Every form input has an associated <code>&lt;label for="..."&gt;</code>, and error
+                            messages use <code>role="alert"</code> so screen readers announce them immediately.</li>
+                        <li>The confirmation message uses <code>role="status" aria-live="polite"</code> so it's
+                            announced without interrupting the user.</li>
+                    </ul>
+
+                    <h3>Link to the validation page</h3>
+                    <p><a href="validation_ST3.html#feedback">Feedback Page validation report</a></p>
+                    <h3>Link to the page</h3>
+                    <p><a href="feedback.html" target="_blank" rel="noopener noreferrer">Open feedback.html</a></p>
+                </section>
+
+                <!-- ==================== TEAM PAGE ==================== -->
+                <section class="card" id="team">
+                    <h2>Team Page (<code>team.html</code>)</h2>
+
+                    <p>This page introduces all four team members using interactive thumbnail cards. Hovering, or
+                        tabbing to, a card reveals the member's full name, role, and a short summary of what they
+                        contributed.</p>
+
+                    <h3>HTML Structure</h3>
+                    <p>Each team member is a single <code>.team-member</code> block with <code>tabindex="0"</code>,
+                        containing an image with a name/role overlay, and a <code>.team-details</code> panel that
+                        starts collapsed.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="team-member" tabindex="0"&gt;
+    &lt;div class="team-photo-wrapper"&gt;
+        &lt;img src="images/team-student3.jpg" alt="Portrait of Student 3" class="team-photo"&gt;
+        &lt;div class="team-name-overlay"&gt;
+            &lt;h3&gt;Upeksha Liyanage&lt;/h3&gt;
+            &lt;span class="team-role-badge"&gt;Feedback &amp; Team&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="team-details"&gt;
+        &lt;h4&gt;Upeksha Liyanage&lt;/h4&gt;
+        &lt;p class="team-role"&gt;Role: Student 3 — Feedback &amp; Program Directory, Team Page&lt;/p&gt;
+        &lt;p class="team-pages"&gt;...&lt;/p&gt;
+        &lt;p class="team-summary"&gt;...&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+
+                    <h3>CSS Architecture</h3>
+                    <p>All interactivity on this page is deliberately CSS-only, per the coursework's requirement for
+                        the Team page:</p>
+                    <ul>
+                        <li>A CSS Grid (<code>grid-template-columns: repeat(4, 1fr)</code>) lays out the four cards,
+                            collapsing to 2 columns and then 1 at smaller breakpoints.</li>
+                        <li><code>.team-member:hover .team-photo</code> scales and darkens the portrait using
+                            <code>transform: scale()</code> and <code>filter: brightness()</code>.</li>
+                        <li>The <code>.team-details</code> panel animates open with a <code>max-height</code>
+                            transition (0 → 300px), since <code>height: auto</code> can't be transitioned directly in
+                            CSS.</li>
+                        <li><code>:focus-within</code> is combined with <code>:hover</code>/<code>:focus</code> so
+                            the panel also opens for keyboard users, not just mouse users.</li>
+                    </ul>
+
+                    <h3>Core Rationale</h3>
+                    <p>I chose <code>max-height</code> over <code>display: none</code>/<code>block</code> toggling
+                        specifically because I wanted the expand/collapse to animate smoothly. A hard display switch
+                        would jump instantly with no transition, which felt less polished for a hover-driven card
+                        interaction.</p>
+
+                    <h3>Accessibility</h3>
+                    <ul>
+                        <li>Every <code>.team-member</code> has <code>tabindex="0"</code> so it's reachable purely by
+                            keyboard, not just by mouse hover.</li>
+                        <li>A visible <code>:focus-visible</code> outline in the brand orange confirms which card is
+                            currently focused.</li>
+                        <li>All portrait images include descriptive <code>alt</code> text identifying the person.</li>
+                    </ul>
+
+                    <h3>Link to the validation page</h3>
+                    <p><a href="validation_ST3.html#team">Team Page validation report</a></p>
+                    <h3>Link to the page</h3>
+                    <p><a href="team.html" target="_blank" rel="noopener noreferrer">Open team.html</a></p>
+                </section>
+
+                <!-- ==================== CONTENT PAGE ==================== -->
+                <section class="card" id="content">
+                    <h2>Content Page (<code>content_ST3.html</code>)</h2>
+
+                    <p>My individual content page, "Community Innovation &amp; Industry", makes the case that SDG
+                        9's goals are advanced as much by small community programmes as by large infrastructure
+                        projects, then links that argument directly to the four programmes on my Feedback page.</p>
+
+                    <h3>HTML Structure</h3>
+                    <p>The page follows the shared <code>.content-page</code> pattern already defined in the team's
+                        global <code>style.css</code>: a full-width banner, then an
+                        <code>.article-content-container</code> grid holding a sticky
+                        <code>.article-content-sidebar</code> and the main <code>.article-content</code> column.</p>
+                    <div class="code-container">
+                        <div class="code-header"><span class="code-lang">html</span></div>
+                        <pre><code>&lt;div class="article-content-container"&gt;
+    &lt;aside class="article-content-sidebar"&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#introduction"&gt;Why Grassroots Innovation Matters&lt;/a&gt;&lt;/li&gt;
+                ...
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/aside&gt;
+    &lt;div class="article-content"&gt;
+        &lt;section class="content-page-section-card" id="introduction"&gt;
+            &lt;h2&gt;Why Grassroots Innovation Matters&lt;/h2&gt;
+            ...
+        &lt;/section&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <p>Every sidebar link points to a real <code>id</code> on a <code>&lt;section&gt;</code>, so
+                        clicking a link genuinely jumps to that part of the page rather than sitting there as a
+                        decorative list. I also added a comparison <code>&lt;table&gt;</code> of the four programmes,
+                        and a <code>&lt;fieldset&gt;</code> containing a numbered "Getting Started" list.</p>
+
+                    <h3>CSS Architecture</h3>
+                    <p>Most of the layout comes from the global CSS classes Student 1 built for content pages
+                        (<code>.content-page-banner</code>, <code>.article-content-fig</code>, etc.), which I reused
+                        rather than duplicating. My own page-specific CSS, kept inside an embedded
+                        <code>&lt;style&gt;</code> block, only adds what the global rules don't cover:</p>
+                    <ul>
+                        <li>A dark overlay and white heading text on the banner, since the global heading style
+                            assumes a lighter background image than the one I used.</li>
+                        <li>Border and padding rules for the comparison table and the fieldset, since neither
+                            element had existing global styling.</li>
+                        <li>A fixed, circular "Go to Top" button implemented purely with an
+                            <code>&lt;a href="#top"&gt;</code> and <code>position: fixed;</code> — no JavaScript —
+                            per the coursework's specific requirement for this button on content pages.</li>
+                    </ul>
+
+                    <h3>Core Rationale</h3>
+                    <p>Reusing Student 1's existing content-page CSS classes instead of writing my own from scratch
+                        kept the four content pages visually consistent as a set, which matters for the site's shared
+                        visual identity requirement. I only added CSS where a genuine gap existed (tables, fieldsets,
+                        the extra Go to Top button).</p>
+
+                    <h3>Accessibility</h3>
+                    <ul>
+                        <li>Heading levels are strictly hierarchical: one <code>&lt;h1&gt;</code> in the banner,
+                            <code>&lt;h2&gt;</code> for each major section, <code>&lt;h3&gt;</code> for sub-points —
+                            no levels are skipped.</li>
+                        <li>All in-article images include descriptive <code>alt</code> text.</li>
+                        <li>The table header row uses <code>&lt;th&gt;</code> cells so screen readers can announce
+                            column headings when navigating the data.</li>
+                        <li>Internal navigation links use real, descriptive text (not "click here"), which is
+                            clearer for screen reader users navigating by link list.</li>
+                    </ul>
+
+                    <h3>Link to the validation page</h3>
+                    <p><a href="validation_ST3.html#content">Content Page validation report</a></p>
+                    <h3>Link to the page</h3>
+                    <p><a href="content_ST3.html" target="_blank" rel="noopener noreferrer">Open
+                            content_ST3.html</a></p>
+                </section>
+
+                <!-- ==================== CHALLENGES ==================== -->
+                <section class="card" id="challenge">
+                    <h2>Challenges and Lessons Learned</h2>
+
+                    <h3>Overriding vs. Extending the Global Button Style</h3>
+                    <p>When Student 1 updated the global CSS partway through the project, button styling switched
+                        from the plain <code>button</code> element selector to a <code>.button</code> class. My
+                        Feedback page buttons only had my own <code>.program-btn</code>/<code>.submit-btn</code>
+                        classes, so they silently lost all their styling until I caught it and added
+                        <code>class="button program-btn"</code> etc. This taught me to always re-check page-specific
+                        CSS against the shared stylesheet after any team update, rather than assuming it still lines
+                        up.</p>
+
+                    <h3>Making the Sort Dropdown Actually Functional</h3>
+                    <p>The brief explicitly says the "Sort by" dropdown on the Feedback page doesn't need to work.
+                        I built it anyway, which meant deciding how to represent "popularity" and "distance" for
+                        programmes that don't have real registered data yet. I settled on
+                        <code>data-*</code> attributes with placeholder values, clearly documented, so the sorting
+                        logic is real and demonstrable even though the underlying numbers are illustrative.</p>
+
+                    <h3>Building the Review "See more / See less" Toggle</h3>
+                    <p>My first attempt tried to truncate review text with CSS
+                        <code>-webkit-line-clamp</code>, but that only works reliably in WebKit-based browsers and
+                        gave inconsistent results elsewhere. Switching to two manually-written spans (short and full)
+                        toggled by JavaScript gave me full, predictable control over exactly what the "short" preview
+                        says, at the cost of writing two versions of each review by hand.</p>
+
+                    <h3>What's Still Left</h3>
+                    <p>I still need to replace every placeholder image path (e.g.
+                        <code>images/feedback-innovation-bootcamp.jpg</code>) with real, properly licensed images and
+                        update their photo credit links, and swap the bracketed team member names on the Team page
+                        for the group's actual final headshots.</p>
+                </section>
+
+                <!-- ==================== COMPLIANCE ==================== -->
+                <section class="card" id="compliance">
+                    <h2>Compliance</h2>
+
+                    <h3>Copyright and Image Sourcing</h3>
+                    <p>Every image placeholder on my pages is annotated with a photo credit line pointing to its
+                        source (e.g. Unsplash), following the same pattern Student 1 used on the Home and Content
+                        pages. Before final submission I will replace the placeholder <code>href="#"</code> credit
+                        links with the real photographer and source URLs for whichever images I actually use, in line
+                        with the coursework's requirement that all external resources be properly referenced.</p>
+
+                    <h3>Content Suitability</h3>
+                    <p>All copy I wrote for the Feedback, Team, and Content pages is original and was written
+                        specifically for this project — none of it is copied from the UN SDG website or any other
+                        source. The programme descriptions, reviews, and team summaries are illustrative content I
+                        authored to fit the coursework's fictional scenario.</p>
+
+                    <h3>No Commercial or Unsolicited Material</h3>
+                    <p>None of my pages contain advertising, sponsored content, or unsolicited promotional material.
+                        The "programmes" featured are framed as free educational/community initiatives consistent
+                        with the site's SDG 9 mission, not as paid products.</p>
+
+                    <h3>User Data in the Feedback Form</h3>
+                    <p>The feedback form collects name, email, phone, and address fields for demonstration purposes
+                        only. Per the coursework brief, the form does not submit data to any server or third party —
+                        <code>event.preventDefault()</code> stops the native submission entirely, and all validation
+                        and the confirmation message happen client-side in the browser. No real user data is
+                        collected, stored, or transmitted anywhere.</p>
+
+                    <h3>Network and Resource Use</h3>
+                    <p>The only external network request my pages make is to Google Fonts (Poppins and Inter),
+                        loaded via a standard <code>&lt;link&gt;</code> tag. No other external scripts, trackers, or
+                        analytics are used anywhere on my pages, in line with JANET's guidance on responsible use of
+                        external resources.</p>
+                </section>
+
+                <!-- ==================== GROUP MEETINGS LOG ==================== -->
+                <section class="card" id="group">
+                    <h2>Group Meetings and Individual Contribution Log</h2>
+                    <p>[Replace the dates, formats, and contribution notes below with what actually happened in your
+                        group — this is a template showing the expected format and level of detail.]</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Format</th>
+                                <th>Objective</th>
+                                <th>Attended</th>
+                                <th>Your Individual Contribution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>[Date]</td>
+                                <td>Face-to-face</td>
+                                <td>Agree the chosen SDG and assign individual roles.</td>
+                                <td>Yes</td>
+                                <td>Agreed to take responsibility for the Feedback &amp; Program Directory page and
+                                    the Team page.</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>[Date]</td>
+                                <td>Online</td>
+                                <td>Review the shared template and confirm the agreed colour palette and fonts.</td>
+                                <td>Yes</td>
+                                <td>Confirmed my pages would use the orange/navy palette and Poppins/Inter fonts to
+                                    match the rest of the site.</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>[Date]</td>
+                                <td>Face-to-face</td>
+                                <td>Progress review of each member's assigned pages.</td>
+                                <td>Yes</td>
+                                <td>Presented an early draft of the Feedback page's programme cards for team
+                                    feedback.</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>[Date]</td>
+                                <td>Online</td>
+                                <td>Mid-project integration check on navigation and footer links.</td>
+                                <td>Yes</td>
+                                <td>Checked my pages' navigation links and footer against the agreed file names and
+                                    fixed a mismatched link.</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>[Date]</td>
+                                <td>Face-to-face</td>
+                                <td>Accessibility and validation review ahead of the deadline.</td>
+                                <td>Yes</td>
+                                <td>Ran the Feedback and Team pages through the W3C validator and fixed the errors
+                                    that came up.</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>[Date]</td>
+                                <td>Online</td>
+                                <td>Final review and rehearsal ahead of the in-class demonstration.</td>
+                                <td>Yes</td>
+                                <td>Rehearsed explaining the Feedback form's JavaScript validation and confirmed my
+                                    Page Editor and Validation pages were ready for submission.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- ==================== REFERENCES ==================== -->
+                <section class="card" id="ref">
+                    <h2>References</h2>
+                    <ul>
+                        <li>iStock (2025) <i>iStock.</i> Available at: <a class="generic-link" target="_blank"
+                                rel="noopener noreferrer" href="https://www.istockphoto.com/">istockphoto.com</a>
+                            (Last accessed: [date]).</li>
+                        <li>Unsplash (2025) <i>Unsplash.</i> Available at: <a class="generic-link" target="_blank"
+                                rel="noopener noreferrer" href="https://unsplash.com/">unsplash.com</a> (Last
+                            accessed: [date]).</li>
+                        <li>Duckett, J., 2011. <i>HTML and CSS: Design and Build Websites.</i> John Wiley &amp; Sons,
+                            Inc. Indianapolis.</li>
+                        <li>MDN Web Docs (2025) <i>Fieldset, legend and form validation reference.</i> Available at:
+                            <a class="generic-link" target="_blank" rel="noopener noreferrer"
+                                href="https://developer.mozilla.org/">developer.mozilla.org</a> (Last accessed:
+                            [date]).</li>
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Scroll to top button. DO NOT TOUCH -->
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry,
+                            Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <p>Developed by: <strong>Upeksha Liyanage</strong></p>
+                    <p>Student ID: <strong>W2212598</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <a href="pageEditor_ST3.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST3.html" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DO NOT TOUCH THE SCRIPT BELOW. WRITE YOUR SCRIPTS ABOVE THIS COMMENT
+        document.querySelectorAll('.navbar a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('current-page')
+            }
+        });
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

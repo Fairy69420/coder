@@ -7,7 +7,7 @@
     <title>SDG Action Impact Simulator</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- page specific css rules for the simulator page (5 rules minimum) -->
+    
     <style>
         /* 1. the box at the top with the title and text */
         .ais-intro {
@@ -91,9 +91,7 @@
 </head>
 
 <body>
-    <!-- ==================================================== -->
-    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
-    <!-- ==================================================== -->
+    
     <header>
         <div class="navbar-and-logo">
             <div class="logo-container">
@@ -114,9 +112,9 @@
             </nav>
         </div>
     </header>
-    <!-- END OF HEADER -->
+    
 
-    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    
     <main class="main-content">
 
         <div class="ais-intro">
@@ -130,7 +128,7 @@
             <!-- card 1 -->
             <div class="action-card" data-points="3">
                 <div class="emoji">🏪</div>
-                <h3>Support local makers</h3>
+                <h2>Support local makers</h2>
                 <p>Buy from small local businesses instead of big importers.</p>
                 <div class="points">Impact points: 3</div>
             </div>
@@ -138,7 +136,7 @@
             <!-- card 2 -->
             <div class="action-card" data-points="3">
                 <div class="emoji">🔧</div>
-                <h3>Choose repairable tech</h3>
+                <h2>Choose repairable tech</h2>
                 <p>Repair a device instead of throwing it away.</p>
                 <div class="points">Impact points: 3</div>
             </div>
@@ -146,7 +144,7 @@
             <!-- card 3 -->
             <div class="action-card" data-points="2">
                 <div class="emoji">💡</div>
-                <h3>Share your skills</h3>
+                <h2>Share your skills</h2>
                 <p>Post a free tutorial or help someone learn something technical.</p>
                 <div class="points">Impact points: 2</div>
             </div>
@@ -154,7 +152,7 @@
             <!-- card 4 -->
             <div class="action-card" data-points="2">
                 <div class="emoji">📍</div>
-                <h3>Report broken infrastructure</h3>
+                <h2>Report broken infrastructure</h2>
                 <p>Report a pothole or broken streetlight to your local council.</p>
                 <div class="points">Impact points: 2</div>
             </div>
@@ -162,7 +160,7 @@
             <!-- card 5 -->
             <div class="action-card" data-points="4">
                 <div class="emoji">♻️</div>
-                <h3>Recycle e-waste</h3>
+                <h2>Recycle e-waste</h2>
                 <p>Take old electronics to a proper recycling point.</p>
                 <div class="points">Impact points: 4</div>
             </div>
@@ -170,14 +168,14 @@
             <!-- card 6 -->
             <div class="action-card" data-points="5">
                 <div class="emoji">🚀</div>
-                <h3>Back an innovation project</h3>
+                <h2>Back an innovation project</h2>
                 <p>Support or volunteer for a local student/tech project.</p>
                 <div class="points">Impact points: 5</div>
             </div>
 
         </div>
 
-        <!-- this box updates using javascript -->
+        
         <div id="resultsBox">
             <p>Selected actions: <span id="countText">0</span></p>
             <p>Total impact score: <span id="scoreText">0</span></p>
@@ -188,7 +186,7 @@
 
     </main>
 
-    <!-- Scroll to top button. DO NOT TOUCH -->
+   
     <div id="scrollToTopBtn">
         <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
             stroke="#ffffff">
@@ -223,26 +221,25 @@
                         global challenges.</p>
                 </div>
                 <div id="footer-student-right-card">
-                    <!-- Replace these placeholders with your details -->
-                    <p>Developed by: <strong>[YOUR NAME]</strong></p>
-                    <p>Student ID: <strong>[YOUR ID]</strong></p>
+                   
+                    <p>Developed by: <strong>[THIMITHRI VIDANAPATHIRANA]</strong></p>
+                    <p>Student ID: <strong>[w2213301/20251394]</strong></p>
                 </div>
             </div>
             <div class="footer-bottom-card">
-                <!-- Change href(target) accordingly -->
-                <a href="pageEditor_ST2.html#splash" class="footer-student-specific-link">Page Editor Report</a>
-                <a href="validation_ST2.html#splash" class="footer-student-specific-link">W3C Validation Evidence</a>
+            
+                <a href="pageEditor_ST2.html" class="pageEditor_ST2 (2).html">Page Editor Report</a>
+                <a href="validation_ST2.html" class="footer-student-specific-link">W3C Validation Evidence</a>
             </div>
         </div>
     </footer>
 
-    <!-- external JS script -->
+  
     <script src="ais_script.js"></script>
 
     <script>
 
-        // DO NOT TOUCH THE SCRIPT BELOW. WRITE YOUR SCRIPTS ABOVE THIS COMMENT
-        // Loop through every link in .navbar a and check if href matches the current page URL and add the class called current-page
+      
         document.querySelectorAll('.navbar a').forEach(link => {
             if (link.href === window.location.href) {
                 link.classList.add('current-page')

@@ -123,7 +123,7 @@
               You can skip questions and revisit them at any time
             </p>
 
-            <div class="profile-toolbar">
+            <div class="profile-toolbar" style="margin-top: 30px;">
                 <button id="btnStart" type="button" class="button">Start</button>
                 <button id="btnReset" type="button" class="button">Reset Profile</button>
                 <button id="btnRevisit1" type="button" class="button">Revisit Step 1</button>
@@ -192,8 +192,8 @@
             </div>
             <div class="footer-bottom-card">
                 <!-- Change href(target) accordingly -->
-                <a href="" class="footer-student-specific-link">Page Editor Report</a>
-                <a href="" class="footer-student-specific-link">W3C Validation Evidence</a>
+                <a href="pageEditor_ST4.html#profile" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST4.html#profile" class="footer-student-specific-link">W3C Validation Evidence</a>
             </div>
         </div>
     </footer>
@@ -201,13 +201,14 @@
     <script>
 
         // DO NOT TOUCH SCROLL BUTTON SCRIPT
+        //scroll button stuff
+
         // Loop through every link in .navbar a and check if href matches the current page URL and add the class called current-page
         document.querySelectorAll('.navbar a').forEach(link => {
             if (link.href === window.location.href) {
                 link.classList.add('current-page')
             }
         });
-        //scroll button stuff
 
         const scrollBtn = document.getElementById("scrollToTopBtn");
 
@@ -227,6 +228,203 @@
                 behavior: "smooth"
             });
         });
+    </script>
+
+    <script>
+    /* =====================================================================
+       USER PROFILE PAGE - JavaScript Logic (Student 4)
+       Coursework requirement: no HTML forms; data collected via prompt().
+       Demonstrates: objects, functions, conditional logic, DOM manipulation.
+       ===================================================================== */
+
+    // ---- 1. Data model -----------------------------------------------------
+    const steps = [
+      {
+        id: "basics",
+        title: "Step 1: Basics",
+        prompts: [
+          { key: "name", text: "What's your name?" },
+          { key: "role", text: "What's your role or field of study? (e.g. student, engineer, designer)" },
+          { key: "location", text: "Which city or area are you based in?" }
+        ]
+      },
+      {
+        id: "interests",
+        title: "Step 2: Interests",
+        prompts: [
+          { key: "focus", text: "Which area of Industry, Innovation & Infrastructure interests you most? (e.g. clean tech, digital access, sustainable transport, smart cities)" },
+          { key: "experience", text: "Have you used or built any tech/innovation project before? Briefly describe, or say 'no'." },
+          { key: "time", text: "How much time could you realistically give to an innovation project per week? (e.g. 1hr, 3hrs, 5+hrs)" }
+        ]
+      },
+      {
+        id: "actions",
+        title: "Step 3: Actions",
+        prompts: [
+          { key: "commitment", text: "Pick one action you could commit to (e.g. support a local infrastructure improvement, learn a sustainable tech skill, volunteer for STEM outreach)." },
+          { key: "problem", text: "What's one infrastructure or innovation problem you'd like to help solve?" },
+          { key: "tips", text: "Would you like tips on how to get started with your chosen action? (yes/no)" }
+        ]
+      }
+    ];
+
+    let profileData = {
+      basics: {},
+      interests: {},
+      actions: {}
+    };
+
+    let stepStarted = { basics: false, interests: false, actions: false };
+
+    const TOTAL_PROMPTS = steps.reduce((sum, step) => sum + step.prompts.length, 0); // 9
+
+    // ---- 2. Core functions --------------------------------------------------
+
+    function runStep(stepIndex, onlyMissing) {
+      const step = steps[stepIndex];
+      stepStarted[step.id] = true;
+
+      step.prompts.forEach(function (p) {
+        const alreadyAnswered = profileData[step.id][p.key] !== undefined &&
+                                profileData[step.id][p.key] !== null &&
+                                profileData[step.id][p.key] !== "";
+
+        if (onlyMissing && alreadyAnswered) {
+          return; // skip prompts we already have an answer for
+        }
+
+        const defaultValue = alreadyAnswered ? profileData[step.id][p.key] : "";
+        const answer = window.prompt(p.text + "\n(Leave blank or press Cancel to skip)", defaultValue);
+
+        if (answer === null || answer.trim() === "") {
+          profileData[step.id][p.key] = null; // explicitly marked as skipped
+        } else {
+          profileData[step.id][p.key] = answer.trim();
+        }
+      });
+
+      updateProgress();
+      renderProfile();
+    }
+
+    function startOrContinueProfile() {
+      for (let i = 0; i < steps.length; i++) {
+        const proceed = window.confirm(
+          "Ready for " + steps[i].title + "? Click OK to answer, Cancel to skip this whole step for now."
+        );
+        if (proceed) {
+          runStep(i, false);
+        } else {
+          stepStarted[steps[i].id] = true;
+          renderProfile();
+        }
+      }
+      updateProgress();
+      checkCompletion();
+    }
+
+    function countAnswered() {
+      let count = 0;
+      steps.forEach(function (step) {
+        step.prompts.forEach(function (p) {
+          const val = profileData[step.id][p.key];
+          if (val !== undefined && val !== null && val !== "") {
+            count++;
+          }
+        });
+      });
+      return count;
+    }
+
+    function updateProgress() {
+      const answered = countAnswered();
+      const percent = Math.round((answered / TOTAL_PROMPTS) * 100);
+
+      document.getElementById("progressBar").style.width = percent + "%";
+      document.getElementById("progressLabel").textContent = "Completion: " + percent + "%";
+
+      const completedSteps = steps.filter(function (step) {
+        return step.prompts.every(function (p) {
+          const val = profileData[step.id][p.key];
+          return val !== undefined && val !== null && val !== "";
+        });
+      }).length;
+
+      document.getElementById("statusLine").textContent =
+        "Status: " +completedSteps + " of " + steps.length + " steps fully completed).";
+    }
+
+    function renderProfile() {
+      const output = document.getElementById("profileOutput");
+      output.innerHTML = "";
+
+      steps.forEach(function (step) {
+        if (!stepStarted[step.id]) {
+          return;
+        }
+
+        const card = document.createElement("div");
+        card.className = "card profile-step-card revealed";
+
+        const heading = document.createElement("h3");
+        heading.textContent = step.title;
+        card.appendChild(heading);
+
+        const list = document.createElement("dl");
+        let hasAnyAnswer = false;
+
+        step.prompts.forEach(function (p) {
+          const val = profileData[step.id][p.key];
+          if (val !== undefined && val !== null && val !== "") {
+            hasAnyAnswer = true;
+            const dt = document.createElement("dt");
+            dt.textContent = p.key;
+            const dd = document.createElement("dd");
+            dd.textContent = val;
+            list.appendChild(dt);
+            list.appendChild(dd);
+          }
+        });
+
+        if (!hasAnyAnswer) {
+          const emptyMsg = document.createElement("p");
+          emptyMsg.textContent = "No details provided yet for this step.";
+          card.appendChild(emptyMsg);
+        } else {
+          card.appendChild(list);
+        }
+
+        output.appendChild(card);
+      });
+
+      checkCompletion();
+    }
+
+    function checkCompletion() {
+      const box = document.getElementById("confirmationBox");
+      box.style.display = (countAnswered() === TOTAL_PROMPTS) ? "block" : "none";
+    }
+
+    function resetProfile() {
+      const sure = window.confirm("This will clear all profile answers. Continue?");
+      if (!sure) return;
+
+      profileData = { basics: {}, interests: {}, actions: {} };
+      stepStarted = { basics: false, interests: false, actions: false };
+      updateProgress();
+      renderProfile();
+    }
+
+    // ---- 3. Wire up buttons (event listeners) -------------------------------
+    document.getElementById("btnStart").addEventListener("click", startOrContinueProfile);
+    document.getElementById("btnReset").addEventListener("click", resetProfile);
+    document.getElementById("btnRevisit1").addEventListener("click", function () { runStep(0, true); });
+    document.getElementById("btnRevisit2").addEventListener("click", function () { runStep(1, true); });
+    document.getElementById("btnRevisit3").addEventListener("click", function () { runStep(2, true); });
+
+    // Initial render on page load (shows empty state / 0%)
+    updateProgress();
+    renderProfile();
     </script>
 </body>
 

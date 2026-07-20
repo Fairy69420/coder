@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG 9 Programs &amp; Feedback</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page specific embedded CSS rules -->
+    <style>
+        /* 1. Overrides header bottom margin only on this page so the banner sits flush under the nav */
+        header {
+            margin-bottom: 0;
+        }
+
+        /* FIXED: Removed restrictive body width rule (width: 900px) */
+
+        /* 2. Page title styling unique to the Feedback page */
+        .feedback-banner h1 {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-size: 42px;
+            letter-spacing: 0.03rem;
+            color: navy;
+        }
+
+        /* 3. Page-specific emphasis for the review score */
+        .rating-score {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+        }
+
+        /* 4. Local list styling used only inside the confirmation message */
+        .confirmation-message.is-visible {
+            animation: feedback-fade-in 0.4s ease forwards;
+        }
+
+        @keyframes feedback-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 5. Page-specific focus outline colour */
+        .program-btn:focus-visible,
+        .submit-btn:focus-visible {
+            outline: 3px solid #1e2638;
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .feedback-page {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+            box-sizing: border-box;
+            gap: 60px;
+        }
+
+        /* ---------- Banner ---------- */
+        .feedback-banner {
+            text-align: center;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #fff4ed 0%, #eef2f6 100%);
+            font-family: 'Poppins', 'Hanken Grotesk', sans-serif;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .feedback-banner p {
+            max-width: 700px;
+            margin: 15px auto 0;
+            font-family: 'Inter', sans-serif;
+            color: #424843;
+            font-size: 18px;
+        }
+
+        /* ---------- Programme directory ---------- */
+        .programs-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .sort-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .sort-dropdown {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgb(193, 200, 194);
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+        }
+
+        .programs-scroll-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px 5px 20px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .programs-scroll-container:focus-visible {
+            outline: 3px solid #fd6925;
+            outline-offset: 4px;
+        }
+
+        .program-card {
+            flex: 0 0 260px;
+            scroll-snap-align: start;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .program-card-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .program-card-body {
+            padding: 15px 18px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            background: #f3f4f6;
+        }
+
+        .program-card-body h3 {
+            font-family: 'Hanken Grotesk', sans-serif;
+            margin-bottom: 8px;
+        }
+
+        .program-card-body p {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: rgb(66, 72, 67);
+            flex-grow: 1;
+        }
+
+        .program-btn {
+            margin-top: 15px;
+            width: 100%;
+            /* background: linear-gradient(90deg, #F97316, #FB923C); */
+        }
+
+        /* ---------- Ratings & reviews ---------- */
+        /* FIXED: Changed hardcoded width: 700px to responsive max-width */
+        .ratings-section {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            background-color: #f3f4f6;
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .ratings-summary {
+            flex: 0 0 220px;
+            border: 1px solid rgb(193, 200, 194);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            background-color: #FB923C;
+        }
+
+        .rating-score {
+            font-size: 42px;
+            color: navy;
+        }
+
+        .rating-score span {
+            font-size: 20px;
+            color: black;
+        }
+
+        .rating-label {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            margin-top: 5px;
+        }
+
+        .rating-count {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: rgb(66, 72, 67);
+            margin-top: 8px;
+        }
+
+        .reviews-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            min-width: 280px;
+        }
+
+        /* FIXED: Replaced width: 600px with responsive width */
+        .review-card {
+            background-color: #fef08a;
+            border: 1px solid rgb(193, 200, 194);
+            border-radius: 10px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .review-title {
+            font-family: 'Hanken Grotesk', sans-serif;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: rgb(66, 72, 67);
+        }
+
+        .see-more-link {
+            color: #fd6925;
+            text-decoration: underline;
+        }
+
+        .review-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: rgb(66, 72, 67);
+        }
+
+        .reviewer-name {
+            font-weight: 700;
+        }
+
+        .review-rating {
+            margin-top: 8px;
+            font-weight: 700;
+            color: #1e2638;
+        }
+
+        /* ---------- Feedback form ---------- */
+        .feedback-form-section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-family: 'Poppins', 'Hanken Grotesk', sans-serif;
+            color: navy;
+        }
+
+        #feedback-form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+            background-color: #D8BFD8;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        fieldset {
+            border: 1px solid rgb(193, 200, 194);
+            border-radius: 10px;
+            padding: 20px 25px 25px;
+        }
+
+        legend {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-weight: 700;
+            padding: 0 8px;
+            font-size: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+
+        .form-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-row label {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .form-row input,
+        .form-row select,
+        .form-row textarea {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid rgb(193, 200, 194);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+
+        .form-row input:focus,
+        .form-row select:focus,
+        .form-row textarea:focus {
+            outline: 2px solid #fd6925;
+        }
+
+        .form-row.has-error input,
+        .form-row.has-error select,
+        .form-row.has-error textarea {
+            border-color: #d92e5d;
+        }
+
+        .error-message {
+            color: #d92e5d;
+            font-size: 12px;
+            margin-top: 5px;
+            min-height: 14px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .char-counter {
+            font-size: 12px;
+            color: rgb(66, 72, 67);
+            margin-top: 6px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .submit-btn {
+            align-self: center;
+            padding: 12px 40px;
+            font-family: 'Hanken Grotesk', sans-serif;
+            letter-spacing: 0.05rem;
+        }
+
+        .confirmation-message {
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #1e824c;
+            min-height: 20px;
+        }
+
+        /* Responsive breakpoints */
+        @media (max-width: 800px) {
+            .feedback-banner h1 {
+                font-size: 32px !important;
+            }
+
+            .ratings-section {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .ratings-summary {
+                width: 100%;
+                flex: 1 1 auto;
+            }
+
+            .program-card {
+                flex: 0 0 220px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .programs-section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .sort-wrapper {
+                width: 100%;
+            }
+
+            .sort-dropdown {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- GLOBAL HEADER -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/earth-svgrepo-com.svg" alt="vector graphics of the the green earth. Credits - svgrepo.com">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User Profile</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <div class="feedback-page">
+            <img src="images/feedback/img3.jpg" alt="Innovation">
+
+            <div class="feedback-banner">
+                <h1> Feedback & Program Directory</h1>
+                <p>Explore innovative programs, workshops, competitions, and community projects that promote sustainable industry, technological innovation, and resilient infrastructure. Share your feedback to help improve these initiatives.</p>
+            </div>
+
+            <!-- Scrollable programme directory -->
+            <section class="programs-section">
+                <div class="programs-section-header">
+                    <h2 id="programs-heading">Explore Our Programmes</h2>
+                    <div class="sort-wrapper">
+                        <label for="sort-select">Sort by</label>
+                        <select id="sort-select" class="sort-dropdown">
+                            <option value="popular">Most Popular</option>
+                            <option value="nearest">Nearest</option>
+                            <option value="student-friendly">Student-Friendly</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- FIXED: Added data attributes to match feedback.js sorting logic -->
+                <div class="programs-scroll-container" tabindex="0">
+                    <div class="program-card" data-popularity="9.8" data-distance="2.5" data-student-friendly="9.5">
+                        <img src="images/feedback/innovation-bootcamp.png" class="program-card-img" alt="Students working on laptops during a coding and robotics workshop">
+                        <div class="program-card-body">
+                            <h3>Innovation Bootcamp</h3>
+                            <p>Learn coding, AI, robotics, and entrepreneurship through hands-on workshops.</p>
+                            <button type="button" class="program-btn button">Join Now</button>
+                        </div>
+                    </div>
+
+                    <div class="program-card" data-popularity="8.5" data-distance="1.2" data-student-friendly="8.0">
+                        <img src="images/feedback/Infrastructure-Trends.jpg" class="program-card-img" alt="A smart city skyline with a bridge fitted with sensor technology">
+                        <div class="program-card-body">
+                            <h3>Smart Infrastructure Workshop</h3>
+                            <p>Discover how smart roads, bridges, and transport systems improve modern cities.</p>
+                            <button type="button" class="program-btn button">Learn More</button>
+                        </div>
+                    </div>
+
+                    <div class="program-card" data-popularity="9.2" data-distance="4.0" data-student-friendly="9.9">
+                        <img src="images/feedback/startup-incubator.jpg" class="program-card-img" alt="Young entrepreneurs discussing a business plan around a table">
+                        <div class="program-card-body">
+                            <h3>Student Startup Incubator</h3>
+                            <p>Develop innovative business ideas with guidance from industry experts.</p>
+                            <button type="button" class="program-btn button">Apply Now</button>
+                        </div>
+                    </div>
+
+                    <div class="program-card" data-popularity="7.9" data-distance="6.8" data-student-friendly="8.7">
+                        <img src="images/feedback/green-manu.avif" class="program-card-img" alt="A modern sustainable factory with solar panels and clean production lines">
+                        <div class="program-card-body">
+                            <h3>Green Manufacturing Program</h3>
+                            <p>Learn how industries reduce pollution using eco-friendly technologies.</p>
+                            <button type="button" class="program-btn button">Get Involved</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ratings & reviews summary -->
+            <section class="ratings-section" aria-labelledby="ratings-heading">
+                <h2 id="ratings-heading" class="sr-only">Ratings and Reviews</h2>
+                <div class="ratings-summary">
+                    <div class="rating-score">8.6<span>/10</span></div>
+                    <div class="rating-label">Excellent</div>
+                    <p class="rating-count">Based on 245 reviews</p>
+                </div>
+
+                <div class="reviews-list">
+                    <article class="review-card">
+                        <h3 class="review-title">Kickstarted my interest in AI</h3>
+                        <p class="review-text">The Innovation Bootcamp gave me my first real experience with robotics and coding in a hands-on setting. <a href="#" class="see-more-link">See more</a></p>
+                        <div class="review-meta">
+                            <span class="reviewer-name">Shankar Perera</span>
+                            <span class="review-date">12 June 2026</span>
+                        </div>
+                        <div class="review-rating">Rating: 9/10</div>
+                    </article>
+
+                    <article class="review-card">
+                        <h3 class="review-title">Eye-opening look at smart cities</h3>
+                        <p class="review-text">The Smart Infrastructure Workshop explained sensor driven roads and bridges in a way that was easy to follow. <a href="#" class="see-more-link">See more</a></p>
+                        <div class="review-meta">
+                            <span class="reviewer-name">Nwas Fernando</span>
+                            <span class="review-date">28 May 2026</span>
+                        </div>
+                        <div class="review-rating">Rating: 8/10</div>
+                    </article>
+
+                    <article class="review-card">
+                        <h3 class="review-title">Great mentorship for my startup idea</h3>
+                        <p class="review-text">The Student Startup Incubator connected me with mentors who helped shape my business plan. <a href="#" class="see-more-link">See more</a></p>
+                        <div class="review-meta">
+                            <span class="reviewer-name">Ruwan De Silva</span>
+                            <span class="review-date">3 May 2026</span>
+                        </div>
+                        <div class="review-rating">Rating: 9/10</div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Feedback form -->
+            <section class="feedback-form-section" aria-labelledby="form-heading">
+                <h2 id="form-heading">Share Your Feedback</h2>
+                <form id="feedback-form" novalidate>
+                    <fieldset>
+                        <legend>Personal Details</legend>
+
+                        <div class="form-row">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" name="fullName" required>
+                            <span class="error-message" id="err-full-name" role="alert"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="error-message" id="err-email" role="alert"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="phone">Telephone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="e.g. 07XXXXXXXX" required>
+                            <span class="error-message" id="err-phone" role="alert"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="address">Address</label>
+                            <textarea id="address" name="address" rows="3" required></textarea>
+                            <span class="error-message" id="err-address" role="alert"></span>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Feedback Details</legend>
+
+                        <div class="form-row">
+                            <label for="program-select">Which programme is this feedback about?</label>
+                            <select id="program-select" name="program" required>
+                                <option value="">-- Select a programme --</option>
+                                <option value="bootcamp">Innovation Bootcamp</option>
+                                <option value="smart-infra">Smart Infrastructure Workshop</option>
+                                <option value="incubator">Student Startup Incubator</option>
+                                <option value="green-manufacturing">Green Manufacturing Program</option>
+                            </select>
+                            <span class="error-message" id="err-program" role="alert"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="visit-date">Preferred Date to Participate</label>
+                            <input type="date" id="visit-date" name="visitDate">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="meeting-time">Preferred Meeting Time</label>
+                            <input type="datetime-local" id="meeting-time" name="meetingTime">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="comment">Comment / Message</label>
+                            <textarea id="comment" name="comment" maxlength="300" rows="4" required></textarea>
+                            <div class="char-counter"><span id="char-count">300</span> characters remaining</div>
+                            <span class="error-message" id="err-comment" role="alert"></span>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" class="submit-btn button">Send Feedback</button>
+                    <div id="confirmation-message" class="confirmation-message" role="status" aria-live="polite"></div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scroll to top button -->
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z"></path>
+                        <path d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z"></path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry, Innovation and Infrastructure</span></div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building resilient infrastructure, sustainable industrialization, and innovation. It aims to develop eco-friendly networks while upgrading industries and driving technological research to solve global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <p>Developed by: <strong>[Upeksha Liyanage]</strong></p>
+                    <p>Student ID: <strong>[w2212598]</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <a href="pageEditor_ST3.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST3.html" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="feedback.js"></script>
+
+    <script>
+        document.querySelectorAll('.navbar a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('current-page');
+            }
+        });
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation - [Upeksha Liyanage]</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+       body {
+        width: 100%;
+       }
+        .card {
+            border-radius: 12px;
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        h2,
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin-top: 20px;
+        }
+
+        .page-editor-grid {
+            display: grid;
+            grid-template-columns: minmax(290px, 1fr) 900px 1fr;
+            gap: 40px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .page-editor-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .stud-line {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #F4F7F9;
+            color: #475569;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="../images/feedback/image-1.jpg" alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User
+                                Profile</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <p class="stud-line">[Upeksha Liyanage] &mdash; SDG 9 Team &mdash; Feedback &amp; Program Directory / Team Page / Content
+        Page Developer</p>
+
+    <main class="main-content">
+        <div class="page-editor-grid">
+            <div class="article-content-sidebar">
+                <ul>
+                    <li><a href="#feedback">Feedback Page</a></li>
+                    <li><a href="#team">Team Page</a></li>
+                    <li><a href="#content">Content Page</a></li>
+                </ul>
+            </div>
+
+            <div class="page-editor-content">
+
+                <section class="card" id="feedback">
+                    <h2>Feedback &amp; Program Directory Page validation report</h2>
+                    <p>The Feedback & Program Directory page passed the W3C HTML validation on the first attempt. No errors or warnings were found, so no changes were required. The page follows valid HTML5 structure and accessibility guidelines.</p>
+                    <img src="../images/feedback/validation-1.png" alt="">
+
+                    <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST3.html#feedback">Feedback Page section in the Page Editor</a></p>
+                </section>
+
+                <section class="card" id="team">
+                    <h2>Team Page validation report</h2>
+                    <p>Issue:
+The page used an h4 heading immediately after an h2 heading. This skips the h3 heading level, creating an incorrect heading hierarchy.
+
+Why it is a problem:
+Headings should follow a logical order (h1 → h2 → h3 → h4). Skipping heading levels makes the page structure confusing for screen readers and reduces accessibility.
+
+How it was resolved:
+The h4 headings were changed to h3 (or an appropriate h3 heading was added before the h4). This created a proper heading hierarchy and removed the validation error.</p>
+                    <img src="../images/feedback/validation-2.png" alt="">
+
+                    <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST3.html#team">Team Page section in the Page Editor</a></p>
+                </section>
+
+                <section class="card" id="content">
+                    <h2>Content Page validation report</h2>
+                    <p>[Describe any validation issues you encountered here, e.g. duplicate section IDs used by
+                        the internal navigation links, an unclosed tag, or a table missing a scope attribute on
+                        its header cells, and explain how each was resolved.]</p>
+                    <img src="../images/feedback/validation-3.png" alt="">
+
+                    <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST3.html#content">Content Page section in the Page Editor</a></p>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry,
+                            Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <p>Developed by: <strong>[Upeksha Liyanage]</strong></p>
+                    <p>Student ID: <strong>[w2212598]</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <a href="pageEditor_ST3.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST3.html" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.navbar a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('current-page')
+            }
+        });
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

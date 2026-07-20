@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Team.css">
+
+    <!-- Page specific embedded CSS rules -->
+    <style>
+        /* 1. Overrides header bottom margin only on this page so the banner sits flush under the nav */
+        header {
+            margin-bottom: 0;
+        }
+
+        /* 2. Page title styling unique to the Team page */
+        .team-banner h1 {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-size: 42px;
+        }
+
+        /* 3. Page-specific hint text styling below the banner heading */
+        .team-banner p {
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+        }
+
+        /* 4. Focus-visible outline colour specific to this page's interactive cards */
+        .team-member:focus-visible {
+            outline: 3px solid #fd6925;
+            outline-offset: 4px;
+        }
+
+        /* 5. Small badge styling unique to the Team page role tags */
+        .team-role-badge {
+            background-color: #fd6925;
+        }
+
+        
+.team-page {
+    display: flex;
+    flex-direction: column;
+    width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 100px;
+    box-sizing: border-box;
+    gap: 40px;
+}
+
+.team-banner {
+    text-align: center;
+    padding: 45px 30px;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.team-banner p {
+    margin-top: 12px;
+    color: rgb(66, 72, 67);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.team-member {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    border-bottom: 4px solid transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.team-member:hover,
+.team-member:focus {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 26px rgba(0, 0, 0, 0.16);
+    border-bottom-color: #fd6925;
+}
+
+.team-photo-wrapper {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+}
+
+.team-photo {
+    width: 100%;
+    height: 160%;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.team-member:hover .team-photo,
+.team-member:focus .team-photo {
+    transform: scale(1.08);
+    filter: brightness(0.55);
+}
+
+.team-name-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 14px 16px;
+    box-sizing: border-box;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    color: white;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.team-member:hover .team-name-overlay,
+.team-member:focus .team-name-overlay {
+    opacity: 0;
+}
+
+.team-name-overlay h3 {
+    font-family: 'Poppins', 'Hanken Grotesk', sans-serif;
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.team-role-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+/* ---------- Expandable details panel ---------- */
+
+.team-details {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.team-member:hover .team-details,
+.team-member:focus .team-details,
+.team-member:focus-within .team-details {
+    max-height: 300px;
+    padding: 20px;
+}
+
+.team-details h4 {
+    font-family: 'Poppins', 'Hanken Grotesk', sans-serif;
+    color: #1e2638;
+    margin-bottom: 6px;
+}
+
+.team-details p {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgb(66, 72, 67);
+    margin-bottom: 8px;
+}
+
+.team-details p:last-child {
+    margin-bottom: 0;
+}
+
+.team-role {
+    font-weight: 700;
+    color: #1e2638;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 1150px) {
+    .team-page {
+        width: 100%;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <!-- ==================================================== -->
+    <!--    GLOBAL HEADER & NAV: DO NOT EDIT THIS SECTION     -->
+    <!-- ==================================================== -->
+    <header>
+        <div class="navbar-and-logo">
+            <div class="logo-container">
+                <img src="images/earth-svgrepo-com.svg" alt="vector graphics of the the green earth. Credits - svgrepo.com">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html" class="nav-link" id="nav-home"><span>Home</span></a></li>
+                    <li><a href="sitemap.html" class="nav-link" id="nav-sitemap"><span>Sitemap</span></a></li>
+                    <li><a href="ais.html" class="nav-link" id="nav-simulator"><span>Simulator</span></a></li>
+                    <li><a href="gallery.html" class="nav-link" id="nav-gallery"><span>Gallery</span></a></li>
+                    <li><a href="feedback.html" class="nav-link" id="nav-feedback"><span>Feedback</span></a></li>
+                    <li><a href="team.html" class="nav-link" id="nav-team"><span>Team Page</span></a></li>
+                    <li class="nav-profile-right"><a href="profile.html" class="nav-link" id="nav-profile"><span>User
+                                Profile</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END OF HEADER -->
+
+    <!-- MAIN CONTENT AREA: CAN BE EDITED -->
+    <main class="main-content">
+        <div class="team-page">
+
+            <div class="team-banner">
+                <h1>Team page</h1>
+                <p>Role & contribution.</p>
+            </div>
+
+            <div class="team-grid">
+
+                <!-- Student 1 -->
+                <div class="team-member" tabindex="0">
+                    <div class="team-photo-wrapper">
+                        <img src="images/feedback/student-1.jpg" alt="Portrait of Student 1" class="team-photo">
+                        <div class="team-name-overlay">
+                            <h2>[Student 1]</h2>
+                            <span class="team-role-badge">Template &amp; Home Page</span>
+                        </div>
+                    </div>
+                    <div class="team-details">
+                        <h4>[Eshan Amarakoon]</h4>
+                        <p class="team-role">Role:Shared Template &amp; Home Page</p>
+                        <p class="team-pages"><strong>Pages contributed:</strong> Shared HTML Template, Global CSS,
+                            Navigation Bar, Home Page, Gallery Page</p>
+                        <p class="team-summary">Built the site's shared foundation, including the global styling and
+                            navigation, then implemented the Home and Gallery pages on top of it.</p>
+                    </div>
+                </div>
+
+                <!-- Student 2 -->
+                <div class="team-member" tabindex="0">
+                    <div class="team-photo-wrapper">
+                        <img src="images/feedback/student-2.jpg" alt="Portrait of Student 2" class="team-photo">
+                        <div class="team-name-overlay">
+                            <h2>[Student 2 ]</h2>
+                            <span class="team-role-badge">Splash &amp; Simulator</span>
+                        </div>
+                    </div>
+                    <div class="team-details">
+                        <h4>[Thimithri Vidanapathirana]</h4>
+                        <p class="team-role">Role: Splash Screen &amp; Action Impact Simulator</p>
+                        <p class="team-pages"><strong>Pages contributed:</strong> Splash Screen, SDG Action Impact
+                            Simulator</p>
+                        <p class="team-summary">Designed the site's first impression with an animated splash screen,
+                            and built the interactive impact simulator that scores users' chosen actions.</p>
+                    </div>
+                </div>
+
+                <!-- Student 3-->
+                <div class="team-member" tabindex="0">
+                    <div class="team-photo-wrapper">
+                        <img src="images/feedback/student-3.webp" alt="Portrait of Student 3" class="team-photo">
+                        <div class="team-name-overlay">
+                            <h2>[Student 3 ]</h2>
+                            <span class="team-role-badge">Feedback &amp; Team</span>
+                        </div>
+                    </div>
+                    <div class="team-details">
+                        <h4>[Upeksha Liyanage]</h4>
+                        <p class="team-role">Role: Student 3 — Feedback &amp; Program Directory, Team Page</p>
+                        <p class="team-pages"><strong>Pages contributed:</strong> Feedback &amp; Program Directory
+                            Page, Team Page</p>
+                        <p class="team-summary">Created the programme directory and review section, built the
+                            JavaScript-validated feedback form, and designed this Team page.</p>
+                    </div>
+                </div>
+
+                <!-- Student 4 -->
+                <div class="team-member" tabindex="0">
+                    <div class="team-photo-wrapper">
+                        <img src="images/feedback/student4.jpg " width="3" height="4" alt="Portrait of Student 4" class="team-photo">
+                        <div class="team-name-overlay">
+                            <h2>[Student 4] </h2>
+                            <span class="team-role-badge">Profile &amp; Sitemap</span>
+                        </div>
+                    </div>
+                    <div class="team-details">
+                        <h4>[Thamiliny Sivanesan]</h4>
+                        <p class="team-role">Role: User Profile &amp; Sitemap</p>
+                        <p class="team-pages"><strong>Pages contributed:</strong> User Profile Page, Sitemap Page</p>
+                        <p class="team-summary">Built the JavaScript-driven progressive profile builder and designed
+                            the interactive SVG sitemap linking every page on the site.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Scroll to top button. DO NOT TOUCH -->
+    <div id="scrollToTopBtn">
+        <svg fill="#ffffff" width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g data-name="Layer 2">
+                    <g data-name="arrowhead-up">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <path
+                            d="M6.63 11.61L12 7.29l5.37 4.48A1 1 0 0 0 18 12a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41l-6-5a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.14z">
+                        </path>
+                        <path
+                            d="M12.64 12.23a1 1 0 0 0-1.27 0l-6 4.83a1 1 0 0 0-.15 1.41 1 1 0 0 0 1.41.15L12 14.29l5.37 4.48A1 1 0 0 0 18 19a1 1 0 0 0 .77-.36 1 1 0 0 0-.13-1.41z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-card">
+            <div class="footer-top-card">
+                <div id="footer-about-left-card">
+                    <div id="sdg9-logo-and-text"><img src="images/sdg9-icon.svg" alt="sdg9 black logo"><span>Industry,
+                            Innovation and Infrastructure</span>
+                    </div>
+                    <p id="sdg9-para"><strong>UN Sustainable Development Goal 9 (SDG 9)</strong> focuses on building
+                        resilient infrastructure, sustainable industrialization, and innovation. It aims to develop
+                        eco-friendly networks while upgrading industries and driving technological research to solve
+                        global challenges.</p>
+                </div>
+                <div id="footer-student-right-card">
+                    <!-- Replace these placeholders with your own details -->
+                    <p>Developed by: <strong>[Upeksha Liyanage]</strong></p>
+                    <p>Student ID: <strong>[w2212598]</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom-card">
+                <!-- Change href(target) accordingly -->
+                <a href="pageEditor_ST3.html" class="footer-student-specific-link">Page Editor Report</a>
+                <a href="validation_ST3.html" class="footer-student-specific-link">W3C Validation Evidence</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DO NOT TOUCH THE SCRIPT BELOW. WRITE YOUR SCRIPTS ABOVE THIS COMMENT
+        document.querySelectorAll('.navbar a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('current-page')
+            }
+        });
+
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 600) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        });
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>
